@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<!-- <div class="row">
+    <div class="col-sm-12"> -->
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">Updating Hub</h3>
+		  </div>
+		  <form method="POST">
+		  	{% csrf_token %}
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-3">
+				    	{{organization_hub_update_form.hub_name|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_code|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_email|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_phone|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_registration_number|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_tin_number|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_registration_year|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_registration_status|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_located_country|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_country_director|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_website|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_facebook|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_instagram|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_twitter|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_linkedin|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{organization_hub_update_form.hub_youtube|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-12">
+				        {{organization_hub_update_form.hub_address|as_crispy_field}}
+				    </div>
+		    	</div>
+		    </div>
+		    <div class="card-footer">
+		      <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Update Hub</button>
+			  <a href="{% url 'organization_hub_list' %}" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
+		    </div>
+		  </form>
+		</div>
+<!-- 	</div>
+</div> -->
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-9">
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">Course Detail of <b>{{obj.course_name}}</b></h3>
+		  </div>
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-6">
+				    	<strong>Course Name: </strong>{{obj.course_name}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub: </strong>{{obj.hub}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Project: </strong>{{obj.project}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Course Target: </strong>{{obj.course_target}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Course Description: </strong>{{obj.course_description}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Course Certificate: </strong>{{obj.course_certificate}}
+				    </div>
+					<div class="form-group col-md-6">
+				    	<strong>Course Version: </strong>{{obj.course_version}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Course Delivery Method: </strong>{{obj.course_delivery}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Course Price: </strong>{{obj.course_price}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Course Cost: </strong>{{obj.course_cost}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Designed By: </strong>{{obj.course_designed_by}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Course Status: </strong>{{obj.course_status}}
+				    </div>
+		    	</div>
+		    </div>
+		    <div class="card-footer">
+		      <a href="{% url 'course_update' obj.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit Course</a>&nbsp;
+              <a href="{% url 'course_list' %}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Go Back</a>
+		    </div>
+		</div>
+</div>
+</div>
+{% endblock content %}

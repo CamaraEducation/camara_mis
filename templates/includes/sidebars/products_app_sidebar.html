@@ -1,0 +1,81 @@
+{% load static %}
+{% if product_open_menu %}
+        <li class="nav-item {{product_open_menu}}">
+          <a href="#" class="nav-link  {{product_open_menu_active}} " style="background-color: #82bc00;">
+            <img src="{% static 'dist/img/whiteproduct.png' %}"  height="33" width="33">
+            <!-- <i class="nav-icon fab  fa-product-hunt" style="color: #ffffff;"></i> -->
+            <p> Products</p>
+          </a>
+          <ul class="nav nav-treeview">
+            {% if supplier_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'supplier_list' %}" class="nav-link {{supplier_nav_link_active}}">
+                    <!-- <i class="nav-icon fa fa-shopping-cart" style="color: #82bc00;"></i> -->
+                    <img src="{% static 'dist/img/suppliergreen.png' %}"  height="25" width="25">
+                    <p> Supplier</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'supplier_list' %}" class="nav-link">
+                    <!-- <i class="nav-icon fa fa-shopping-cart" style="color: #82bc00;"></i> -->
+                    <img src="{% static 'dist/img/suppliergreen.png' %}"  height="25" width="25">
+                    <p> Supplier</p></a>
+              </li>
+            {% endif %}
+
+           {% if computer_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'computer_list' %}" class="nav-link {{computer_nav_link_active}}">
+                    <i class="nav-icon fa fa-server" style="color: #82bc00;"></i><p> Computer</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'computer_list' %}" class="nav-link">
+                    <i class="nav-icon fa fa-server" style="color: #82bc00;"></i><p> Computer</p></a>
+              </li>
+            {% endif %}
+ 
+            {% if monitor_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'monitor_list' %}" class="nav-link {{monitor_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-desktop" style="color: #82bc00;"></i><p> Monitor</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'monitor_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-desktop" style="color: #82bc00;"></i><p> Monitor</p></a>
+              </li>
+            {% endif %}
+          </ul>
+        </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="{% static 'dist/img/greenproduct.png' %}"  height="33" width="33">
+          <!-- <i class="nav-icon fab fa-product-hunt" style="color: #82bc00;"></i> -->
+          <p> Products</p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{% url 'supplier_list' %}" class="nav-link">
+                <!-- <i class="nav-icon fa fa-shopping-cart" style="color: #82bc00;"></i> -->
+                <img src="{% static 'dist/img/suppliergreen.png' %}"  height="25" width="25">
+                <p>  Suppliers</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'computer_list' %}" class="nav-link">
+                <i class="nav-icon fa fa-server" style="color: #82bc00;"></i>
+                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
+                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
+                <p>Computer</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'monitor_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-desktop" style="color: #82bc00;"></i>
+                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
+                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
+                <p> Monitor</p></a>
+          </li>
+        </ul>
+      </li>
+      {% endif%}

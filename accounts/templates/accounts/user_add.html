@@ -1,0 +1,119 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="card card-secondary">
+    <div class="card-header">
+    <h3 class="card-title">Adding User</h3>
+    </div>
+    <form action="{% url 'user_add' %}" method="POST" id="positionForm" data-hub-department-url="{% url 'ajax_load_hub_department' %}" novalidate>
+        {% csrf_token %}
+    <div class="card-body">
+        <div class="row">
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.hub|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.department|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.position|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+				{{user_add_form.username|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+				{{user_add_form.first_name|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+				{{user_add_form.last_name|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_code|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_personal_email|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_hired_date|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_employement_type|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_gender|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_phone_number|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_education_level|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_birth_date|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_contact_name|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_contact_phone_number|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_contact_email|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_contact_relationship|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+                {{user_profile_add_form.user_contact_address|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+				{{user_add_form.password1|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-4">
+				{{user_add_form.password2|as_crispy_field}}
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add User</button>
+        <a class="btn btn-danger" href="{% url 'user_list' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+    </div>
+    </form>
+</div>
+
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <script>
+    $("#id_hub").change(function () {
+      var url = $("#positionForm").attr("data-hub-department-url");  // get the url of the `load_cities` view
+      var hub_id = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'hub_id': hub_id       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_department").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+    $("#id_department").change(function () {
+      var url = $("#positionForm").attr("data-hub-department-url");  // get the url of the `load_cities` view
+      var department_id = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'department_id': department_id       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_position").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-9">
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">School Detail of <b>{{obj.school_name}}</b></h3>
+		  </div>
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-6">
+				    	<strong>School Name: </strong>{{obj.school_name}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Code: </strong>{{obj.school_code}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Hub: </strong>{{obj.country}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Level: </strong>{{obj.school_level}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Ownership: </strong>{{obj.school_ownership}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Area: </strong>{{obj.school_area}}
+				    </div>
+					<div class="form-group col-md-6">
+				    	<strong>School Po-Box: </strong>{{obj.po_box}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Website: </strong>{{obj.website}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Phone number 1: </strong>{{obj.phone_number_1}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Phone Number 2: </strong>{{obj.phone_number_2}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Female Teachers: </strong>{{obj.female_teachers}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Male Teachers: </strong>{{obj.male_teachers}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Female Students: </strong>{{obj.female_students}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Male Students: </strong>{{obj.male_students}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Female Special need Students: </strong>{{obj.female_sn_students}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Male Special need Students: </strong>{{obj.male_sn_students}}
+				    </div>
+		    	</div>
+		    </div>
+		    <div class="card-footer">
+		      <a href="{% url 'school_update' obj.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit School</a>&nbsp;
+              <a href="{% url 'school_list' %}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Go Back</a>
+		    </div>
+		</div>
+</div>
+</div>
+{% endblock content %}

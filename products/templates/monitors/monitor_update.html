@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="card card-secondary">
+  <div class="card-header">
+    <h3 class="card-title">Updating Computer</h3>
+  </div>
+  <form method="POST">
+  	{% csrf_token %}
+    <div class="card-body">
+    	<div class="row">
+			<div class="form-group col-md-3">
+				{{monitor_update_form.m_affritrack_number|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.serial_number|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.brand|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.donor_id|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.container_number|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.device_status|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.supplier|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.working_status|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.date_received|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{monitor_update_form.screen_size|as_crispy_field}}
+			</div>
+    	</div>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Update Monitor</button>
+	  <a href="{% url 'monitor_list' %}" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock content %}

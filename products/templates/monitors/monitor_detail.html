@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6">
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">Monitor Detail of <b>{{obj.m_affritrack_number}}</b></h3>
+		  </div>
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-6">
+				    	<strong>Affritrack Number: </strong>{{obj.m_affritrack_number}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Serial Number: </strong>{{obj.serial_number}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Brand: </strong>{{obj.brand}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Donor Name: </strong>{{obj.donor_id}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Container Number: </strong>{{obj.container_number}}
+				    </div>
+					<div class="form-group col-md-6">
+				    	<strong>Device Status: </strong>{{obj.device_status}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Supplier: </strong>{{obj.supplier}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Working Status: </strong>{{obj.working_status}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Date Receviced: </strong>{{obj.date_received}}
+				    </div>
+		    	</div>
+		    </div>
+		    <div class="card-footer">
+		      <a href="{% url 'monitor_update' obj.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit Monitor</a>&nbsp;
+              <a href="{% url 'monitor_list' %}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Go Back</a>
+		    </div>
+		</div>
+</div>
+</div>
+{% endblock content %}

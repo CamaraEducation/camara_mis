@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card card-secondary">
+	<div class="card-header">
+		<h1 class="card-title mt-1">Camara Departments List</h1>
+		<a href="{% url 'department_add' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Department</a>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Department Hub</th>
+					<th>Department Name</th>
+					<th>Department Code</th>
+					<th>Department Email</th>
+					<!-- <th>Department Phone</th> -->
+					<!-- <th>Department Manager</th> -->
+					<!-- <th>Department Roles</th> -->
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for departments in department_list %}
+				<tr>
+					<td>{{ departments.hub }}</td>
+					<td>{{ departments.department_name }}</td>
+					<td>{{ departments.department_code }}</td>
+					<td>{{ departments.department_email }}</td>
+					<!-- <td>{{ departments.department_phone_number }}</td> -->
+					<!-- <td>{{ departments.department_manager }}</td> -->
+					<!-- <td>{{ departments.department_role|safe }}</td> -->
+					<td>
+						<a href="{% url 'department_detail' departments.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+        				<a href="{% url 'department_update' departments.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{departments.id}}">
+							<i class="fa fa-trash"></i> Delete</a>
+						
+						<div class="modal fade" id="modal-danger{{departments.id}}">
+							<div class="modal-dialog modal-lg">
+							  <div class="modal-content ">
+								<div class="modal-header bg-danger">
+								  <h4 class="modal-title">Deleting Department <strong>{{ departments.department_name }}</strong></h4>
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								<div class="modal-body">
+								  <p>Are you sure you want to Delete <strong> {{ departments.department_name }}</strong> Department from <strong>{{ departments.department_hub_name }}</strong> Hub?</p>
+								</div>
+								<div class="modal-footer justify-content-between">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								  <a href="{% url 'department_delete' departments.id %}" class="btn btn-danger">Delete</a>
+								</div>
+							  </div>
+							  <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,98 @@
+{% load static %}
+{% if school_open_menu %}
+        <li class="nav-item {{school_open_menu}}">
+          <a href="#" class="nav-link  {{school_open_menu_active}} " style="background-color: #82bc00;">
+            <!-- <img src="{% static 'dist/img/projectwhite.png' %}"  height="35" width="35" style="background-color: ffffff;"> -->
+            <i class="nav-icon fas fa-school" style="color: #ffffff;"></i>
+            <p> Schools and Training</p>
+          </a>
+          <ul class="nav nav-treeview">
+            {% if school_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'school_list' %}" class="nav-link {{school_nav_link_active}}">
+                    <i class="nav-icon fas fa-school" style="color: #82bc00;"></i><p> School</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'school_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa-school" style="color: #82bc00;"></i>
+                    <p> School</p></a>
+              </li>
+            {% endif %}
+
+           {% if course_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'course_list' %}" class="nav-link {{course_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-book" style="color: #82bc00;"></i><p> Course</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'course_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-book" style="color: #82bc00;"></i><p> Course</p></a>
+              </li>
+            {% endif %}
+ 
+            {% if training_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'training_list' %}" class="nav-link {{training_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-exchange-alt" style="color: #82bc00;"></i><p> Training</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'training_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-exchange-alt" style="color: #82bc00;"></i><p> Training</p></a>
+              </li>
+            {% endif %}
+
+            {% if training_attendance_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'training_attendance_list' %}" class="nav-link {{training_attendance_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-address-card" style="color: #82bc00;"></i><p> Training Attendance</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'training_attendance_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-address-card" style="color: #82bc00;"></i><p> Training Attendance</p></a>
+              </li>
+            {% endif %}
+          </ul>
+        </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="35" width="35"> -->
+          <i class="nav-icon fas fa-school" style="color: #82bc00;"></i>
+          <p> Schools and Training</p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{% url 'school_list' %}" class="nav-link">
+                <!-- <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i> -->
+                <i class="nav-icon fas fa-school" style="color: #82bc00;"></i>
+                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
+                <p>  Schools</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'course_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-book" style="color: #82bc00;"></i>
+                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
+                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
+                <p> Course</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'training_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-exchange-alt" style="color: #82bc00;"></i>
+                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
+                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
+                <p> Trainings</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'training_attendance_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-address-card" style="color: #82bc00;"></i>
+                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
+                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
+                <p> Training Attendance</p></a>
+          </li>
+        </ul>
+      </li>
+      {% endif%}

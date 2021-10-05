@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="card card-secondary">
+	<div class="card-header">
+		<h1 class="card-title mt-1">Camara Training List</h1>
+		<a href="{% url 'training_add' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Training</a>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Training Name</th>
+					<th>Training Course Name</th>
+					<th>Training Instructor</th>
+					<th># of Participant</th>
+					<th># of Schools</th>
+					<th>Training Start Date</th>
+					<!-- <th>Training End Date</th> -->
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for trainings in trainings_list %}
+				<tr>
+					<td>{{ trainings.training_name }}</td>
+					<td>{{ trainings.course }}</td>
+					<td>{{ trainings.instructor }}</td>
+					<td>{{ trainings.number_of_participant }}</td>
+					<td>{{ trainings.number_of_schools }}</td>
+					<td>{{ trainings.start_date }}</td>
+					<!-- <td>{{ trainings.end_date }}</td> -->
+					<td>{{ trainings.status }}</td>
+					<td>
+						<a href="{% url 'training_detail' trainings.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+        				<a href="{% url 'training_update' trainings.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{trainings.id}}">
+							<i class="fa fa-trash"></i> Delete</a>
+						
+						<div class="modal fade" id="modal-danger{{trainings.id}}">
+							<div class="modal-dialog modal-md">
+							  <div class="modal-content ">
+								<div class="modal-header bg-danger">
+								  <h4 class="modal-title">Deleting <strong>{{ trainings.training_name }}</strong></h4>
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								<div class="modal-body">
+								  <p>Are you sure you want to Delete <strong> {{ trainings.training_name }}</strong>?</p>
+								</div>
+								<div class="modal-footer justify-content-between">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								  <a href="{% url 'training_delete' trainings.id %}" class="btn btn-danger">Delete</a>
+								</div>
+							  </div>
+							  <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock content %}

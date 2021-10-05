@@ -1,0 +1,14 @@
+
+<div class="mb-2 mr-10" id="msg">
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div  class="alert alert-danger " id="msg" style="background-color: #f2dede; border-color: #ebccd1; color: #a94442;">
+        {{message}}
+      </div>
+      {% elif message.tags == 'success' %}
+      <div class="alert alert-success" id="msg" style="background-color: #dff0d8; color: #3c763d; border-color: #d6e9c6;">
+        {{message}}
+      </div>
+      {% endif %}
+    {% endfor %}
+</div>

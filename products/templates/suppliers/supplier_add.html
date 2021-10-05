@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="card card-secondary">
+	<div class="card-header">
+	<h3 class="card-title">Adding Supplier</h3>
+	</div>
+	<form method="POST" >
+	{% csrf_token %}
+	<div class="card-body">
+		<div class="row">
+			<div class="form-group col-md-3">
+				{{supplier_add_form.name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{supplier_add_form.address|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{supplier_add_form.contact|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{supplier_add_form.contact_person|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{supplier_add_form.payment_mode|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-9">
+				{{supplier_add_form.description|as_crispy_field}}
+			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Supplier</button>
+		<a class="btn btn-danger" href="{% url 'supplier_list' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+	</div>
+	</form>
+</div>
+{% endblock content %}

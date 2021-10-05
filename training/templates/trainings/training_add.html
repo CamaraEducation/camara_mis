@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="card card-secondary">
+	<div class="card-header">
+	<h3 class="card-title">Adding Training</h3>
+	</div>
+	<form method="POST" >
+	{% csrf_token %}
+	<div class="card-body">
+		<div class="row">
+			<div class="form-group col-md-3">
+				{{training_add_form.training_name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.course|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.instructor|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.number_of_participant|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.number_of_schools|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.start_date|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.end_date|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.training_location|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{training_add_form.status|as_crispy_field}}
+			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Training</button>
+		<a class="btn btn-danger" href="{% url 'training_list' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+	</div>
+	</form>
+</div>
+{% endblock content %}

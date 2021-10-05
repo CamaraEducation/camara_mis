@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-9">
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">Hub Detail</h3>
+		  </div>
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-6">
+				    	<strong>Hub Name: </strong>{{obj.hub_name}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Code: </strong>{{obj.hub_code}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub email: </strong>{{obj.hub_email}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Phone Number: </strong>{{obj.hub_phone}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Registration Number: </strong>{{obj.hub_registration_number}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Tin Number: </strong>{{obj.hub_tin_number}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Registration Year: </strong>{{obj.hub_registration_year}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Registration Status: </strong>{{obj.hub_registration_status}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Located County: </strong>{{obj.hub_located_country}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Country Director: </strong>{{obj.hub_country_director}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub website: </strong>{{obj.hub_website}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Facebook: </strong>{{obj.hub_facebook}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Instagram: </strong>{{obj.hub_instagram}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Twitter: </strong>{{obj.hub_twitter}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Linkedin: </strong>{{obj.hub_linkedin}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Hub Youtube: </strong>{{obj.hub_youtube}}
+				    </div>
+				    <div class="form-group col-md-12">
+				        <strong>Hub Address: </strong>{{obj.hub_address|safe}}
+				    </div>
+		    	</div>
+		    </div>
+		    <div class="card-footer">
+		      <a href="{% url 'organization_hub_update' obj.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit Hub</a>&nbsp;
+              <a href="{% url 'organization_hub_list' %}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Go Back</a>
+		    </div>
+		</div>
+</div>
+</div>
+{% endblock content %}

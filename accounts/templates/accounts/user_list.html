@@ -1,0 +1,84 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card card-secondary" >
+	<div class="card-header">
+		<h1 class="card-title mt-1">Camara User Accounts List</h1>
+		<a href="{% url 'user_add' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add User</a>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+        			<!-- <th>Hub</th> -->
+					<!-- <th>Department</th> -->
+					<!-- <th>Position</th> -->
+					<th>Username</th>
+					<th>Full Name</th>
+        			<th>Email</th>
+					<th>Account Active</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users_list %}
+				<tr>
+					<!-- <td>{{user.userprofile.hub}}</td> -->
+					<!-- <td>{{user.userprofile.department}}</td> -->
+					<!-- <td>{{user.userprofile.position}}</td> -->
+					<td>{{user.username}}</td>
+					<td>{{user.first_name}} {{user.last_name}}</td>
+					<td>{{user.userprofile.user_personal_email}}</td>
+					<td>
+						{% if user.is_active == True %}
+							<img src="{% static 'dist/img/icon-yes.svg' %}" alt="">
+						{% else %}
+							<img src="{% static 'dist/img/icon-no.svg' %}" alt="">
+						{% endif %}
+					</td>
+					<td>
+						<a href="{% url 'user_detail' user.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+						<a href="{% url 'user_update' user.id %}" class="btn btn-warning btn-xs"><i class="fa fa-info-circle"></i> Edit</a>&nbsp;
+						{% if user.is_active == True %}
+						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">
+							<i class="fa fa-ban"></i>&nbsp;Deactivate</a>
+						{% else %}
+						<a class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-danger">
+							<i class="fa fa-play"></i>&nbsp;Activate</a>
+						{% endif %}
+						<!-- <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger">
+							<i class="fa fa-trash"></i> Delete</a> -->
+						
+						<div class="modal fade" id="modal-danger">
+							<div class="modal-dialog">
+							  <div class="modal-content ">
+								<div class="modal-header bg-danger">
+								  <h4 class="modal-title">Deleting Position <strong>{{ user.username }}</strong></h4>
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								<div class="modal-body">
+								  <p>Are you sure you want to Delete <strong> {{ user.username }}</strong> position from <strong>{{ user.username }}</strong> Department?</p>
+								</div>
+								<div class="modal-footer justify-content-between">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								 
+								</div>
+							  </div>
+							  <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+{% endblock content %}

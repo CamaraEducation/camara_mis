@@ -1,0 +1,33 @@
+from django import forms
+from .models import Monitor, Supplier, Computer
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class AddSuplierForm(forms.ModelForm):
+
+    class Meta:
+        model = Supplier
+        fields = ('name', 'description', 'address', 'contact', 'contact_person', 'payment_mode')
+
+class AddComputerForm(forms.ModelForm):
+
+    class Meta:
+        model = Computer
+        fields = ('c_affritrack_number', 'serial_number', 'brand', 'model', 'donor_id', 'container_number',
+                    'device_status', 'supplier', 'processor_type', 'processor_speed', 'memory_type', 'memory_size',
+                    'storage_type', 'storage_size', 'os_type', 'os_version', 'working_status', 'date_received')
+        widgets = {
+            'date_received': DateInput()
+        }
+
+
+class AddMonitorForm(forms.ModelForm):
+
+    class Meta:
+        model = Monitor
+        fields = ('m_affritrack_number', 'serial_number', 'brand', 'donor_id', 'container_number',
+                    'device_status', 'supplier', 'date_received', 'screen_size', 'working_status')
+        widgets = {
+            'date_received': DateInput()
+        }

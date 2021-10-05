@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card card-secondary">
+	<div class="card-header">
+		<h1 class="card-title mt-1">Camara Project Donors List</h1>
+		<a href="{% url 'project_donor_add' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Project Donor</a>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Donor Name</th>
+					<th>Project Name</th>
+					<th>How the Donor Secured</th>
+					<th>Type of Donation</th>
+					<th>Monetary Value</th>
+					<th>Donor Key Name</th>
+					<th>Donor Key Email</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for project_donor in project_donor_list %}
+				<tr>
+					<td>{{ project_donor.donor_name }}</td>
+					<td>{{ project_donor.project_name }}</td>
+					<td>{{ project_donor.recruitment_source }}</td>
+					<td>{{ project_donor.type_of_donation }}</td>
+					<td>{{ project_donor.value_of_donation }}</td>
+					<td>{{ project_donor.key_contact_name }}</td>
+					<td>{{ project_donor.key_contact_email }}</td>
+					<td>
+						<a href="{% url 'project_donor_detail' project_donor.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+        				<a href="{% url 'project_donor_update' project_donor.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{project_donor.id}}">
+							<i class="fa fa-trash"></i> Delete</a>
+						
+						<div class="modal fade" id="modal-danger{{project_donor.id}}">
+							<div class="modal-dialog modal-md">
+							  <div class="modal-content ">
+								<div class="modal-header bg-danger">
+								  <h4 class="modal-title">Deleting Project Donor <strong>{{ project_donor.donor_name }}</strong></h4>
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								<div class="modal-body">
+								  <p>Are you sure you want to delete your project donor <strong> {{ project_donor.donor_name }}</strong>?</p>
+								</div>
+								<div class="modal-footer justify-content-between">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								  <a href="{% url 'project_donor_delete' project_donor.id %}" class="btn btn-danger">Delete</a>
+								</div>
+							  </div>
+							  <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+{% endblock content %}

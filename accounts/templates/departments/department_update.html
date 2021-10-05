@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<!-- <div class="row">
+    <div class="col-sm-12"> -->
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">Updating Department</h3>
+		  </div>
+		  <form method="POST">
+		  	{% csrf_token %}
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-3">
+				    	{{department_update_form.hub|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{department_update_form.department_code|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{department_update_form.department_name|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{department_update_form.department_email|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{department_update_form.department_manager|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-3">
+				        {{department_update_form.department_phone_number|as_crispy_field}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        {{department_update_form.department_role|as_crispy_field}}
+				    </div>
+		    	</div>
+		    </div>
+		    <div class="card-footer">
+		      <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Update Department</button>
+			  <a href="{% url 'department_list' %}" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
+		    </div>
+		  </form>
+		</div>
+<!-- 	</div>
+</div> -->
+{% endblock content %}

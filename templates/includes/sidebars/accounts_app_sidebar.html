@@ -1,0 +1,83 @@
+{% load static %}
+{% if account_open_menu %}
+        <li class="nav-item {{account_open_menu}}">
+          <a href="#" class="nav-link {{account_open_menu_active}}" style="background-color: #82bc00;">
+            <img src="{% static 'dist/img/hubwhite.png' %}"  height="35" width="35" style="background-color: ffffff;">
+            <p> Hubs & Accounts</p>
+          </a>
+          <ul class="nav nav-treeview">
+            {% if hub_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'organization_hub_list' %}" class="nav-link {{hub_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-university" style="color: #82bc00;"></i><p> Hubs</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'organization_hub_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-university" style="color: #82bc00;"></i><p> Hubs</p></a>
+              </li>
+            {% endif %}
+
+            {% if department_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'department_list' %}" class="nav-link {{department_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-sitemap" style="color: #82bc00;"></i><p> Departments</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'department_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-sitemap" style="color: #82bc00;"></i><p> Departments</p></a>
+              </li>
+            {% endif %}
+
+            {% if position_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'position_list' %}" class="nav-link {{position_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'position_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+              </li>
+            {% endif %}
+
+            {% if user_nav_link_active %}
+            <li class="nav-item">
+              <a href="{% url 'user_list' %}" class="nav-link {{user_nav_link_active}}">
+                  <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
+            </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'user_list' %}" class="nav-link">
+                    <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
+              </li>
+            {% endif %}
+          </ul>
+        </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="{% static 'dist/img/hub.png' %}"  height="35" width="35">
+          <p> Hubs & Accounts</p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{% url 'organization_hub_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-university" style="color: #82bc00;"></i><p> Hubs</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'department_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-sitemap" style="color: #82bc00;"></i><p> Departments</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'position_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'user_list' %}" class="nav-link">
+                <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
+          </li>
+        </ul>
+      </li>
+      {% endif%}

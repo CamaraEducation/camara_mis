@@ -1,0 +1,11 @@
+{% if departments %}
+    <option value="">---------</option>
+	{% for department in departments %}
+	<option value="{{ department.id }}">{{ department.department_name }}</option>
+	{% endfor %}
+{% elif positions %}
+	<option value="">---------</option>
+	{% for position in positions %}
+	<option value="{{ position.id }}">{{ position.position_name }}</option>
+	{% endfor %}
+{% endif %}

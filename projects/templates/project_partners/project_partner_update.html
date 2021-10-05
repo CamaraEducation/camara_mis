@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="card card-secondary">
+  <div class="card-header">
+    <h3 class="card-title">Updating Project Partner</h3>
+  </div>
+  <form method="POST">
+  	{% csrf_token %}
+    <div class="card-body">
+    	<div class="row">
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.partner_name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.project_name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.start_Date|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.end_Date|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.key_contact_name_1|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.key_contact_email_1|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.key_contact_name_2|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.key_contact_email_2|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.partner_Budget|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{project_partner_update_form.partner_role|as_crispy_field}}
+			</div>
+    	</div>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Update Project Partner</button>
+	  <a href="{% url 'project_partner_list' %}" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock content %}

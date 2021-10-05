@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6">
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">Project Donor Detail of <b>{{obj.donor_name}}</b></h3>
+		  </div>
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-6">
+				    	<strong>Donor Name: </strong>{{obj.donor_name}}
+				    </div>
+					<div class="form-group col-md-6">
+				    	<strong>Partner Name: </strong>{{obj.project_name}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>How the Donor Secured: </strong>{{obj.recruitment_source}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Type of Donation: </strong>{{obj.type_of_donation}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Monetary Value: </strong>{{obj.value_of_donation}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Donor Name: </strong>{{obj.key_contact_name}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Donor Email: </strong>{{obj.key_contact_email}}
+				    </div>
+		    	</div>
+		    </div>
+		    <div class="card-footer">
+		      <a href="{% url 'project_donor_update' obj.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit Project Donor</a>&nbsp;
+              <a href="{% url 'project_donor_list' %}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Go Back</a>
+		    </div>
+		</div>
+</div>
+</div>
+{% endblock content %}
