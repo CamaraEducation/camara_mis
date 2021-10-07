@@ -9,8 +9,8 @@ class AddCourseForm(forms.ModelForm):
 
     class Meta:
         model = Course
-        fields = {'hub', 'project', 'course_name', 'course_target', 'course_description', 'course_certificate',
-                    'course_version', 'course_delivery', 'course_price', 'course_cost', 'course_designed_by',
+        fields = {'hub', 'project', 'course_name', 'course_code', 'course_target', 'course_description', 'course_certificate',
+                    'course_version', 'course_delivery', 'course_duration', 'course_price', 'course_cost', 'course_designed_by',
                     'course_status',}
 
 class AddTrainingForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class AddTrainingForm(forms.ModelForm):
     class Meta:
         model = Training
         fields = {'training_name', 'course', 'instructor', 'number_of_participant', 'number_of_schools',
-                    'start_date', 'end_date', 'training_location', 'status',}
+                    'start_date', 'end_date', 'traing_duration', 'training_location', 'status',}
         widgets = {
             'start_date': DateInput(),
             'end_date': DateInput()
