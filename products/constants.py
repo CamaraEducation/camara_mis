@@ -47,18 +47,18 @@ RAM_TYPE_CHOICES = [
 ]
 
 # RAM Sizes
-FIVE12 = '512MB'
-ONE_GB = '1GB'
-TWO_GB = '2GB'
-FOUR_GB = '4GB'
-EGIHT_GB = '8GB'
+FIVE12 = '512 MB'
+ONE_GB = '1 GB'
+TWO_GB = '2 GB'
+FOUR_GB = '4 GB'
+EGIHT_GB = '8 GB'
 
 RAM_SIZE_CHOICES = [
-    (FIVE12, '512MB'),
-    (ONE_GB, '1GB'),
-    (TWO_GB, '2GB'),
-    (FOUR_GB, '4GB'),
-    (EGIHT_GB, '8GB'),
+    (FIVE12, '512 MB'),
+    (ONE_GB, '1 GB'),
+    (TWO_GB, '2 GB'),
+    (FOUR_GB, '4 GB'),
+    (EGIHT_GB, '8 GB'),
 ]
 
 # Storage Types
@@ -76,21 +76,21 @@ STORAGE_TYPE_CHOICES = [
 
 # Storage Sizes
 
-GB80 = '80GB'
-GB128 = '128GB'
-GB160 = '160GB'
-GB250 = '250GB'
-GB320 = '320GB'
-GB500 = '500GB'
+GB80 = '80 GB'
+GB128 = '128 GB'
+GB160 = '160 GB'
+GB250 = '250 GB'
+GB320 = '320 GB'
+GB500 = '500 GB'
 TB1 = '1TB'
 
 STORAGE_SIZE_CHOICES = [
-    (GB80, '80GB'),
-    (GB128, '128GB'),
-    (GB160, '160GB'),
-    (GB250, '250GB'),
-    (GB320, '320GB'),
-    (GB500, '500GB'),
+    (GB80, '80 GB'),
+    (GB128, '128 GB'),
+    (GB160, '160 GB'),
+    (GB250, '250 GB'),
+    (GB320, '320 GB'),
+    (GB500, '500 GB'),
     (TB1, '1TB'),
 ]
 
@@ -133,4 +133,17 @@ DEVICE_TYPE_CHOICES = [
     (LAPTOP, 'Laptop'),
     (PRINTER, 'Printer'),
     (PROJECTOR, 'Projector'),
+]
+
+# Screen Size
+UNKNOWN = 'Unknown'
+INCH17 = '17 inch'
+INCH19 = '19 inch'
+INCH21 = '21 inch'
+
+SCREEN_SIZE_CHOICES = [
+    (UNKNOWN, 'Unknown'),
+    (INCH17, '17 inch'),
+    (INCH19, '19 inch'),
+    (INCH21, '21 inch'),
 ]

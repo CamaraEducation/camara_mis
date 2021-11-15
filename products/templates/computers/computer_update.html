@@ -12,6 +12,9 @@
     <div class="card-body">
     	<div class="row">
 			<div class="form-group col-md-3">
+				{{computer_update_form.hub|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
 				{{computer_update_form.c_affritrack_number|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
@@ -61,9 +64,6 @@
 			</div>
 			<div class="form-group col-md-3">
 				{{computer_update_form.working_status|as_crispy_field}}
-			</div>
-			<div class="form-group col-md-3">
-				{{computer_update_form.date_received|as_crispy_field}}
 			</div>
     	</div>
     </div>

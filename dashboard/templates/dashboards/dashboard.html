@@ -1,0 +1,239 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content%}
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-3" >
+        <div class="info-box" style="background-color: #fff5dd;">
+        <span class="info-box-icon  elevation-1" style="background-color: #ffc41f;">
+            <i class="icon" style="background-color: #ffc41f;"><img src="{% static 'dist/img/to-be-process.png' %}"  height="50" width="50"></i>
+        </span>
+        <div class="info-box-content">
+            <span class="info-box-text">Working/To be processed</span>
+            <span class="info-box-number">
+            {{working}}
+            </span>
+        </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box" style="background-color: #e4effc;">
+        <span class="info-box-icon elevation-1" style="background-color: #37a2eb;">
+            <i class="icon" style="background-color: #37a2eb;"><img src="{% static 'dist/img/processed.png' %}"  height="50" width="50"></i>
+        </span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Processed</span>
+            <span class="info-box-number">
+                {{processed}}
+            </span>
+        </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box" style="background-color: #efdce4;">
+        <span class="info-box-icon  elevation-1" style="background-color: #943266;">
+            <i class="icon" style="background-color: #943266;"><img src="{% static 'dist/img/broken.png' %}"  height="50" width="50"></i>
+        </span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Problematic</span>
+            <span class="info-box-number">
+                {{problematic}}
+            </span>
+        </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box" style="background-color: #edf4da;">
+        <span class="info-box-icon elevation-1" style="background-color: #82bc00;">
+            <i class="icon" style="background-color: #82bc00;"><img src="{% static 'dist/img/dispathced.png' %}"  height="50" width="50"></i>
+        </span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Dispatched</span>
+            <span class="info-box-number">
+                {{dispatched}}
+            </span>
+        </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box" style="background-color: #ffdfdb;">
+        <span class="info-box-icon  elevation-1" style="background-color: red;">
+            <i class="icon" style="background-color: red;"><img src="{% static 'dist/img/ewaste.png' %}"  height="50" width="50"></i>
+        </span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">E-waste</span>
+            <span class="info-box-number">
+                {{ewaste}}
+            </span>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- Charts -->
+   
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-secondary">
+            <div class="card-header">
+            <h3 class="card-title">Number of computers By processor type</h3>
+            </div>
+            <div class="card-body">
+            <div class="chart">
+                <canvas id="myChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Intel i3', 'Intel i5', 'Intel i7', 'Dual core'],
+                        datasets: [{
+                            label: '# of computers By processor type',
+                            barPercentage: 0.5,
+                            data: ['{{corei3}}','{{corei5}}','{{corei7}}','{{dual_core}}'],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                </script>
+            </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <div class="col-md-4">
+        <div class="card card-secondary">
+            <div class="card-header">
+            <h3 class="card-title">Number of computers By Brand</h3>
+            </div>
+            <div class="card-body">
+            <div class="chart">
+                <canvas id="myChart1" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <script>
+                var ctx = document.getElementById('myChart1').getContext('2d');
+                var myChart1 = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Dell', 'HP', 'Lenovo'],
+                        datasets: [{
+                            label: '# of computers By Brand',
+                            barPercentage: 0.5,
+                            data: ['{{dell}}','{{hp}}','{{lenovo}}'],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                </script>
+            </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-secondary">
+            <div class="card-header">
+            <h3 class="card-title">Number of computers By RAM size</h3>
+            </div>
+            <div class="card-body">
+            <div class="chart">
+                <canvas id="myChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <script>
+                var ctx = document.getElementById('myChart2').getContext('2d');
+                var myChart2 = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['512BM', '1GB', '2GB', '4GB', '8GB'],
+                        datasets: [{
+                            label: '# of computers By RAM size',
+                            barPercentage: 0.5,
+                            data: ['{{five12}}','{{one_gb}}','{{two_gb}}','{{four_gb}}', '{{egiht_gb}}'],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                </script>
+            </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
+</div>
+
+{% endblock content%}

@@ -1,0 +1,6 @@
+{% if school_names %}
+    <option value="">---------</option>
+	{% for school_name in school_names %}
+	<option value="{{ school_name.id }}">{{ school_name.school_name }}</option>
+	{% endfor %}
+{% endif %}

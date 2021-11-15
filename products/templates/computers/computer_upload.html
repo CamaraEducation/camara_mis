@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="card card-secondary">
+	<div class="card-header">
+	<h3 class="card-title">Uploading Computer</h3>
+	</div>
+	<form method="POST" action="{% url 'computer_upload' %}" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="card-body">
+		<div class="row">
+			<div class="form-group col-md-3">
+				{{computer_upload_form|crispy}}
+			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<button type="submit" class="btn btn-success"><i class="fa fa-upload"></i> Upload Computer</button>
+		<a class="btn btn-danger" href="{% url 'computer_list' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+	</div>
+	</form>
+</div>
+
+
+{% endblock %}

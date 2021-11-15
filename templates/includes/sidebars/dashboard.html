@@ -1,0 +1,84 @@
+{% load static %}
+{% if dashboard_open_menu %}
+        <li class="nav-item {{dashboard_open_menu}}">
+          <a href="#" class="nav-link {{dashboard_open_menu_active}}" style="background-color: #82bc00;">
+            <i class="nav-icon fas fa fa-tachometer-alt" ></i>
+            <p> Dashboard</p>
+          </a>
+          <ul class="nav nav-treeview">
+            {% if computer_dashboard_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link {{computer_dashboard_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-chart-line" style="color: #82bc00;"></i><p> Computer</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-chart-line" style="color: #82bc00;"></i><p> Computer</p></a>
+              </li>
+            {% endif %}
+
+            <!-- {% if department_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'department_list' %}" class="nav-link {{department_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-sitemap" style="color: #82bc00;"></i><p> Departments</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'department_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-sitemap" style="color: #82bc00;"></i><p> Departments</p></a>
+              </li>
+            {% endif %}
+
+            {% if position_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'position_list' %}" class="nav-link {{position_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'position_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+              </li>
+            {% endif %}
+
+            {% if user_nav_link_active %}
+            <li class="nav-item">
+              <a href="{% url 'user_list' %}" class="nav-link {{user_nav_link_active}}">
+                  <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
+            </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'user_list' %}" class="nav-link">
+                    <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
+              </li>
+            {% endif %} -->
+          </ul>
+        </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa fa-chart-line" style="color: #82bc00;"></i>
+          <!-- <img src="{% static 'dist/img/hub.png' %}"  height="35" width="35"> -->
+          <p> Dashboard</p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{% url 'home' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-chart-line" style="color: #82bc00;"></i><p> Computer</p></a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="{% url 'department_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-sitemap" style="color: #82bc00;"></i><p> Departments</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'position_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'user_list' %}" class="nav-link">
+                <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
+          </li> -->
+        </ul>
+      </li>
+      {% endif%}

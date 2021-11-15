@@ -11,10 +11,11 @@ class AddSuplierForm(forms.ModelForm):
         fields = ('name', 'description', 'address', 'contact', 'contact_person', 'payment_mode')
 
 class AddComputerForm(forms.ModelForm):
+    c_affritrack_number = forms.CharField(label = "Computer Affritrack Number")
 
     class Meta:
         model = Computer
-        fields = ('c_affritrack_number', 'serial_number', 'brand', 'model', 'donor_id', 'container_number',
+        fields = ('hub', 'c_affritrack_number', 'serial_number', 'brand', 'model', 'donor_id', 'container_number',
                     'device_status', 'supplier', 'processor_type', 'processor_speed', 'memory_type', 'memory_size',
                     'storage_type', 'storage_size', 'os_type', 'os_version', 'working_status', 'date_received')
         widgets = {
@@ -23,11 +24,19 @@ class AddComputerForm(forms.ModelForm):
 
 
 class AddMonitorForm(forms.ModelForm):
+    m_affritrack_number = forms.CharField(label = "Monitor Affritrack Number")
 
     class Meta:
         model = Monitor
-        fields = ('m_affritrack_number', 'serial_number', 'brand', 'donor_id', 'container_number',
+        fields = ('hub','m_affritrack_number', 'serial_number', 'brand', 'donor_id', 'container_number',
                     'device_status', 'supplier', 'date_received', 'screen_size', 'working_status')
         widgets = {
             'date_received': DateInput()
         }
+
+
+class UploadComputerForm(forms.Form):
+	computer_upload = forms.FileField()
+
+class UploadMonitorForm(forms.Form):
+	monitor_upload = forms.FileField()

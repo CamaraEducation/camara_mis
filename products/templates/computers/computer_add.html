@@ -12,6 +12,15 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="form-group col-md-3">
+				<label for="hub" class="from-control">Please select your Hub</label>
+				<select name="hub" id="id_hub" class="form-control">
+					<option selected="selected" disabled>------------Select One------------</option>
+					{% for hub in hubs %}
+					<option value="{{hub.id}}">{{hub.hub_name}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="form-group col-md-3">
 				{{computer_add_form.c_affritrack_number|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">

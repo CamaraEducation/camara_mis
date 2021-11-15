@@ -6,13 +6,15 @@
 <div class="card card-secondary">
 	<div class="card-header">
 		<h1 class="card-title mt-1">Camara Monitors List</h1>
-		<a href="{% url 'monitor_add' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Monitor</a>
+		<a href="{% url 'monitor_add' %}" class="btn btn-success btn-sm float-right ml-2"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Monitor</a>
+		<a href="{% url 'monitor_upload' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-upload"></i>&nbsp;&nbsp;Upload Monitor</a>
 	</div>
 	<!-- /.card-header -->
 	<div class="card-body">
 		<table id="example1" class="table table-bordered table-striped">
 			<thead>
 				<tr>
+					<th>Hub</th>
 					<th>Afritrack Number</th>
 					<th>Serial Number</th>
 					<th>Brand</th>
@@ -24,6 +26,7 @@
 			<tbody>
 				{% for monitor in monitors_list %}
 				<tr>
+					<td>{{ monitor.hub }}</td>
 					<td>{{ monitor.m_affritrack_number }}</td>
 					<td>{{ monitor.serial_number }}</td>
 					<td>{{ monitor.brand }}</td>

@@ -19,7 +19,7 @@
 					<th>School Area</th>
 					<th>School Level</th>
 					<th>School Phone</th>
-					<th></th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,7 +35,8 @@
 						<a href="{% url 'school_detail' schools.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
         				<a href="{% url 'school_update' schools.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{schools.id}}">
-							<i class="fa fa-trash"></i> Delete</a>
+							<i class="fa fa-trash"></i> Delete</a>&nbsp;
+						<a href="{% url 'dispatch:school_computer_request_add' schools.id %}" class="btn btn-primary btn-xs "><i class="fa fa-plus"></i> Add computer Request</a>
 						
 						<div class="modal fade" id="modal-danger{{schools.id}}">
 							<div class="modal-dialog modal-md">

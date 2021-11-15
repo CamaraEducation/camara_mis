@@ -8,8 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import Department, Hub, Position, UserProfile
 from .forms import AddOrganizationHubForm, AddDepartmentForm, AddPositionForm, AddUserProfileForm, AddUserForm, UpdateUserForm
 
-def home_view(request):
-	return render(request, 'base/base.html')
+
 
 ##################### views for managing Users and Logins #####################
 def logout_view(request):

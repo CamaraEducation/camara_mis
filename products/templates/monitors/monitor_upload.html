@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="card card-secondary">
+	<div class="card-header">
+	<h3 class="card-title">Uploading Monitors</h3>
+	</div>
+	<form method="POST" action="{% url 'monitor_upload' %}" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-3">
+			<div class="form-group col-md-12">
+				<label for="hub" class="from-control">Please select your Hub</label>
+				<select name="hub" id="id_hub" class="form-control">
+					<option selected="selected" disabled>------------Select One------------</option>
+					{% for hub in hubs %}
+					<option value="{{hub.id}}">{{hub.hub_name}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="form-group col-md-12">
+				{{monitor_upload_form|crispy}}
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<button type="submit" class="btn btn-success"><i class="fa fa-upload"></i> Upload Monitor</button>
+		<a class="btn btn-danger" href="{% url 'monitor_list' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+	</div>
+	</form>
+</div>
+
+
+{% endblock %}

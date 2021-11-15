@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-9">
+		<div class="card card-secondary">
+		  <div class="card-header">
+		    <h3 class="card-title">Adding Computer Request of <b>{{obj.school_name}}</b></h3>
+		  </div>
+		    <div class="card-body">
+		    	<div class="row">
+					<div class="form-group col-md-6">
+				    	<strong>School Name: </strong>{{obj.school_name}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Code: </strong>{{obj.school_code}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Hub: </strong>{{obj.country}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Level: </strong>{{obj.school_level}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Ownership: </strong>{{obj.school_ownership}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Area: </strong>{{obj.school_area}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>School Phone number 1: </strong>{{obj.phone_number_1}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Female Teachers: </strong>{{obj.female_teachers}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Male Teachers: </strong>{{obj.male_teachers}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Female Students: </strong>{{obj.female_students}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Male Students: </strong>{{obj.male_students}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Female Special need Students: </strong>{{obj.female_sn_students}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Male Special need Students: </strong>{{obj.male_sn_students}}
+				    </div>
+		    	</div>
+				<div class="card-footer">
+					<form method="POST" action="{% url 'dispatch:computer_request_add' %}">
+						{% csrf_token %}
+						<div class="form-group col-md-12">
+						Number of computers this school requesting:
+						<input type="number" name="number_of_computers" class="form-control" required>
+					</div>
+						<div class="form-group col-md-12">
+						<select class="form-control" name="applicant_id">
+							{% for comp_app in computer_app %}
+							<option value="{{comp_app.id}}">{{comp_app.full_name}}</option>
+							{% endfor %}
+						</select>
+						<input type="hidden" name="school_name" value="{{obj.id}}"/>
+						<input type="hidden" name="hub" value="{{obj.country_id}}"/>
+						</div>
+						<div class="form-group col-md-12">
+							<button type="submit"  class="btn btn-success"><i class="fa fa-plus"></i> Add Computer Request</button>&nbsp;
+							<a href="{% url 'school_list' %}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Go Back</a>
+						</div>
+					</form>
+				</div>
+		    </div>
+		</div>
+</div>
+</div>
+{% endblock content %}

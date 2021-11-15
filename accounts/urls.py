@@ -29,7 +29,7 @@ urlpatterns = [
     # path('user/<int:id>/delete', views.user_delete_view, name='user_delete'),
 
 
-    path('', views.home_view, name='home'),
+ 
     path('logout/', views.logout_view, name='logout'),
     path('login/', views.login_view, name='login'),
 ]
