@@ -7,7 +7,7 @@ from school.constants import SCHOOL_AREA_CHOICES, SCHOOL_LEVEL_CHOICES, SCHOOL_O
 class School(models.Model):
     school_code = models.CharField(max_length=20, unique=True, blank=True, default=None)
     country = models.ForeignKey(Hub, on_delete=models.CASCADE)
-    school_name = models.CharField(max_length=30)
+    school_name = models.CharField(max_length=200)
     school_level = models.CharField(max_length=20, choices=SCHOOL_LEVEL_CHOICES)
     school_ownership = models.CharField(max_length=20, choices=SCHOOL_OWNERSHIP_CHOICES)
     school_area = models.CharField(max_length=20, choices=SCHOOL_AREA_CHOICES)

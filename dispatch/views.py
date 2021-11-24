@@ -130,7 +130,7 @@ def computer_request_add_view(request):
 	#return render(request, 'computer_requests/school_computer_request_add.html', context)
 
 def computer_request_detail_view(request, id=id):
-	obj = get_object_or_404(Computer_Applicant, id=id)
+	obj = get_object_or_404(Computer_Request, id=id)
 	context = {
 		'dispatch_open_menu': 'menu-open',
 		'dispatch_open_menu_active': 'active',
@@ -138,10 +138,10 @@ def computer_request_detail_view(request, id=id):
 		'title':'Computer Applicant Detial',
 		'obj':obj,
 	}
-	return render(request, 'computer_requests/computer_request_detail.html', context)
+	return render(request, 'computer_requests/school_computer_request_detail.html', context)
 
 def computer_request_update_view(request, id=id):
-	obj = get_object_or_404(Computer_Applicant, id=id)
+	obj = get_object_or_404(Computer_Request, id=id)
 	applicant_update_form = AddComputerApplicantForm(request.POST or None, instance=obj)
 	if applicant_update_form.is_valid():
 		applicant_update_form.save()
@@ -157,7 +157,7 @@ def computer_request_update_view(request, id=id):
 	return render(request, 'computer_requests/computer_request_update.html', context)
 
 def computer_request_delete_view(request, id=id):
-	obj = get_object_or_404(Computer_Applicant, id=id)
+	obj = get_object_or_404(Computer_Request, id=id)
 	obj.delete()
 	messages.success(request, "computer Applicant Deleted successfully")
 	return redirect('applicant_list')
