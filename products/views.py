@@ -146,9 +146,12 @@ def computer_delete_view(request, id=id):
 
 def computer_upload_view(request):
 	computer_upload_form = UploadComputerForm()
+	hubs = Hub.objects.all()
 	if request.method == 'POST':
 		try:
 			csv_file = request.FILES['computer_upload']
+			get_hub = request.POST.get("hub")
+			hub = get_object_or_404(Hub, id=get_hub)
 			if not csv_file.name.endswith('.csv'):
 				messages.error(request, 'This is not a CSV file')
 
@@ -157,6 +160,7 @@ def computer_upload_view(request):
 			next(io_string)
 			for column in csv.reader(io_string, delimiter=',', quotechar='|'):
 				_, created = Computer.objects.update_or_create(
+					hub=hub,
 					c_affritrack_number=column[0],
 					serial_number=column[1],
 					brand=column[2],
@@ -181,6 +185,7 @@ def computer_upload_view(request):
 	context = {
 		'title':'Computer Upload',
 		'computer_upload_form':computer_upload_form,
+		'hubs':hubs,
 	}
 	return render(request, 'computers/computer_upload.html', context)
 

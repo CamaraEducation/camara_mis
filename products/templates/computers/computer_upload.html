@@ -10,8 +10,19 @@
 	{% csrf_token %}
 	<div class="card-body">
 		<div class="row">
-			<div class="form-group col-md-3">
-				{{computer_upload_form|crispy}}
+			<div class="col-md-3">
+				<div class="form-group col-md-12">
+					<label for="hub" class="from-control">Please select your Hub</label>
+					<select name="hub" id="id_hub" class="form-control">
+						<option selected="selected" disabled>------------Select One------------</option>
+						{% for hub in hubs %}
+						<option value="{{hub.id}}">{{hub.hub_name}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group col-md-12">
+					{{computer_upload_form|crispy}}
+				</div>
 			</div>
 		</div>
 	</div>
