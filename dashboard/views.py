@@ -17,11 +17,11 @@ def home_view(request):
     dell = Computer.objects.filter(brand='Dell').count()
     hp = Computer.objects.filter(brand='HP').count()
     lenovo = Computer.objects.filter(brand='Lenovo').count()
-    five12 = Computer.objects.filter(memory_size='512MB').count()
-    one_gb = Computer.objects.filter(memory_size='1GB').count()
-    two_gb = Computer.objects.filter(memory_size='2GB').count()
-    four_gb = Computer.objects.filter(memory_size='4GB').count()
-    egiht_gb = Computer.objects.filter(memory_size='8GB').count()
+    five12 = Computer.objects.filter(memory_size='512 MB').count()
+    one_gb = Computer.objects.filter(memory_size='1 GB').count()
+    two_gb = Computer.objects.filter(memory_size='2 GB').count()
+    four_gb = Computer.objects.filter(memory_size='4 GB').count()
+    egiht_gb = Computer.objects.filter(memory_size='8 GB').count()
     context = {
         'data':data,
         'corei3':corei3,
