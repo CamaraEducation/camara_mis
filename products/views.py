@@ -183,6 +183,9 @@ def computer_upload_view(request):
 		except Exception as e:
 			print (e)
 	context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'computer_nav_link_active': 'active',
 		'title':'Computer Upload',
 		'computer_upload_form':computer_upload_form,
 		'hubs':hubs,
@@ -290,6 +293,9 @@ def monitor_upload_view(request):
 		except Exception as e:
 			print (e)
 	context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'monitor_nav_link_active': 'active',
 		'title':'Monitor Upload',
 		'monitor_upload_form':monitor_upload_form,
 		'hubs':hubs,
