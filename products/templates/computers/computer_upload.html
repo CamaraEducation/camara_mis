@@ -13,8 +13,8 @@
 			<div class="col-md-3">
 				<div class="form-group col-md-12">
 					<label for="hub" class="from-control">Please select your Hub</label>
-					<select name="hub" id="id_hub" class="form-control">
-						<option selected="selected" disabled>------------Select One------------</option>
+					<select name="hub" id="id_hub" class="form-control" required>
+						<option selected="selected" disabled value="">------------Select One------------</option>
 						{% for hub in hubs %}
 						<option value="{{hub.id}}">{{hub.hub_name}}</option>
 						{% endfor %}

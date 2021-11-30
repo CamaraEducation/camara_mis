@@ -12,3 +12,7 @@ class AddSchoolForm(forms.ModelForm):
         fields = {'school_code', 'country', 'school_name', 'school_level', 'school_ownership', 'school_area',
                     'po_box', 'phone_number_1', 'phone_number_2', 'website', 'female_teachers', 'male_teachers',
                     'female_students', 'male_students', 'female_sn_students', 'male_sn_students', }
+
+
+class UploadSchoolForm(forms.Form):
+	school_upload = forms.FileField()
