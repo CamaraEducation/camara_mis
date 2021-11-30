@@ -5,7 +5,7 @@
             <img src="{% static 'dist/img/hubwhite.png' %}"  height="35" width="35" style="background-color: ffffff;">
             <p> Hubs & Accounts</p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul class="nav nav-treeview" style="background-color: #6c757d;">
             {% if hub_nav_link_active %}
               <li class="nav-item">
                 <a href="{% url 'organization_hub_list' %}" class="nav-link {{hub_nav_link_active}}">
@@ -61,7 +61,7 @@
           <img src="{% static 'dist/img/hub.png' %}"  height="35" width="35">
           <p> Hubs & Accounts</p>
         </a>
-        <ul class="nav nav-treeview">
+        <ul class="nav nav-treeview" style="background-color: #6c757d;">
           <li class="nav-item">
             <a href="{% url 'organization_hub_list' %}" class="nav-link">
                 <i class="nav-icon fas fa fa-university" style="color: #82bc00;"></i><p> Hubs</p></a>
