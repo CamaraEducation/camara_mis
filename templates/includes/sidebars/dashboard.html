@@ -5,7 +5,7 @@
             <i class="nav-icon fas fa fa-tachometer-alt" ></i>
             <p> Dashboard</p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul class="nav nav-treeview" style="background-color: #6c757d;">
             {% if computer_dashboard_nav_link_active %}
               <li class="nav-item">
                 <a href="{% url 'home' %}" class="nav-link {{computer_dashboard_nav_link_active}}">
@@ -62,7 +62,7 @@
           <!-- <img src="{% static 'dist/img/hub.png' %}"  height="35" width="35"> -->
           <p> Dashboard</p>
         </a>
-        <ul class="nav nav-treeview">
+        <ul class="nav nav-treeview" style="background-color: #6c757d;">
           <li class="nav-item">
             <a href="{% url 'home' %}" class="nav-link">
                 <i class="nav-icon fas fa fa-chart-line" style="color: #82bc00;"></i><p> Computer</p></a>

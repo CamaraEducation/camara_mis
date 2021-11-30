@@ -5,7 +5,7 @@
             <i class="nav-icon fas fa fa-dolly" ></i>
             <p> Dispatch</p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul class="nav nav-treeview" style="background-color: #6c757d;">
             {% if applicant_nav_link_active %}
               <li class="nav-item">
                 <a href="{% url 'dispatch:applicant_list' %}" class="nav-link {{applicant_nav_link_active}}">
@@ -62,7 +62,7 @@
           <!-- <img src="{% static 'dist/img/hub.png' %}"  height="35" width="35"> -->
           <p> Dispatch</p>
         </a>
-        <ul class="nav nav-treeview">
+        <ul class="nav nav-treeview" style="background-color: #6c757d;">
           <li class="nav-item">
             <a href="{% url 'dispatch:applicant_list' %}" class="nav-link">
                 <i class="nav-icon fas fa fa-user-tie" style="color: #82bc00;"></i><p> Computer Applicant</p></a>
