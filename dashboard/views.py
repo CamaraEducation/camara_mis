@@ -1,8 +1,9 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from products.models import Computer
 
 # Create your views here.
+@login_required(login_url='login')
 def home_view(request):
     processed = Computer.objects.filter(working_status='Processed').count()
     working = Computer.objects.filter(working_status='working').count()
