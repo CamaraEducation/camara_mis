@@ -17,6 +17,7 @@ from products.constants import (
     SYSTEM_UNIT,
     WORKING,
     PROCESSED,
+    REFURBISHED,
     SCREEN_SIZE_CHOICES,)
     
 from django.db import models
@@ -42,7 +43,7 @@ class Computer(models.Model):
     model = models.CharField(max_length=30)
     donor_id = models.ForeignKey(Donor, on_delete=models.CASCADE, null=True, default=None, blank=True,)
     container_number = models.CharField(max_length=20)
-    device_status = models.CharField(max_length=20, choices=DEVICE_STATUS_CHOICES, null=True)
+    device_status = models.CharField(max_length=20, choices=DEVICE_STATUS_CHOICES, null=True, default=REFURBISHED)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True, default=None, blank=True,)
     processor_type = models.CharField(max_length=20, choices=PROCESSOR_TYPE_CHOICES)
     processor_speed = models.CharField(max_length=10)
@@ -68,7 +69,7 @@ class Monitor(models.Model):
     serial_number = models.CharField(max_length=50, unique=True)
     brand = models.CharField(max_length=20, choices=BRAND_CHOICES)
     container_number = models.CharField(max_length=20)
-    device_status = models.CharField(max_length=20, choices=DEVICE_STATUS_CHOICES, null=True)
+    device_status = models.CharField(max_length=20, choices=DEVICE_STATUS_CHOICES, null=True, default=REFURBISHED)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True, default=None, blank=True,)
     date_received = models.DateField()
     screen_size = models.CharField(max_length=20, choices=SCREEN_SIZE_CHOICES, default=INCH17)
