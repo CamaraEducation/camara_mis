@@ -39,11 +39,17 @@ EMPLOYEMENT_TYPE_CHOICES = [
 BACHELORS='Bachelor’s'
 MASTERS = 'Master’s'
 DOCTORAL = 'Doctoral'
+DIPLOMA = 'Diploma'
+CERTIFICATE = 'Certificate'
+SECONDARY_EDUCATION = 'Secondary Education'
 
 EDUCATION_LEVEL_CHOICES = [
     (BACHELORS, 'Bachelor’s'),
     (MASTERS, 'Master’s'),
     (DOCTORAL, 'Doctoral'),
+    (DIPLOMA, 'Diploma'),
+    (CERTIFICATE, 'Certificate'),
+    (SECONDARY_EDUCATION, 'Secondary Education'),
 ]
 
 #Contact Information Relationship Choices
