@@ -4,6 +4,10 @@ HP = 'HP'
 LENOVO = 'Lenovo'
 ACER = 'Acer'
 ASUS = 'Asus'
+EPSON = 'Epson'
+MEDITECH = 'MediTech'
+SAMSUNG = 'Samsung'
+X_TIG = 'X_Tig'
 
 BRAND_CHOICES = [
     (DELL, 'Dell'),
@@ -11,6 +15,10 @@ BRAND_CHOICES = [
     (LENOVO, 'Lenovo'),
     (ACER, 'Acer'),
     (ASUS, 'Asus'),
+    (EPSON, 'Epson'),
+    (MEDITECH, 'MediTech'),
+    (SAMSUNG, 'Samsung'),
+    (X_TIG, 'X_Tig'),
 ]
 
 # Devides status
@@ -19,8 +27,8 @@ REFURBISHED = 'Refurbished'
 USED = 'Used'
 
 DEVICE_STATUS_CHOICES = [
-    (NEW, 'New'),
     (REFURBISHED, 'Refurbished'),
+    (NEW, 'New'),
     (USED, 'Used'),
 ]
 
@@ -29,12 +37,18 @@ INTEL_I3 = 'intel i3'
 INTEL_I5 = 'intel i5'
 INTEL_I7 = 'intel i7'
 DUAL_CORE = 'Dual Core'
+PENTIUM_4 = 'Pentium 4'
+QUAD_CORE = 'Quad Core'
+AMD = 'AMD'
 
 PROCESSOR_TYPE_CHOICES = [
     (INTEL_I3, 'intel i3'),
     (INTEL_I5, 'intel i5'),
     (INTEL_I7, 'intel i7'),
     (DUAL_CORE, 'Dual Core'),
+    (PENTIUM_4, 'Pentium 4'),
+    (QUAD_CORE, 'Quad Core'),
+    (AMD, 'AMD'),
 ]
 
 # RAM Types
@@ -68,8 +82,8 @@ ROM = 'ROM'
 SD_CARD = 'SD Card'
 
 STORAGE_TYPE_CHOICES = [
-    (SSD, 'SSD'),
     (HDD, 'HDD'),
+    (SSD, 'SSD'),
     (ROM, 'ROM'),
     (SD_CARD, 'SD Card'),
 ]
@@ -83,6 +97,9 @@ GB250 = '250 GB'
 GB320 = '320 GB'
 GB500 = '500 GB'
 TB1 = '1TB'
+GB16 = '16 GB'
+GB32 = '32 GB'
+GB8 = '8 GB'
 
 STORAGE_SIZE_CHOICES = [
     (GB80, '80 GB'),
@@ -92,17 +109,24 @@ STORAGE_SIZE_CHOICES = [
     (GB320, '320 GB'),
     (GB500, '500 GB'),
     (TB1, '1TB'),
+    (GB8, '8 GB'),
+    (GB16, '16 GB'),
+    (GB32, '32 GB'),
 ]
 
 # OS Type Installed
 MAC = 'Mac OS'
 WINDOWS = 'Windows'
 LINUX = 'Linux'
+ANDROID = 'Android'
+NO_OS = 'No OS'
 
 OS_TYPE_CHOICES = [
+    (LINUX, 'Linux'),
     (MAC, 'Mac OS'),
     (WINDOWS, 'Windows'),
-    (LINUX, 'Linux'),
+    (ANDROID, 'Android'),
+    (NO_OS, 'No OS'),
 ]
 
 # Computer Status
@@ -114,9 +138,9 @@ EWASTE = 'E-Waste'
 
 COMPUTER_STATUS_CHOICES = [
     (WORKING, 'Working'),
+    (PROCESSED, 'Processed'),
     (PROBLEMATIC, 'Problematic'),
     (DESPATCHED, 'Dispatched'),
-    (PROCESSED, 'Processed'),
     (EWASTE, 'E-Waste'),
 ]
 
@@ -140,10 +164,14 @@ UNKNOWN = 'Unknown'
 INCH17 = '17 inch'
 INCH19 = '19 inch'
 INCH21 = '21 inch'
+INCH20 = '20 INCH'
+INCH15 = '15 INCH'
 
 SCREEN_SIZE_CHOICES = [
     (UNKNOWN, 'Unknown'),
+    (INCH15, '15 inch'),
     (INCH17, '17 inch'),
     (INCH19, '19 inch'),
+    (INCH20, '20 inch'),
     (INCH21, '21 inch'),
 ]
