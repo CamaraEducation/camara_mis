@@ -4,7 +4,7 @@ from django.contrib import messages
 
 from accounts.models import Hub
 from .models import Monitor, Supplier, Computer
-from .forms import AddSuplierForm, AddComputerForm, AddMonitorForm, UploadComputerForm, UploadMonitorForm
+from .forms import AddSuplierForm, AddComputerForm, AddMonitorForm, UploadComputerForm, UploadMonitorForm,UpdateComputerForm
 # Create your views here.
 
 
@@ -123,17 +123,21 @@ def computer_detail_view(request, id=id):
 
 def computer_update_view(request, id=id):
 	obj = get_object_or_404(Computer, id=id)
-	computer_update_form = AddComputerForm(request.POST or None, instance=obj)
+	computer_update_form = UpdateComputerForm(request.POST or None, instance=obj)
 	if computer_update_form.is_valid():
+		# print(computer_update_form)
 		computer_update_form.save()
 		messages.success(request, "Computer Updated successfully")
 		return redirect('computer_list')
+	else:
+		print(computer_update_form.errors)
 	context = {
 		'product_open_menu': 'menu-open',
 		'product_open_menu_active': 'active',
 		'computer_nav_link_active': 'active',
 		'title':'Update Computer',
 		'computer_update_form':computer_update_form,
+		'obj': obj
 	}
 	return render(request, 'computers/computer_update.html', context)
 

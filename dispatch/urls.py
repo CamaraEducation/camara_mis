@@ -21,5 +21,6 @@ urlpatterns = [
     path('computer_request/<int:id>/delete', views.computer_request_delete_view, name='computer_request_delete'),
 
     path('computer_request_dispatch_process/<int:id>/dispatch', views.computer_request_dispatch_process_view, name='computer_request_dispatch_process'),
-    path('dispacth/ajax/check_status', views.product_status_check, name='check_status'),
+    path('dispacth/ajax/check_status', views.product_status_check, name='product_status_check'),
+    path('dispatch_computer/dispatch', views.computer_dispatch_view, name='computer_dispatch')
 ]

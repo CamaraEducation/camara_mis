@@ -1,6 +1,5 @@
-from django.db.models.enums import Choices
-from django.forms import widgets
 from projects.models import Donor
+from django.db import models
 from accounts.models import Hub
 from products.constants import (
     BRAND_CHOICES,
@@ -16,13 +15,13 @@ from products.constants import (
     DEVICE_TYPE_CHOICES,
     SYSTEM_UNIT,
     WORKING,
+    DRAM,
+    LINUX,
+    HDD,
     PROCESSED,
     REFURBISHED,
     SCREEN_SIZE_CHOICES,)
-    
-from django.db import models
 
-# Create your models here.
 
 class Supplier(models.Model):
     name = models.CharField(max_length=100)
@@ -36,7 +35,7 @@ class Supplier(models.Model):
         return self.name
 
 class Computer(models.Model):
-    hub = models.ForeignKey(Hub,on_delete=models.CASCADE, default=1, null=True)
+    hub = models.ForeignKey(Hub,on_delete=models.CASCADE, default=None, null=True)
     c_affritrack_number = models.CharField(max_length=50, unique=True)
     serial_number = models.CharField(max_length=50, unique=True)
     brand = models.CharField(max_length=20, choices=BRAND_CHOICES)
@@ -47,18 +46,17 @@ class Computer(models.Model):
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True, default=None, blank=True,)
     processor_type = models.CharField(max_length=20, choices=PROCESSOR_TYPE_CHOICES)
     processor_speed = models.CharField(max_length=10)
-    memory_type = models.CharField(max_length=10, choices=RAM_TYPE_CHOICES)
+    memory_type = models.CharField(max_length=10, choices=RAM_TYPE_CHOICES, default=DRAM)
     memory_size = models.CharField(max_length=10, choices=RAM_SIZE_CHOICES)
-    storage_type = models.CharField(max_length=10, choices=STORAGE_TYPE_CHOICES)
+    storage_type = models.CharField(max_length=10, choices=STORAGE_TYPE_CHOICES, default=HDD)
     storage_size = models.CharField(max_length=10, choices=STORAGE_SIZE_CHOICES)
-    os_type = models.CharField(max_length=10, choices=OS_TYPE_CHOICES, null=True)
-    os_version = models.CharField(max_length=30, null=True)
+    os_type = models.CharField(max_length=10, choices=OS_TYPE_CHOICES, null=True, default=LINUX)
+    os_version = models.CharField(max_length=30, null=True, default=None, blank=True,)
     working_status = models.CharField(max_length=30, choices=COMPUTER_STATUS_CHOICES, default=WORKING)
     date_received = models.DateField()
-    # price
-    # cost
     screen_size = models.CharField(max_length=20, choices=SCREEN_SIZE_CHOICES, default=INCH17)
     device_type = models.CharField(max_length=20, choices=DEVICE_TYPE_CHOICES, default=SYSTEM_UNIT)
+
     def __str__(self):
         return self.c_affritrack_number
 
@@ -75,8 +73,6 @@ class Monitor(models.Model):
     screen_size = models.CharField(max_length=20, choices=SCREEN_SIZE_CHOICES, default=INCH17)
     donor_id = models.ForeignKey(Donor, on_delete=models.CASCADE, null=True, default=None, blank=True,)
     working_status = models.CharField(max_length=30, choices=COMPUTER_STATUS_CHOICES, default=PROCESSED)
-    # price
-    # cost
 
     def __str__(self):
         return self.m_affritrack_number

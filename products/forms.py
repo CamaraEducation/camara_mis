@@ -15,9 +15,23 @@ class AddComputerForm(forms.ModelForm):
 
     class Meta:
         model = Computer
-        fields = ('hub', 'c_affritrack_number', 'serial_number', 'brand', 'model', 'donor_id', 'container_number',
-                    'device_status', 'supplier', 'processor_type', 'processor_speed', 'memory_type', 'memory_size',
-                    'storage_type', 'storage_size', 'os_type', 'os_version', 'working_status', 'date_received')
+        fields = ('hub', 'c_affritrack_number', 'serial_number', 'brand', 'model', 'donor_id',
+                    'container_number', 'device_status', 'supplier', 'processor_type', 
+                    'processor_speed', 'memory_type', 'memory_size', 'storage_type', 
+                    'storage_size', 'os_type', 'os_version', 'working_status', 'date_received')
+        widgets = {
+            'date_received': DateInput()
+        }
+
+class UpdateComputerForm(forms.ModelForm):
+    c_affritrack_number = forms.CharField(label = "Computer Affritrack Number")
+
+    class Meta:
+        model = Computer
+        fields = ('hub', 'c_affritrack_number', 'serial_number', 'brand', 'model', 'donor_id',
+                    'container_number', 'device_status', 'supplier', 'processor_type', 
+                    'processor_speed', 'memory_type', 'memory_size', 'storage_type', 
+                    'storage_size', 'os_type', 'os_version', 'working_status')
         widgets = {
             'date_received': DateInput()
         }

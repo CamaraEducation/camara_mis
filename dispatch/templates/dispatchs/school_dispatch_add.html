@@ -5,12 +5,14 @@
 {% block content %}
 <div class="card card-secondary">
 	<div class="card-header">
-	<h3 class="card-title">Computer Dispatch for School <b style="font-size: 30px;">{{obj.school_name}}</b></h3>
+	<h3 class="card-title">Computer Dispatch for School <b style="font-size: 20px;">{{obj.school_name}}</b></h3>
 	</div>
-    {{obj.school_name}}
-	<form method="POST" id="dispatchForm" product-status-check-url="{% url 'dispatch:check_status' %}"  novalidate>
+	<form method="POST" action="{% url 'dispatch:computer_dispatch' %}" id="dispatchForm" product-status-check-url="{% url 'dispatch:product_status_check' %}"  novalidate>
 	{% csrf_token %}
 	<div class="card-body">
+    {{computer_dispatch_form.date_dispatched}}
+    {{computer_dispatch_form.dispatched_by}}
+    {{computer_dispatch_form.warranty_end}}
 		<div class="row">
             {% for i in c %}
 			<div class="form-group col-md-3">
@@ -28,40 +30,56 @@
             <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script> 
             <script>
               $("#affritract_number_{{i}}").change(function () {
-                var affritract_number = $(this).val();
+                var paffritract_number = $(this).val();
                 var url = $("#dispatchForm").attr("product-status-check-url");
-                console.log( affritract_number);
-                $.ajax({                       // initialize an AJAX request
-                    url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-                    data: affritract_number,      // add the country id to the GET parameters
-                    success: function (pdata) {   // `data` is the return of the `load_cities` view function
-                      if (count(pdata > 0)) {
-                      $('##affritract_number_{{i}}').removeClass('is-valid').addClass('is-invalid');
-                      $('##affritract_number_{{i}}').after('<div class="invalid-feedback d-block" id="usernameError">This username is not available!</div>')
-                      }
-                      //$("#affritract_number_{{i}}").html(data);  // replace the contents of the city input with the data that came from the server
+                // console.log( paffritract_number);
+                $.ajax({
+                    url: url,
+                    data: {
+                      'paffritract_number': paffritract_number
+                    },
+                    success: function (response) {
+                    if (response.is_taken == 1) {
+                        $('#affritract_number_{{i}}').removeClass('is-valid').addClass('is-invalid');
+                        // $('#affritract_number_{{i}}').after('<div class="invalid-feedback d-block" id="pcError">This PC is not available in stock or not processed yet!</div>')
+                        }
+                    if(response.is_taken == 5){
+                        $('#affritract_number_{{i}}').removeClass('is-invalid').addClass('is-valid');
+                        $('#pcError').remove();
+                        }
                     }
                   });
               });
               $("#maffritract_number_{{i}}").change(function () {
                 var maffritract_number = $(this).val();
                 var url = $("#dispatchForm").attr("product-status-check-url");
-                console.log( maffritract_number);
-                // $.ajax({                       // initialize an AJAX request
-                //     url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-                //     data: maffritract_number,
-                //     success: function (response) {   // `data` is the return of the `load_cities` view function
-                //       $("#maffritract_number_{{i}}").html(data);  // replace the contents of the city input with the data that came from the server
-                //     }
-                //   });
+                // console.log( maffritract_number);
+                $.ajax({
+                  url: url,
+                  data: {
+                        'maffritract_number': maffritract_number
+                  },
+                  success: function (response) {   
+                  if (response.is_taken == 1) {
+                      $('#maffritract_number_{{i}}').removeClass('is-valid').addClass('is-invalid');
+                      // $('#maffritract_number_{{i}}').after('<div class="invalid-feedback d-block" id="monitorError">This Monitor is not available in stock or not processed yet!</div>');
+                  }
+                  if(response.is_taken == 5){
+                      $('#maffritract_number_{{i}}').removeClass('is-invalid').addClass('is-valid');
+                      $('#monitorError').remove();
+                  }
+                  }
+                })
               });
             </script>
 			{% endfor %}
 		</div>
 	</div>
+  <input type="hidden" name="request_id" value="{{obj.id}}"/>
+  <input type="hidden" name="number_of_computers" value="{{obj.number_of_computers}}"/>
 	<div class="card-footer">
 		<button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Dispatch Computers</button>
-		<a class="btn btn-danger" href="{% url 'dispatch:applicant_list' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+		<a class="btn btn-danger" href="{% url 'dispatch:computer_request_list' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
 	</div>
 	</form>
   {{pdata}}

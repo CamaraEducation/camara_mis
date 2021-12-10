@@ -7,7 +7,7 @@
   <div class="card-header">
     <h3 class="card-title">Updating Computer</h3>
   </div>
-  <form method="POST">
+  <form method="POST" action="{% url 'computer_update' obj.id %}">
   	{% csrf_token %}
     <div class="card-body">
     	<div class="row">

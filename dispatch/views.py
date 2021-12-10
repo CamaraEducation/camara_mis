@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import AddComputerApplicantForm,AddComputerRequestForm
-from dispatch.models import Computer_Applicant, Computer_Request
+from django.http import JsonResponse, HttpResponse
+from .forms import AddComputerApplicantForm,AddComputerRequestForm, DispatchComputerForm
+from dispatch.models import Computer_Applicant, Computer_Request, Dispatch
 from school.models import School
 from accounts.models import Hub
 from products.models import Computer, Monitor
@@ -66,11 +67,7 @@ def applicant_delete_view(request, id=id):
 	messages.success(request, "computer Applicant Deleted successfully")
 	return redirect('dispatch:applicant_list')
 
-# def ajax_load_school(request):
-# 	if request.GET.get('hub_id'):
-# 		hub_id = request.GET.get('hub_id')
-# 		school_names = School.objects.filter(country=hub_id)
-# 		return render(request, 'applicants/applicant_dropdown_option.html', {'school_names': school_names})
+
 ###################### End Views for managing Computer Applicant ######################
 
 
@@ -168,7 +165,11 @@ def computer_request_dispatch_process_view(request, id=id):
 	obj = get_object_or_404(Computer_Request, id=id)
 	a = obj.number_of_computers + 1
 	c = range(1, a, 1)
+	
 	context = {
+		'dispatch_open_menu': 'menu-open',
+		'dispatch_open_menu_active': 'active',
+		'computer_request_nav_link_active': 'active',
         'title': 'Dispatch Computers',
         'obj': obj,
         'c': c,
@@ -176,20 +177,60 @@ def computer_request_dispatch_process_view(request, id=id):
 	return render(request, 'dispatchs/school_dispatch_add.html', context)
 
 def product_status_check(request):
-	if request.GET.get('affritract_number'):
-		c_affritrack_number = request.GET.get('affritract_number')
-		if c_affritrack_number:
-				pdata = Computer.objects.filter(c_affritrack_number=c_affritrack_number)
-				if(pdata):
-					return render(request, 'dispatch/school_dispatch_add.html',{'pdata': pdata})
-    # else:
-    #     affritract_number = request.GET.get('maffritract_number')
-    #     if affritract_number:
-    #         response = {
-    #             'mdata': Monitor.objects.filter(affritract_number=affritract_number)
-    #             }
-    #         # mdata = Monitor.objects.filter(affritract_number=affritract_number, status=2)
-    #         # messages.success(request,f'School Computer request has been Added successfully!')
-    #         # return render(request, 'dispatch/school_dispatch_add.html',{'mdata': mdata})
-    #         if (response):
-    #             return render(request, 'dispatch/school_dispatch_add.html',{'response': response})
+	if request.GET.get('paffritract_number', None):
+		c_affritrack_number = request.GET.get('paffritract_number')
+		# check_dispatch = Dispatch.objects.filter(c_affritrack_number__iexact=c_affritrack_number).exists()
+		check_status = Computer.objects.filter(c_affritrack_number=c_affritrack_number, working_status = 'Processed')
+		if check_status:
+			response = {
+					'is_taken': 5
+				}
+			return JsonResponse(response)
+		else:
+			response = {
+					'is_taken': 1
+				}
+			return JsonResponse(response)
+	if request.GET.get('maffritract_number', None):
+		m_affritrack_number = request.GET.get('maffritract_number')
+		check_status = Monitor.objects.filter(m_affritrack_number=m_affritrack_number, working_status = 'Processed')
+		if check_status:
+			response = {
+					'is_taken': 5
+				}
+			return JsonResponse(response)
+		else:
+			response = {
+					'is_taken': 1
+				}
+			return JsonResponse(response)
+
+def computer_dispatch_view(request):
+	computer_dispatch_form = DispatchComputerForm(request.POST or None)
+	if computer_dispatch_form.is_valid():
+		request_id = request.POST.get('request_id')
+		number_of_computers = request.POST.get('number_of_computers')
+		request_info = get_object_or_404(Computer_Request, id=request_id)
+		hub = request_info['hub']
+		computer_request_id = request_id
+		applicant_name = request_info['applicant_id']
+		school_name = request_info['school_name']
+
+		for num_of_com in range(1, number_of_computers):
+			computer_dispatch_form.hub = hub
+			computer_dispatch_form.computer_request_id = computer_request_id
+			computer_dispatch_form.applicant_name = applicant_name
+			computer_dispatch_form.school_name = school_name
+			computer_dispatch_form.c_affritrack_number = request.POST.get('affritract_number_') + num_of_com
+			computer_dispatch_form.m_affritrack_number = request.POST.get('maffritract_number_') + num_of_com
+			computer_dispatch_form.save()
+		
+		messages.success(request, "Computer Dispatched successfully")
+		return redirect('computer_request_list')
+
+	context = {
+		'computer_dispatch_form': computer_dispatch_form
+	}
+	return render(request, 'dispatchs/school_dispatch_add.html', context)
+
+
