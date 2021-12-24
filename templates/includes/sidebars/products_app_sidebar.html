@@ -46,6 +46,30 @@
                     <i class="nav-icon fas fa fa-desktop" style="color: #82bc00;"></i><p> Monitor</p></a>
               </li>
             {% endif %}
+
+            <!-- {% if os_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'os_list' %}" class="nav-link {{os_nav_link_active}}">
+                    <i class="nav-icon fab fa-ubuntu" style="color: #82bc00;"></i><p> Operating System</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'os_list' %}" class="nav-link">
+                    <i class="nav-icon fab fa-ubuntu" style="color: #82bc00;"></i><p> Operating System</p></a>
+              </li>
+            {% endif %}
+
+            {% if osv_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'osv_list' %}" class="nav-link {{osv_nav_link_active}}">
+                    <i class="nav-icon fas fa-code-branch" style="color: #82bc00;"></i><p> OS Version</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'osv_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa-code-branch" style="color: #82bc00;"></i><p> OS Version</p></a>
+              </li>
+            {% endif %} -->
           </ul>
         </li>
       {% else %}
@@ -76,6 +100,16 @@
                 <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
                 <p> Monitor</p></a>
           </li>
+          <!-- <li class="nav-item">
+            <a href="{% url 'os_list' %}" class="nav-link">
+                <i class="nav-icon fab fa-ubuntu" style="color: #82bc00;"></i>
+                <p> Operating System</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'osv_list' %}" class="nav-link">
+                <i class="nav-icon fas fa-code-branch" style="color: #82bc00;"></i>
+                <p> OS Version</p></a>
+          </li> -->
         </ul>
       </li>
       {% endif%}

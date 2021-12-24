@@ -3,8 +3,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from accounts.models import Hub
-from .models import Monitor, Supplier, Computer
-from .forms import AddSuplierForm, AddComputerForm, AddMonitorForm, UploadComputerForm, UploadMonitorForm,UpdateComputerForm
+from .models import Monitor, Operating_System, Operating_system_Version, Supplier, Computer
+from .forms import (
+	AddSuplierForm,
+	AddComputerForm,
+	AddMonitorForm,
+	UploadComputerForm,
+	UploadMonitorForm,
+	UpdateComputerForm,
+	AddOSForm,
+	AddOSVForm,)
 # Create your views here.
 
 
@@ -78,6 +86,7 @@ def computer_list_view(request):
     problematic = Computer.objects.filter(working_status='Problematic')
     ewaste = Computer.objects.filter(working_status='E-Waste')
     dispatched = Computer.objects.filter(working_status='Dispatched')
+    not_received = Computer.objects.filter(working_status='Not Received')
     context = {
 		'title': 'Computer List',
 		'product_open_menu': 'menu-open',
@@ -89,6 +98,7 @@ def computer_list_view(request):
 		'problematic': problematic,
 		'ewaste': ewaste,
 		'dispatched':dispatched,
+		'not_received': not_received,
 	}
     return render(request, 'computers/computer_list.html', context)
 
@@ -114,7 +124,9 @@ def computer_add_view(request):
 
 def computer_detail_view(request, id=id):
 	obj = get_object_or_404(Computer, id=id)
-	context = {UploadComputerForm: 'active',
+	context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
 		'computer_nav_link_active': 'active',
 		'title':'Computer Detial',
 		'obj':obj,
@@ -195,21 +207,32 @@ def computer_upload_view(request):
 		'hubs':hubs,
 	}
 	return render(request, 'computers/computer_upload.html', context)
-
-
 ###################### End Views for managing Computer ######################
 
 ###################### Views for managing Monitor ######################
 def monitor_list_view(request):
-    monitors_list = Monitor.objects.all()
-    context = {
+	monitors_list = Monitor.objects.all()
+	processed = Monitor.objects.filter(working_status='Processed')
+	working = Monitor.objects.filter(working_status='working')
+	problematic = Monitor.objects.filter(working_status='Problematic')
+	ewaste = Monitor.objects.filter(working_status='E-Waste')
+	dispatched = Monitor.objects.filter(working_status='Dispatched')
+	not_received = Monitor.objects.filter(working_status='Not Received')
+	
+	context = {
 		'title': 'Monitor List',
 		'product_open_menu': 'menu-open',
 		'product_open_menu_active': 'active',
 		'monitor_nav_link_active': 'active',
-		'monitors_list': monitors_list
+		'monitors_list': monitors_list,
+		'processed': processed,
+		'working': working,
+		'problematic': problematic,
+		'ewaste': ewaste,
+		'dispatched':dispatched,
+		'not_received': not_received,
 	}
-    return render(request, 'monitors/monitor_list.html', context)
+	return render(request, 'monitors/monitor_list.html', context)
 
 def monitor_add_view(request):
     monitor_add_form = AddMonitorForm(request.POST or None)
@@ -306,3 +329,139 @@ def monitor_upload_view(request):
 	}
 	return render(request, 'monitors/monitor_upload.html', context)
 ###################### End Views for managing Monitor ######################
+
+###################### Views for managing OS ######################
+def os_list_view(request):
+	os_list = Operating_System.objects.all()
+	context = {
+		'title': 'Operating System List',
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'os_nav_link_active': 'active',
+		'os_list': os_list,
+	}
+	return render(request, 'os/os_list.html', context)
+
+def os_add_view(request):
+    os_add_form = AddOSForm(request.POST or None)
+    if os_add_form.is_valid():
+        os_add_form.save()
+        messages.success(request, "Operating System added successfully")
+        return redirect('os_list')
+    context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'os_nav_link_active': 'active',
+		'title':'Add an Operating system',
+		'os_add_form':os_add_form,
+	}
+    return render(request, 'os/os_add.html', context)
+
+def os_detail_view(request, id=id):
+	obj = get_object_or_404(Operating_System, id=id)
+	context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'os_nav_link_active': 'active',
+		'title':'Operating System Detial',
+		'obj':obj,
+	}
+	return render(request, 'os/os_detail.html', context)
+
+def os_update_view(request, id=id):
+	obj = get_object_or_404(Operating_System, id=id)
+	os_update_form = AddOSForm(request.POST or None, instance=obj)
+	if os_update_form.is_valid():
+		os_update_form.save()
+		messages.success(request, "Operating System Updated successfully")
+		return redirect('os_list')
+	context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'os_nav_link_active': 'active',
+		'title':'Update Operating System',
+		'os_update_form':os_update_form,
+	}
+	return render(request, 'os/os_update.html', context)
+
+def os_delete_view(request, id=id):
+	obj = get_object_or_404(Operating_System, id=id)
+	obj.delete()
+	messages.success(request, "Operating System Deleted successfully")
+	return redirect('os_list')
+
+###################### End Views for managing OS ######################
+
+###################### Views for managing OS ######################
+def osv_list_view(request):
+	osv_list = Operating_system_Version.objects.all()
+	context = {
+		'title': 'Operating System Version List',
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'osv_nav_link_active': 'active',
+		'osv_list': osv_list,
+	}
+	return render(request, 'osv/osv_list.html', context)
+
+def osv_add_view(request):
+    osv_add_form = AddOSVForm(request.POST or None)
+    if osv_add_form.is_valid():
+        osv_add_form.save()
+        messages.success(request, "Operating System Version added successfully")
+        return redirect('osv_list')
+    context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'osv_nav_link_active': 'active',
+		'title':'Add an Operating system',
+		'osv_add_form':osv_add_form,
+	}
+    return render(request, 'osv/osv_add.html', context)
+
+def osv_detail_view(request, id=id):
+	obj = get_object_or_404(Operating_system_Version, id=id)
+	context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'osv_nav_link_active': 'active',
+		'title':'Operating System Version Detial',
+		'obj':obj,
+	}
+	return render(request, 'osv/osv_detail.html', context)
+
+def osv_update_view(request, id=id):
+	obj = get_object_or_404(Operating_system_Version, id=id)
+	osv_update_form = AddOSVForm(request.POST or None, instance=obj)
+	if osv_update_form.is_valid():
+		osv_update_form.save()
+		messages.success(request, "Operating System Version Updated successfully")
+		return redirect('osv_list')
+	context = {
+		'product_open_menu': 'menu-open',
+		'product_open_menu_active': 'active',
+		'osv_nav_link_active': 'active',
+		'title':'Update Operating System Version',
+		'osv_update_form':osv_update_form,
+	}
+	return render(request, 'osv/osv_update.html', context)
+
+def osv_delete_view(request, id=id):
+	obj = get_object_or_404(Operating_system_Version, id=id)
+	obj.delete()
+	messages.success(request, "Operating System Version Deleted successfully")
+	return redirect('osv_list')
+
+###################### End Views for managing OS ######################
+
+##################### Ajax views for OS Version Dependent Dropdown #####################
+def ajax_load_os_version(request):
+	if request.GET.get('os_type_id'):
+		os_type_id = request.GET.get('os_type_id')
+		os_versions = Operating_system_Version.objects.filter(os_name=os_type_id)
+		return render(request, 'computers/osversion_dropdown_option.html', {'os_versions': os_versions})
+	else:
+		department_id = request.GET.get('department_id')
+		positions = Position.objects.filter(department_id=department_id)
+		return render(request, 'positions/department_dropdown_option.html', {'positions': positions})
+##################### End of Ajax views for Hub, Department, and Position Dependent Dropdown #####################

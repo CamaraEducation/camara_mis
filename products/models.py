@@ -4,6 +4,7 @@ from accounts.models import Hub
 from products.constants import (
     BRAND_CHOICES,
     COMPUTER_STATUS_CHOICES,
+    MONITOR_STATUS_CHOICES,
     DEVICE_STATUS_CHOICES,
     INCH17,
     OS_TYPE_CHOICES,
@@ -22,6 +23,18 @@ from products.constants import (
     REFURBISHED,
     SCREEN_SIZE_CHOICES,)
 
+class Operating_System(models.Model):
+    os_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.os_name
+
+class Operating_system_Version(models.Model):
+    os_name = models.ForeignKey(Operating_System, on_delete=models.CASCADE)
+    os_version = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.os_version
 
 class Supplier(models.Model):
     name = models.CharField(max_length=100)
@@ -50,10 +63,11 @@ class Computer(models.Model):
     memory_size = models.CharField(max_length=10, choices=RAM_SIZE_CHOICES)
     storage_type = models.CharField(max_length=10, choices=STORAGE_TYPE_CHOICES, default=HDD)
     storage_size = models.CharField(max_length=10, choices=STORAGE_SIZE_CHOICES)
-    os_type = models.CharField(max_length=10, choices=OS_TYPE_CHOICES, null=True, default=LINUX)
-    os_version = models.CharField(max_length=30, null=True, default=None, blank=True,)
+    os_type = models.ForeignKey(Operating_System, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    os_version = models.ForeignKey(Operating_system_Version, on_delete=models.CASCADE, null=True, default=None, blank=True)
     working_status = models.CharField(max_length=30, choices=COMPUTER_STATUS_CHOICES, default=WORKING)
     date_received = models.DateField()
+    comment = models.CharField(null=True, default=None, blank=True, max_length=240)
     screen_size = models.CharField(max_length=20, choices=SCREEN_SIZE_CHOICES, default=INCH17)
     device_type = models.CharField(max_length=20, choices=DEVICE_TYPE_CHOICES, default=SYSTEM_UNIT)
 
@@ -72,7 +86,9 @@ class Monitor(models.Model):
     date_received = models.DateField()
     screen_size = models.CharField(max_length=20, choices=SCREEN_SIZE_CHOICES, default=INCH17)
     donor_id = models.ForeignKey(Donor, on_delete=models.CASCADE, null=True, default=None, blank=True,)
-    working_status = models.CharField(max_length=30, choices=COMPUTER_STATUS_CHOICES, default=PROCESSED)
+    comment = models.CharField(null=True, default=None, blank=True, max_length=240)
+    working_status = models.CharField(max_length=30, choices=MONITOR_STATUS_CHOICES, default=PROCESSED)
 
     def __str__(self):
         return self.m_affritrack_number
+

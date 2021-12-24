@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card card-secondary">
+	<div class="card-header">
+		<h1 class="card-title mt-1">Operating systems Version List</h1>
+		<a href="{% url 'osv_add' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Operating System Version</a>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Operating System  Name</th>
+					<th>Operating System Version Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for osv in osv_list %}
+				<tr>
+					<td>{{ osv.os_name }}</td>
+					<td>{{ osv.os_version }}</td>
+					<td>
+						<a href="{% url 'osv_detail' osv.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+        				<a href="{% url 'osv_update' osv.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{osv.id}}">
+							<i class="fa fa-trash"></i> Delete</a>
+						
+						<div class="modal fade" id="modal-danger{{osv.id}}">
+							<div class="modal-dialog modal-md">
+							  <div class="modal-content ">
+								<div class="modal-header bg-danger">
+								  <h4 class="modal-title">Deleting <strong>{{ osv.os_version }}</strong></h4>
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								<div class="modal-body">
+								  <p>Are you sure you want to Delete <strong> {{ osv.os_version }}</strong>?</p>
+								</div>
+								<div class="modal-footer justify-content-between">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								  <a href="{% url 'osv_delete' osv.id %}" class="btn btn-danger">Delete</a>
+								</div>
+							  </div>
+							  <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+{% endblock content %}

@@ -24,4 +24,19 @@ urlpatterns = [
     path('monitor/<int:id>/update', views.monitor_update_view, name='monitor_update'),
     path('monitor/<int:id>/delete', views.monitor_delete_view, name='monitor_delete'),
     path('monitor/upload/', views.monitor_upload_view, name='monitor_upload'),
+
+    #urls for managing OS
+    path('os/add', views.os_add_view, name='os_add'),
+    path('os/list', views.os_list_view, name='os_list'),
+    path('os/<int:id>/detail', views.os_detail_view, name='os_detail'),
+    path('os/<int:id>/update', views.os_update_view, name='os_update'),
+    path('os/<int:id>/delete', views.os_delete_view, name='os_delete'),
+
+    #urls for managing OSV
+    path('osv/add', views.osv_add_view, name='osv_add'),
+    path('osv/list', views.osv_list_view, name='osv_list'),
+    path('osv/<int:id>/detail', views.osv_detail_view, name='osv_detail'),
+    path('osv/<int:id>/update', views.osv_update_view, name='osv_update'),
+    path('osv/<int:id>/delete', views.osv_delete_view, name='osv_delete'),
+    path('ajax/load-os-version/', views.ajax_load_os_version, name='ajax_load_os_version'),
 ]

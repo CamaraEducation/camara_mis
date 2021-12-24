@@ -7,7 +7,7 @@
 	<div class="card-header">
 	<h3 class="card-title">Adding Computer</h3>
 	</div>
-	<form method="POST" >
+	<form method="POST" id="ComputerAddForm" data-os-version-url="{% url 'ajax_load_os_version' %}" novalidate>
 	{% csrf_token %}
 	<div class="card-body">
 		<div class="row">
@@ -82,4 +82,22 @@
 	</div>
 	</form>
 </div>
+
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <script>
+    $("#id_os_type").change(function () {
+      var url = $("#ComputerAddForm").attr("data-os-version-url");  // get the url of the `load_cities` view
+      var os_type_id = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'os_type_id': os_type_id       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_os_version").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+    });
+  </script>
 {% endblock content %}

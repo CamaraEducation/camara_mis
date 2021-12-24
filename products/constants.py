@@ -129,12 +129,13 @@ OS_TYPE_CHOICES = [
     (NO_OS, 'No OS'),
 ]
 
-# Computer Status
+# Computer and Monitor Status
 WORKING = 'Working'
 PROBLEMATIC = 'Problematic'
 DESPATCHED = 'Dispatched'
 PROCESSED = 'Processed'
 EWASTE = 'E-Waste'
+NOT_RECEIVED = 'Not Received'
 
 COMPUTER_STATUS_CHOICES = [
     (WORKING, 'Working'),
@@ -142,8 +143,16 @@ COMPUTER_STATUS_CHOICES = [
     (PROBLEMATIC, 'Problematic'),
     (DESPATCHED, 'Dispatched'),
     (EWASTE, 'E-Waste'),
+    (NOT_RECEIVED, 'Not Received'),
 ]
 
+MONITOR_STATUS_CHOICES = [
+    (PROCESSED, 'Processed'),
+    (PROBLEMATIC, 'Problematic'),
+    (DESPATCHED, 'Dispatched'),
+    (EWASTE, 'E-Waste'),
+    (NOT_RECEIVED, 'Not Received'),
+]
 # Device type choices
 SYSTEM_UNIT = 'System Unit'
 TABLET = 'Tablet'

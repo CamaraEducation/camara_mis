@@ -1,0 +1,6 @@
+{% if os_versions %}
+    <option value="">---------</option>
+	{% for os_version in os_versions %}
+	<option value="{{ os_version.id }}">{{ os_version.os_version }}</option>
+	{% endfor %}
+{% endif %}

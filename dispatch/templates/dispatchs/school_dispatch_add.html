@@ -41,7 +41,7 @@
                     success: function (response) {
                     if (response.is_taken == 1) {
                         $('#affritract_number_{{i}}').removeClass('is-valid').addClass('is-invalid');
-                        // $('#affritract_number_{{i}}').after('<div class="invalid-feedback d-block" id="pcError">This PC is not available in stock or not processed yet!</div>')
+                        $('#affritract_number_{{i}}').after('<div class="invalid-feedback d-block" id="pcError">This PC is not available in stock or not processed yet!</div>')
                         }
                     if(response.is_taken == 5){
                         $('#affritract_number_{{i}}').removeClass('is-invalid').addClass('is-valid');
@@ -62,7 +62,7 @@
                   success: function (response) {   
                   if (response.is_taken == 1) {
                       $('#maffritract_number_{{i}}').removeClass('is-valid').addClass('is-invalid');
-                      // $('#maffritract_number_{{i}}').after('<div class="invalid-feedback d-block" id="monitorError">This Monitor is not available in stock or not processed yet!</div>');
+                      $('#maffritract_number_{{i}}').after('<div class="invalid-feedback d-block" id="monitorError">This Monitor is not available in stock or not processed yet!</div>');
                   }
                   if(response.is_taken == 5){
                       $('#maffritract_number_{{i}}').removeClass('is-invalid').addClass('is-valid');
