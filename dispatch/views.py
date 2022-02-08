@@ -246,9 +246,29 @@ def computer_dispatch_view(request):
 			Computer_Request.objects.filter(id=request_id).update(request_status=1)
 		return redirect('dispatch:computer_request_list')
 
-		
+def computer_dispatch_list_view(request):
+    computer_dispatch_list = Computer_Request.objects.filter(request_status=1)
+    context = {
+		'title': 'Computer Dispatched List',
+		'dispatch_open_menu': 'menu-open',
+		'dispatch_open_menu_active': 'active',
+		'computer_dispath_nav_link_active': 'active',
+		'computer_dispatch_list': computer_dispatch_list
+	}
+    return render(request, 'computer_dispatch/computer_dispatch_list.html', context)		
 
-
+def computer_dispatch_print_view(request, id=id):
+	obj = Dispatch.objects.filter(computer_request_id=id)
+	dis_data = get_object_or_404(Computer_Request, id=id)
+	context = {
+		'title': 'Computer Dispatched List',
+		'dispatch_open_menu': 'menu-open',
+		'dispatch_open_menu_active': 'active',
+		'computer_dispath_nav_link_active': 'active',
+		'obj': obj,
+		'dis_data': dis_data
+	}
+	return render(request, 'computer_dispatch/computer_dispatch_detail.html', context)
 
 # def computer_dispatch_view(request):
 # 	computer_dispatch_form = DispatchComputerForm(request.POST or None)

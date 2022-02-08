@@ -30,19 +30,19 @@
               </li>
             {% endif %}
 
-          <!--   {% if position_nav_link_active %}
+            {% if computer_dispath_nav_link_active %}
               <li class="nav-item">
-                <a href="{% url 'position_list' %}" class="nav-link {{position_nav_link_active}}">
-                    <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+                <a href="{% url 'dispatch:computer_dispatch_list' %}" class="nav-link {{computer_dispath_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-table" style="color: #82bc00;"></i><p> Dispatch Data</p></a>
               </li>
             {% else %}
               <li class="nav-item">
-                <a href="{% url 'position_list' %}" class="nav-link">
-                    <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
+                <a href="{% url 'dispatch:computer_dispatch_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-table" style="color: #82bc00;"></i><p> Dispatch Data</p></a>
               </li>
             {% endif %}
 
-            {% if user_nav_link_active %}
+          <!--   {% if user_nav_link_active %}
             <li class="nav-item">
               <a href="{% url 'user_list' %}" class="nav-link {{user_nav_link_active}}">
                   <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
@@ -71,11 +71,11 @@
             <a href="{% url 'dispatch:computer_request_list' %}" class="nav-link">
                 <i class="nav-icon fas fa fa-question-circle" style="color: #82bc00;"></i><p> Computer Request</p></a>
           </li>
-          <!-- <li class="nav-item">
-            <a href="{% url 'position_list' %}" class="nav-link">
-                <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i><p> Positions</p></a>
-          </li>
           <li class="nav-item">
+            <a href="{% url 'dispatch:computer_dispatch_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-table" style="color: #82bc00;"></i><p> Dispatch Data</p></a>
+          </li>
+          <!--<li class="nav-item">
             <a href="{% url 'user_list' %}" class="nav-link">
                 <i class="nav-icon fa fa-users" style="color: #82bc00;"></i><p> Users</p></a>
           </li> -->

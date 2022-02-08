@@ -1,0 +1,84 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<style>
+@media print {
+	/* style sheet for print goes here */
+	.main-footer{
+		visibility: hidden;
+	}
+	@page {
+		margin: 2cm;
+	}
+	.noprint {
+	  visibility: hidden;
+	}
+	body {
+		font: 14pt Georgia, "Times New Roman", Times, serif;
+		line-height: 1.1;
+	}
+	.cardtitle{
+		font: 18pt Georgia, "Times New Roman", Times, serif;
+		color: black;
+	}
+}
+
+</style>
+<div class="row">
+    <div class="col-sm-12">
+		<div class="card card-secondary">
+		  <div class="card-header cardheader">
+		    <h3 class="card-title cardtitle" > Computers Dispatched Detail of <b>{{dis_data.school_name}}</b></h3>
+		  </div>
+		    <div class="card-body">
+				
+		    	<div class="row">
+					
+					<table id="" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>PC Affritrack Number</th>
+								<th>Monitor Affritrack Number</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for objs in obj %}
+								{% if forloop.first %}
+								<div class="form-group col-md-6">
+									<strong>Hub: </strong>{{objs.hub}}
+								</div>
+								<div class="form-group col-md-6">
+									<strong>School Name: </strong>{{objs.school_name}}
+								</div>
+								<div class="form-group col-md-6">
+									<strong>Applicant Name: </strong>{{objs.applicant_name}}
+								</div>
+								<div class="form-group col-md-6">
+									<strong>Dispatched By: </strong>{{objs.dispatched_by}}
+								</div>
+								<div class="form-group col-md-6">
+									<strong>Dispatched Date: </strong>{{objs.date_dispatched}}
+								</div><br><br><br>
+								{%endif%}
+							<tr>
+								<td>{{ forloop.counter }}</td>
+								<td>{{ objs.c_affritrack_number }}</td>
+								<td>{{ objs.m_affritrack_number }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				
+		    	</div>
+				<div class="card-footer">
+					<a href="{% url 'dispatch:computer_dispatch_list' %}" class="btn btn-info noprint"><i class="fa fa-chevron-left"></i> Go Back</a>
+					<button onclick="window.print()" class="btn btn-success noprint"><i class="fa fa-print"></i> Print this page</button>
+				  </div>
+		    </div>
+		</div>
+</div>
+</div>
+{% endblock content %}
