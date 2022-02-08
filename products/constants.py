@@ -141,7 +141,6 @@ COMPUTER_STATUS_CHOICES = [
     (WORKING, 'Working'),
     (PROCESSED, 'Processed'),
     (PROBLEMATIC, 'Problematic'),
-    (DESPATCHED, 'Dispatched'),
     (EWASTE, 'E-Waste'),
     (NOT_RECEIVED, 'Not Received'),
 ]
