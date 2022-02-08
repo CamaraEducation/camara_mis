@@ -60,7 +60,7 @@ def school_update_view(request, id=id):
 	return render(request, 'schools/school_update.html', context)
 
 def school_delete_view(request, id=id):
-	obj = get_object_or_404(school, id=id)
+	obj = get_object_or_404(School, id=id)
 	obj.delete()
 	messages.success(request, "School Deleted successfully")
 	return redirect('school_list')
