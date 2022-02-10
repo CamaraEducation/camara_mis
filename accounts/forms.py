@@ -77,7 +77,12 @@ class AddUserProfileForm(forms.ModelForm):
 			'hub': 'Hub Name',
 			'department': 'Department Name',
 			'position_name': 'Position Name',
-			'user_personal_email': 'Camara Email'
+			'user_personal_email': 'Camara Email',
+			'user_contact_name': 'Next of Kin Name',
+			'user_contact_phone_number': 'Next of Kin Phone No',
+			'user_contact_email': 'Next of Kin Email',
+			'user_contact_relationship': 'Next of Kin Relationship',
+			'user_contact_address': 'Next of Kin Address',
 		}
 		widgets = {
         'user_birth_date': DateInput(),

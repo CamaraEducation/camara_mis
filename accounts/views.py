@@ -108,6 +108,20 @@ def user_update_view(request, id=id):
 	}
 	return render(request, 'accounts/user_update.html', context)
 
+def user_deactivate_view(request, id=id):
+	user = User.objects.get(pk=id)
+	user.is_active = False
+	user.save()
+	messages.success(request, "User account has been successfully deactivated!")
+	return redirect('user_list')
+
+def user_activate_view(request, id=id):
+	user = User.objects.get(pk=id)
+	user.is_active = True
+	user.save()
+	messages.success(request, "User account has been successfully activated!")
+	return redirect('user_list')
+
 ##################### End of views for managing Users and Logins #####################
 
 ##################### views for managing Hubs #####################
