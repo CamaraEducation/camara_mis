@@ -148,7 +148,6 @@ COMPUTER_STATUS_CHOICES = [
 MONITOR_STATUS_CHOICES = [
     (PROCESSED, 'Processed'),
     (PROBLEMATIC, 'Problematic'),
-    (DESPATCHED, 'Dispatched'),
     (EWASTE, 'E-Waste'),
     (NOT_RECEIVED, 'Not Received'),
 ]
