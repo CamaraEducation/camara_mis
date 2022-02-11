@@ -1,8 +1,31 @@
+import re
+from statistics import mode
 from django.db import models
-
+from projects.models import Project
 from accounts.models import Hub
 from school.constants import SCHOOL_AREA_CHOICES, SCHOOL_LEVEL_CHOICES, SCHOOL_OWNERSHIP_CHOICES
 # Create your models here.
+
+class County_Region(models.Model):
+    county_or_region_name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.county_or_region
+
+class Sub_County_Zone (models.Model):
+    county_or_region_name = models.ForeignKey(County_Region, on_delete=models.CASCADE)
+    sub_county_or_Zone_name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.sub_county_or_Zone_name
+
+class District_Woreda(models.Model):
+    county_or_region_name = models.ForeignKey(County_Region, on_delete=models.CASCADE)
+    sub_county_or_Zone_name = models.ForeignKey(Sub_County_Zone, on_delete=models.CASCADE)
+    district_or_woreda_name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.district_or_woreda_name
 
 class School(models.Model):
     school_code = models.CharField(max_length=20, unique=True, blank=True, default=None, null=True)
@@ -22,6 +45,11 @@ class School(models.Model):
     male_students = models.IntegerField(default=0)
     female_sn_students = models.IntegerField(default=0)
     male_sn_students = models.IntegerField(default=0)
+    project_name = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    county_or_region_name = models.ForeignKey(County_Region, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    sub_county_or_Zone_name = models.ForeignKey(Sub_County_Zone, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    district_or_woreda_name = models.ForeignKey(District_Woreda, on_delete=models.CASCADE, null=True, default=None, blank=True)
 
     def __str__(self):
         return self.school_name
+
