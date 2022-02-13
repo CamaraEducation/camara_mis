@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card card-secondary">
+	<div class="card-header">
+		<h1 class="card-title mt-1">District/Woreda List</h1>
+		<a href="{% url 'district_woreda_add' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add District/Woreda</a>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body">
+		<table id="example1" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>County/Region Name</th>
+					<th>Sub County/Zone Name</th>
+					<th>District/Woreda Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for district_woreda in district_woreda_list %}
+				<tr>
+					<td>{{ district_woreda.county_or_region_name }}</td>
+					<td>{{ district_woreda.sub_county_or_Zone_name }}</td>
+					<td>{{ district_woreda.district_or_woreda_name }}</td>
+					<td>
+						<a href="{% url 'district_woreda_detail' district_woreda.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+        				<a href="{% url 'district_woreda_update' district_woreda.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{district_woreda.id}}"><i class="fa fa-trash"></i> Delete</a>
+						<div class="modal fade" id="modal-danger{{district_woreda.id}}">
+							<div class="modal-dialog modal-md">
+							  <div class="modal-content ">
+								<div class="modal-header bg-danger">
+								  <h4 class="modal-title">Deleting <strong>{{ district_woreda.district_or_woreda_name }}</strong></h4>
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								<div class="modal-body">
+								  <p>Are you sure you want to Delete <strong> {{ district_woreda.district_or_woreda_name }}</strong>?</p>
+								</div>
+								<div class="modal-footer justify-content-between">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								  <a href="{% url 'district_woreda_delete' district_woreda.id %}" class="btn btn-danger">Delete</a>
+								</div>
+							  </div>
+							  <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+{% endblock content %}

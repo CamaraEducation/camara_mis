@@ -7,10 +7,11 @@ from school.constants import SCHOOL_AREA_CHOICES, SCHOOL_LEVEL_CHOICES, SCHOOL_O
 # Create your models here.
 
 class County_Region(models.Model):
+    hub_name = models.ForeignKey(Hub, on_delete=models.CASCADE, null=True, default=None, blank=True)
     county_or_region_name = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.county_or_region
+        return self.county_or_region_name
 
 class Sub_County_Zone (models.Model):
     county_or_region_name = models.ForeignKey(County_Region, on_delete=models.CASCADE)

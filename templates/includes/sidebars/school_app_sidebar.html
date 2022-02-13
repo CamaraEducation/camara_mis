@@ -2,7 +2,6 @@
 {% if school_open_menu %}
         <li class="nav-item {{school_open_menu}}">
           <a href="#" class="nav-link  {{school_open_menu_active}} " style="background-color: #82bc00;">
-            <!-- <img src="{% static 'dist/img/projectwhite.png' %}"  height="35" width="35" style="background-color: ffffff;"> -->
             <i class="nav-icon fas fa-school" style="color: #ffffff;"></i>
             <p> Schools and Training</p>
           </a>
@@ -55,44 +54,89 @@
                     <i class="nav-icon fas fa fa-address-card" style="color: #82bc00;"></i><p> Training Attendance</p></a>
               </li>
             {% endif %}
+            {% if request.user.is_superuser %}
+                {% if county_region_nav_link_active %}
+                  <li class="nav-item">
+                    <a href="{% url 'county_region_list' %}" class="nav-link {{county_region_nav_link_active}}">
+                        <i class="nav-icon fa " style="color: #82bc00;"></i><p> County/Region</p></a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a href="{% url 'county_region_list' %}" class="nav-link">
+                        <i class="nav-icon fa " style="color: #82bc00;"></i><p> County/Region</p></a>
+                  </li>
+                {% endif %}
+
+                {% if sub_county_zone_nav_link_active %}
+                  <li class="nav-item">
+                    <a href="{% url 'sub_county_zone_list' %}" class="nav-link {{sub_county_zone_nav_link_active}}">
+                        <i class="nav-icon fa " style="color: #82bc00;"></i><p> Sub County/Zone</p></a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a href="{% url 'sub_county_zone_list' %}" class="nav-link">
+                        <i class="nav-icon fa " style="color: #82bc00;"></i><p> Sub County/Zone</p></a>
+                  </li>
+                {% endif %}
+
+                {% if district_woreda_nav_link_active %}
+                  <li class="nav-item">
+                    <a href="{% url 'district_woreda_list' %}" class="nav-link {{district_woreda_nav_link_active}}">
+                        <i class="nav-icon fa " style="color: #82bc00;"></i><p> District/Woreda</p></a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a href="{% url 'district_woreda_list' %}" class="nav-link">
+                        <i class="nav-icon fa " style="color: #82bc00;"></i><p> District/Woreda</p></a>
+                  </li>
+                {% endif %}
+            {% endif %}
           </ul>
         </li>
       {% else %}
       <li class="nav-item">
         <a href="#" class="nav-link">
-          <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="35" width="35"> -->
           <i class="nav-icon fas fa-school" style="color: #82bc00;"></i>
           <p> Schools and Training</p>
         </a>
         <ul class="nav nav-treeview" style="background-color: #6c757d;">
           <li class="nav-item">
             <a href="{% url 'school_list' %}" class="nav-link">
-                <!-- <i class="nav-icon fas fa fa-tasks" style="color: #82bc00;"></i> -->
                 <i class="nav-icon fas fa-school" style="color: #82bc00;"></i>
-                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
                 <p>  Schools</p></a>
           </li>
           <li class="nav-item">
             <a href="{% url 'course_list' %}" class="nav-link">
                 <i class="nav-icon fas fa fa-book" style="color: #82bc00;"></i>
-                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
-                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
                 <p> Course</p></a>
           </li>
           <li class="nav-item">
             <a href="{% url 'training_list' %}" class="nav-link">
                 <i class="nav-icon fas fa fa-exchange-alt" style="color: #82bc00;"></i>
-                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
-                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
                 <p> Trainings</p></a>
           </li>
           <li class="nav-item">
             <a href="{% url 'training_attendance_list' %}" class="nav-link">
                 <i class="nav-icon fas fa fa-address-card" style="color: #82bc00;"></i>
-                <!-- <i class="fas fa-project-diagram" style="color: #82bc00;"></i> -->
-                <!-- <img src="{% static 'dist/img/projectgreen.png' %}"  height="30" width="30"> -->
                 <p> Training Attendance</p></a>
           </li>
+          {% if request.user.is_superuser %}
+            <li class="nav-item">
+              <a href="{% url 'county_region_list' %}" class="nav-link">
+                  <i class="nav-icon fa " style="color: #82bc00;"></i>
+                  <p> County/Region</p></a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'sub_county_zone_list' %}" class="nav-link">
+                  <i class="nav-icon fa " style="color: #82bc00;"></i>
+                  <p> Sub County/Zone</p></a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'district_woreda_list' %}" class="nav-link">
+                  <i class="nav-icon fa " style="color: #82bc00;"></i>
+                  <p> District/Woreda</p></a>
+            </li>
+          {% endif %}
         </ul>
       </li>
       {% endif%}

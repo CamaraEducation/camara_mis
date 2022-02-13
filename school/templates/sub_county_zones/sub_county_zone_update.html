@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="card card-secondary">
+  <div class="card-header">
+    <h3 class="card-title">Updating Sub County/Zone</h3>
+  </div>
+  <form method="POST">
+  	{% csrf_token %}
+    <div class="card-body">
+    	<div class="row">
+        <div class="form-group col-md-3">
+          {{sub_county_zone_update_form.county_or_region_name|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-3">
+          {{sub_county_zone_update_form.sub_county_or_Zone_name|as_crispy_field}}
+        </div>
+    	</div>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Update Sub County/Zone</button>
+	  <a href="{% url 'sub_county_zone_list' %}" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock content %}

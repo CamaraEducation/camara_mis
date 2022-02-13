@@ -2,8 +2,8 @@ import csv, io
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from accounts.models import Hub
-from .forms import AddSchoolForm, UploadSchoolForm
-from .models import School
+from .forms import AddSchoolForm, UploadSchoolForm, AddCountyRegionForm, AddSubCountyZoneForm, AddDistrictWoredaForm
+from .models import School, County_Region, Sub_County_Zone, District_Woreda
 
 ###################### Views for managing school ######################
 def school_list_view(request):
@@ -116,3 +116,186 @@ def school_upload_view(request):
 	}
 	return render(request, 'schools/school_upload.html', context)
 ###################### End Views for managing school ######################
+
+###################### Views for managing Counties/Regions ######################
+def county_region_list_view(request):
+    county_region_list = County_Region.objects.all()
+    context = {
+		'title': 'County/Region List',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'county_region_nav_link_active': 'active',
+		'county_region_list': county_region_list
+	}
+    return render(request, 'county_regions/county_region_list.html', context)
+
+def county_region_add_view(request):
+    county_region_add_form = AddCountyRegionForm(request.POST or None)
+    if county_region_add_form.is_valid():
+        county_region_add_form.save()
+        messages.success(request, "County/Region has been added successfully")
+        return redirect('county_region_list')
+    context = {
+		'title': 'County/Region Add',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'county_region_nav_link_active': 'active',
+		'county_region_add_form':county_region_add_form,
+	}
+    return render(request, 'county_regions/county_region_add.html', context)
+
+def county_region_detail_view(request, id=id):
+	obj = get_object_or_404(County_Region, id=id)
+	context = {
+		'title': 'County/Region Detail',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'county_region_nav_link_active': 'active',
+		'obj':obj,
+	}
+	return render(request, 'county_regions/county_region_detail.html', context)
+
+def county_region_update_view(request, id=id):
+	obj = get_object_or_404(County_Region, id=id)
+	county_region_update_form = AddCountyRegionForm(request.POST or None, instance=obj)
+	if county_region_update_form.is_valid():
+		county_region_update_form.save()
+		messages.success(request, "County/Region has been Updated successfully")
+		return redirect('county_region_list')
+	context = {
+		'title': 'County/Region Update',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'county_region_nav_link_active': 'active',
+		'county_region_update_form':county_region_update_form,
+	}
+	return render(request, 'county_regions/county_region_update.html', context)
+
+def county_region_delete_view(request, id=id):
+	obj = get_object_or_404(County_Region, id=id)
+	obj.delete()
+	messages.success(request, "County/Region has been Deleted successfully")
+	return redirect('county_region_list')
+###################### End Views for managing Counties/Regions ######################
+
+###################### Views for managing Sub-Counties/Zone ######################
+def sub_county_zone_list_view(request):
+    sub_county_zone_list = Sub_County_Zone.objects.all()
+    context = {
+		'title': 'Sub County/Zone List',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'sub_county_zone_nav_link_active': 'active',
+		'sub_county_zone_list': sub_county_zone_list
+	}
+    return render(request, 'sub_county_zones/sub_county_zone_list.html', context)
+
+def sub_county_zone_add_view(request):
+    sub_county_zone_add_form = AddSubCountyZoneForm(request.POST or None)
+    if sub_county_zone_add_form.is_valid():
+        sub_county_zone_add_form.save()
+        messages.success(request, "Sub County/Zone has been added successfully")
+        return redirect('sub_county_zone_list')
+    context = {
+		'title': 'Sub County/Zone Add',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'sub_county_zone_nav_link_active': 'active',
+		'sub_county_zone_add_form':sub_county_zone_add_form,
+	}
+    return render(request, 'sub_county_zones/sub_county_zone_add.html', context)
+
+def sub_county_zone_detail_view(request, id=id):
+	obj = get_object_or_404(Sub_County_Zone, id=id)
+	context = {
+		'title': 'Sub County/Zone Detail',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'sub_county_zone_nav_link_active': 'active',
+		'obj':obj,
+	}
+	return render(request, 'sub_county_zones/sub_county_zone_detail.html', context)
+
+def sub_county_zone_update_view(request, id=id):
+	obj = get_object_or_404(Sub_County_Zone, id=id)
+	sub_county_zone_update_form = AddSubCountyZoneForm(request.POST or None, instance=obj)
+	if sub_county_zone_update_form.is_valid():
+		sub_county_zone_update_form.save()
+		messages.success(request, "Sub County/Zone has been Updated successfully")
+		return redirect('sub_county_zone_list')
+	context = {
+		'title': 'Sub County/Zone Update',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'sub_county_zone_nav_link_active': 'active',
+		'sub_county_zone_update_form':sub_county_zone_update_form,
+	}
+	return render(request, 'sub_county_zones/sub_county_zone_update.html', context)
+
+def sub_county_zone_delete_view(request, id=id):
+	obj = get_object_or_404(Sub_County_Zone, id=id)
+	obj.delete()
+	messages.success(request, "Sub County/Zone has been Deleted successfully")
+	return redirect('sub_county_zone_list')
+###################### End Views for managing Sub-Counties/Zone ######################
+
+###################### Views for managing District/Woreda ######################
+def district_woreda_list_view(request):
+    district_woreda_list = District_Woreda.objects.all()
+    context = {
+		'title': 'District/Woreda List',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'district_woreda_nav_link_active': 'active',
+		'district_woreda_list': district_woreda_list
+	}
+    return render(request, 'district_woredas/district_woreda_list.html', context)
+
+def district_woreda_add_view(request):
+    district_woreda_add_form = AddDistrictWoredaForm(request.POST or None)
+    if district_woreda_add_form.is_valid():
+        district_woreda_add_form.save()
+        messages.success(request, "District/Woreda has been added successfully")
+        return redirect('district_woreda_list')
+    context = {
+		'title': 'District/Woreda Add',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'district_woreda_nav_link_active': 'active',
+		'district_woreda_add_form':district_woreda_add_form,
+	}
+    return render(request, 'district_woredas/district_woreda_add.html', context)
+
+def district_woreda_detail_view(request, id=id):
+	obj = get_object_or_404(District_Woreda, id=id)
+	context = {
+		'title': 'District/Woreda Detail',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'district_woreda_nav_link_active': 'active',
+		'obj':obj,
+	}
+	return render(request, 'district_woredas/district_woreda_detail.html', context)
+
+def district_woreda_update_view(request, id=id):
+	obj = get_object_or_404(District_Woreda, id=id)
+	district_woreda_update_form = AddDistrictWoredaForm(request.POST or None, instance=obj)
+	if district_woreda_update_form.is_valid():
+		district_woreda_update_form.save()
+		messages.success(request, "District/Woreda has been Updated successfully")
+		return redirect('district_woreda_list')
+	context = {
+		'title': 'District/Woreda Update',
+		'school_open_menu': 'menu-open',
+		'school_open_menu_active': 'active',
+		'district_woreda_nav_link_active': 'active',
+		'district_woreda_update_form':district_woreda_update_form,
+	}
+	return render(request, 'district_woredas/district_woreda_update.html', context)
+
+def district_woreda_delete_view(request, id=id):
+	obj = get_object_or_404(District_Woreda, id=id)
+	obj.delete()
+	messages.success(request, "District/Woreda has been Deleted successfully")
+	return redirect('district_woreda_list')
+###################### End Views for managing District/Woreda ######################
