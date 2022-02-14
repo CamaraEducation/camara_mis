@@ -84,16 +84,10 @@ def user_detail_view(request, id=id):
 	return render(request, 'accounts/user_detail.html', context)
 
 def user_update_view(request, id=id):
-	obj = get_object_or_404(User, id=id)
-	obj2 = get_object_or_404(UserProfile, id=id)
-	user_update_form = UpdateUserForm(request.POST or None, instance=obj)
-	user_profile_update_form = AddUserProfileForm(request.POST or None, instance=obj2)
-	if user_update_form.is_valid():
-		user_update_form.save()
-		messages.success(request, "User Information Updated successfully")
-		return redirect('user_list')
-
-	elif user_profile_update_form.is_valid():
+	obj = get_object_or_404(UserProfile, id=id)
+	obj2 = get_object_or_404(User, id=id)
+	user_profile_update_form = AddUserProfileForm(request.POST or None, instance=obj)
+	if user_profile_update_form.is_valid():
 		user_profile_update_form.save()
 		messages.success(request, "User Profile Information Updated successfully")
 		return redirect('user_list')
@@ -103,7 +97,7 @@ def user_update_view(request, id=id):
 		'user_nav_link_active': 'active',
 		'title':'Update user account and profile',
 		'obj':obj,
-		'user_update_form':user_update_form,
+		'obj2': obj2,
 		'user_profile_update_form': user_profile_update_form
 	}
 	return render(request, 'accounts/user_update.html', context)
