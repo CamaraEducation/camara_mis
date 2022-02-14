@@ -36,8 +36,10 @@
 					<td>
 						<a href="{% url 'organization_hub_detail' organization_hubs.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
         				<a href="{% url 'organization_hub_update' organization_hubs.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+						{% if request.user.is_superuser %}
 						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-dange{{organization_hubs.id}}r">
 							<i class="fa fa-trash"></i> Delete</a>
+						{% endif %}
 						
 						<div class="modal fade" id="modal-danger{{organization_hubs.id}}">
 							<div class="modal-dialog">
