@@ -12,7 +12,7 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" style="color: #fff;">
-          <i class="far fa-user fa-lg"></i> <span class="">&nbsp;{{ user.first_name }} {{ user.last_name }}</span>
+          <i class="far fa-user fa-lg"></i> <span class="">&nbsp;{{ request.user.first_name }} {{ request.user.last_name }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Manage Account</span>
