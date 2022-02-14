@@ -70,6 +70,8 @@ class Computer(models.Model):
     comment = models.CharField(null=True, default=None, blank=True, max_length=240)
     screen_size = models.CharField(max_length=20, choices=SCREEN_SIZE_CHOICES, default=INCH17)
     device_type = models.CharField(max_length=20, choices=DEVICE_TYPE_CHOICES, default=SYSTEM_UNIT)
+    date_modified = models.DateTimeField(auto_now=True)
+    date_published = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.c_affritrack_number
@@ -88,6 +90,8 @@ class Monitor(models.Model):
     donor_id = models.ForeignKey(Donor, on_delete=models.CASCADE, null=True, default=None, blank=True,)
     comment = models.CharField(null=True, default=None, blank=True, max_length=240)
     working_status = models.CharField(max_length=30, choices=MONITOR_STATUS_CHOICES, default=PROCESSED)
+    date_modified = models.DateTimeField(auto_now=True)
+    date_published = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.m_affritrack_number
