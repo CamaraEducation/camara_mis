@@ -5,7 +5,8 @@ from training.models import Course, Training, Training_Attendance
 
 ###################### Views for managing course ######################
 def course_list_view(request):
-    courses_list = Course.objects.all()
+    user = request.user.userprofile.hub
+    courses_list = Course.objects.all().filter(hub=user)
     context = {
 		'title': 'course List',
 		'school_open_menu': 'menu-open',

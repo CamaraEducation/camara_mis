@@ -6,7 +6,8 @@ from .forms import AddProjectForm, AddDonorForm, AddPartnerForm, AddProjectPartn
 
 ###################### Views for managing Project ######################
 def project_list_view(request):
-	project_list = Project.objects.all()
+	user = request.user.userprofile.hub
+	project_list = Project.objects.all().filter(hub=user)
 	context = {
 		'title': 'Projects List',
 		'project_open_menu': 'menu-open',

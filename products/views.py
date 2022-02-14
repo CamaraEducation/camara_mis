@@ -80,13 +80,14 @@ def supplier_delete_view(request, id=id):
 
 ###################### Views for managing Computer ######################
 def computer_list_view(request):
-    computers_list = Computer.objects.all()
-    processed = Computer.objects.filter(working_status='Processed')
-    working = Computer.objects.filter(working_status='working')
-    problematic = Computer.objects.filter(working_status='Problematic')
-    ewaste = Computer.objects.filter(working_status='E-Waste')
-    dispatched = Computer.objects.filter(working_status='Dispatched')
-    not_received = Computer.objects.filter(working_status='Not Received')
+    user = request.user.userprofile.hub
+    computers_list = Computer.objects.all().filter(hub=user)
+    processed = Computer.objects.filter(working_status='Processed').filter(hub=user)
+    working = Computer.objects.filter(working_status='working').filter(hub=user)
+    problematic = Computer.objects.filter(working_status='Problematic').filter(hub=user)
+    ewaste = Computer.objects.filter(working_status='E-Waste').filter(hub=user)
+    dispatched = Computer.objects.filter(working_status='Dispatched').filter(hub=user)
+    not_received = Computer.objects.filter(working_status='Not Received').filter(hub=user)
     context = {
 		'title': 'Computer List',
 		'product_open_menu': 'menu-open',
@@ -99,6 +100,7 @@ def computer_list_view(request):
 		'ewaste': ewaste,
 		'dispatched':dispatched,
 		'not_received': not_received,
+		'user': user
 	}
     return render(request, 'computers/computer_list.html', context)
 
@@ -211,13 +213,14 @@ def computer_upload_view(request):
 
 ###################### Views for managing Monitor ######################
 def monitor_list_view(request):
-	monitors_list = Monitor.objects.all()
-	processed = Monitor.objects.filter(working_status='Processed')
-	working = Monitor.objects.filter(working_status='working')
-	problematic = Monitor.objects.filter(working_status='Problematic')
-	ewaste = Monitor.objects.filter(working_status='E-Waste')
-	dispatched = Monitor.objects.filter(working_status='Dispatched')
-	not_received = Monitor.objects.filter(working_status='Not Received')
+	user = request.user.userprofile.hub
+	monitors_list = Monitor.objects.all().filter(hub=user)
+	processed = Monitor.objects.filter(working_status='Processed').filter(hub=user)
+	working = Monitor.objects.filter(working_status='working').filter(hub=user)
+	problematic = Monitor.objects.filter(working_status='Problematic').filter(hub=user)
+	ewaste = Monitor.objects.filter(working_status='E-Waste').filter(hub=user)
+	dispatched = Monitor.objects.filter(working_status='Dispatched').filter(hub=user)
+	not_received = Monitor.objects.filter(working_status='Not Received').filter(hub=user)
 	
 	context = {
 		'title': 'Monitor List',

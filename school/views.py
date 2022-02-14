@@ -7,7 +7,8 @@ from .models import School, County_Region, Sub_County_Zone, District_Woreda
 
 ###################### Views for managing school ######################
 def school_list_view(request):
-    schools_list = School.objects.all()
+    user = request.user.userprofile.hub
+    schools_list = School.objects.all().filter(country=user)
     context = {
 		'title': 'school List',
 		'school_open_menu': 'menu-open',

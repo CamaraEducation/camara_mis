@@ -11,7 +11,8 @@ from products.models import Computer, Monitor
 
 ###################### Views for managing Computer Applicant ######################
 def applicant_list_view(request):
-    computer_applicants_list = Computer_Applicant.objects.all()
+    user = request.user.userprofile.hub
+    computer_applicants_list = Computer_Applicant.objects.all().filter(hub=user)
     context = {
 		'title': 'Computer Applicant List',
 		'dispatch_open_menu': 'menu-open',
@@ -92,7 +93,8 @@ def school_computer_request_add(request, id=id):
 
 
 def computer_request_list_view(request):
-    computer_request_list = Computer_Request.objects.filter(request_status=0)
+    user = request.user.userprofile.hub
+    computer_request_list = Computer_Request.objects.filter(request_status=0).filter(hub=user)
     context = {
 		'title': 'Computer Applicant List',
 		'dispatch_open_menu': 'menu-open',
@@ -247,7 +249,8 @@ def computer_dispatch_view(request):
 		return redirect('dispatch:computer_request_list')
 
 def computer_dispatch_list_view(request):
-    computer_dispatch_list = Computer_Request.objects.filter(request_status=1)
+    user = request.user.userprofile.hub
+    computer_dispatch_list = Computer_Request.objects.filter(request_status=1).filter(hub=user)
     context = {
 		'title': 'Computer Dispatched List',
 		'dispatch_open_menu': 'menu-open',
