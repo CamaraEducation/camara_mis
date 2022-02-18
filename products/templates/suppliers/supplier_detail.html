@@ -15,20 +15,40 @@
 				    	<strong>Supplier Name: </strong>{{obj.name}}
 				    </div>
 				    <div class="form-group col-md-6">
-				        <strong>Supplier Address: </strong>{{obj.address}}
-				    </div>
-				    <div class="form-group col-md-6">
 				        <strong>Supplier Contact Person: </strong>{{obj.contact_person}}
 				    </div>
 				    <div class="form-group col-md-6">
-				        <strong>Supplier Contact: </strong>{{obj.contact}}
+				        <strong>Supplier Phone Number: </strong>{{obj.contact}}
+				    </div>
+					<div class="form-group col-md-6">
+				    	<strong>Additional Phone Number: </strong>{{obj.contact_2}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Supplier Email: </strong>{{obj.supplier_email}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Additional Email: </strong>{{obj.supplier_email_2}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Supplier Website: </strong>{{obj.supplier_website}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Supplier items: </strong>{{obj.supplier_items}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Supplier items Status: </strong>{{obj.supplier_items_status}}
 				    </div>
 				    <div class="form-group col-md-6">
 				        <strong>Payment Methods: </strong>{{obj.payment_mode}}
 				    </div>
-				    <div class="form-group col-md-12">
-				        <strong>Supplier Description: </strong>
-						{% if obj.description %} {{obj.description|safe}} {% else %} None{% endif %}
+				    <div class="form-group col-md-6">
+				        <strong>Supplier Category: </strong>{{obj.supplier_category}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Supplier Description: </strong>{{obj.description}}
+				    </div>
+				    <div class="form-group col-md-6">
+				        <strong>Supplier Address: </strong>{{obj.address}}
 				    </div>
 		    	</div>
 		    </div>

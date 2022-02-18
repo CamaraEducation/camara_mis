@@ -182,3 +182,25 @@ SCREEN_SIZE_CHOICES = [
     (INCH20, '20 inch'),
     (INCH21, '21 inch'),
 ]
+
+#Payment Methods
+
+CASH = 'Cash'
+CHEQUIE = 'Chequie'
+BANK_TRANSFER = 'Bank Transfer'
+
+PAYMENT_METHOD = [
+    (CASH, 'Cash'),
+    (CHEQUIE, 'Chequie'),
+    (BANK_TRANSFER, 'Bank Transfer'),
+]
+
+# Supplier Category
+
+LOCAL = 'Local'
+INTERNATIONAL = 'International'
+
+SUPPLIER_CATEGORY = [
+    (LOCAL, 'Local'),
+    (INTERNATIONAL, 'International'),
+]

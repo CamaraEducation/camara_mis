@@ -1,6 +1,7 @@
 from projects.models import Donor
 from django.db import models
 from accounts.models import Hub
+from phonenumber_field.modelfields import PhoneNumberField
 from products.constants import (
     BRAND_CHOICES,
     COMPUTER_STATUS_CHOICES,
@@ -21,7 +22,10 @@ from products.constants import (
     HDD,
     PROCESSED,
     REFURBISHED,
-    SCREEN_SIZE_CHOICES,)
+    SCREEN_SIZE_CHOICES,
+    PAYMENT_METHOD,
+    SUPPLIER_CATEGORY,
+    )
 
 class Operating_System(models.Model):
     os_name = models.CharField(max_length=100)
@@ -38,11 +42,18 @@ class Operating_system_Version(models.Model):
 
 class Supplier(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.CharField(max_length=255,default=None, blank=True, null=True)
     address = models.CharField(max_length=100)
-    contact = models.CharField(max_length=100)
+    contact = PhoneNumberField(blank=True)
+    contact_2 = PhoneNumberField(default=None, blank=True, null=True)
     contact_person = models.CharField(max_length=100)
-    payment_mode = models.CharField(max_length=100)
+    payment_mode = models.CharField(max_length=20, choices=PAYMENT_METHOD, default=None, blank=True)
+    supplier_email = models.EmailField(blank=True, default=None, null=True)
+    supplier_email_2 = models.EmailField(blank=True, default=None, null=True)
+    supplier_website = models.CharField(max_length=100, default=None, blank=True, help_text='Optional')
+    supplier_category = models.CharField(max_length=20, choices=SUPPLIER_CATEGORY, default=None, blank=True)
+    supplier_items = models.CharField(max_length=255,default=None, blank=True, null=True, help_text='ie. Laptops, Printers, Desktops, Networking Materials, Accessories, Tablets, Electric Supplies. Please use comma(,) to separate the items.')
+    supplier_items_status = models.CharField(max_length=255, blank=True, null=True, help_text='ie. Brand New, Used, Refurb, Both. Please use comma(,) to separate the items.')
 
     def __str__(self):
         return self.name

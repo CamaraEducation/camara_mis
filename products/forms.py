@@ -8,7 +8,14 @@ class AddSuplierForm(forms.ModelForm):
 
     class Meta:
         model = Supplier
-        fields = ('name', 'description', 'address', 'contact', 'contact_person', 'payment_mode')
+        fields = ('name', 'description', 'address', 'contact', 'contact_2', 'contact_person', 'payment_mode',
+                    'supplier_email', 'supplier_email_2', 'supplier_website', 'supplier_category', 'supplier_items', 'supplier_items_status')
+        labels = {
+            'name':'Supplier Name',
+            'contact': 'Supplier Phone Number',
+            'contact_2': 'Additional Phone Number',
+            'supplier_email_2': 'Additional Email'
+        }
 
 class AddComputerForm(forms.ModelForm):
     c_affritrack_number = forms.CharField(label = "Computer Affritrack Number")

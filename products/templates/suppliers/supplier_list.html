@@ -14,9 +14,9 @@
 			<thead>
 				<tr>
 					<th>Supplier Name</th>
-					<th>Supplier Address</th>
 					<th>Supplier Contact Person</th>
-					<th>Supplier Contact</th>
+					<th>Supplier Phone Number</th>
+					<th>Supplier email</th>
 					<th>Supplier Payment Method</th>
 					<th></th>
 				</tr>
@@ -25,9 +25,9 @@
 				{% for supplier in suppliers_list %}
 				<tr>
 					<td>{{ supplier.name }}</td>
-					<td>{{ supplier.address }}</td>
 					<td>{{ supplier.contact_person }}</td>
 					<td>{{ supplier.contact }}</td>
+					<td>{{ supplier.supplier_email }}</td>
 					<td>{{ supplier.payment_mode }}</td>
 					<td>
 						<a href="{% url 'supplier_detail' supplier.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
