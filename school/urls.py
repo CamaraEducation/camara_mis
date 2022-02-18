@@ -9,6 +9,8 @@ urlpatterns = [
     path('school/<int:id>/update', views.school_update_view, name='school_update'),
     path('school/<int:id>/delete', views.school_delete_view, name='school_delete'),
     path('school/upload/', views.school_upload_view, name='school_upload'),
+    path('ajax/load-sub-county-zone/', views.ajax_load_sub_county_zone, name='ajax_load_sub_county_zone'),
+    
 
     path('county_region/add', views.county_region_add_view, name='county_region_add'),
     path('county_region/list', views.county_region_list_view, name='county_region_list'),

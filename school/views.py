@@ -2,6 +2,7 @@ import csv, io
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from accounts.models import Hub
+from projects.models import Project
 from .forms import AddSchoolForm, UploadSchoolForm, AddCountyRegionForm, AddSubCountyZoneForm, AddDistrictWoredaForm
 from .models import School, County_Region, Sub_County_Zone, District_Woreda
 
@@ -19,7 +20,8 @@ def school_list_view(request):
     return render(request, 'schools/school_list.html', context)
 
 def school_add_view(request):
-    school_add_form = AddSchoolForm(request.POST or None)
+    user = request.user.userprofile.hub
+    school_add_form = AddSchoolForm(user, request.POST or None)
     if school_add_form.is_valid():
         school_add_form.save()
         messages.success(request, "School added successfully")
@@ -45,8 +47,9 @@ def school_detail_view(request, id=id):
 	return render(request, 'schools/school_detail.html', context)
 
 def school_update_view(request, id=id):
+	user = request.user.userprofile.hub
 	obj = get_object_or_404(School, id=id)
-	school_update_form = AddSchoolForm(request.POST or None, instance=obj)
+	school_update_form = AddSchoolForm(user, request.POST or None, instance=obj)
 	if school_update_form.is_valid():
 		school_update_form.save()
 		messages.success(request, "School Updated successfully")
@@ -68,12 +71,15 @@ def school_delete_view(request, id=id):
 
 def school_upload_view(request):
 	school_upload_form = UploadSchoolForm()
-	hubs = Hub.objects.all()
+	user = request.user.userprofile.hub
+	projects = Project.objects.all().filter(hub = user)
+	county_regions = County_Region.objects.all().filter(hub_name=user)
 	if request.method == 'POST':
 		try:
 			csv_file = request.FILES['school_upload']
-			get_hub = request.POST.get("hub")
-			hub = get_object_or_404(Hub, id=get_hub)
+			project_selected = get_object_or_404(Project, id = request.POST.get("project"))
+			county_region_selected = get_object_or_404(County_Region, id = request.POST.get("county_region"))
+			sub_county_zone_selected = get_object_or_404(Sub_County_Zone, id = request.POST.get("sub_county_zone"))
 			if not csv_file.name.endswith('.csv'):
 				messages.error(request, 'This is not a CSV file')
 
@@ -82,23 +88,27 @@ def school_upload_view(request):
 			next(io_string)
 			for column in csv.reader(io_string, delimiter=',', quotechar='|'):
 				_, created = School.objects.update_or_create(
-					country=hub,
+					country=user,
+					project_name = project_selected,
+					county_or_region_name = county_region_selected,
+					sub_county_or_Zone_name=sub_county_zone_selected,
 					school_code=column[0],
 					school_name=column[1],
 					school_level=column[2],
 					school_ownership=column[3],
 					school_area=column[4],
-					po_box=column[5],
-					phone_number_1=column[6],
-					phone_number_2=column[7],
-					email=column[8],
-					website=column[9],
-					female_teachers=column[10],
-					male_teachers=column[11],
-					female_students=column[12],
-					male_students=column[13],
-					female_sn_students=column[14],
-					male_sn_students=column[15],
+					district_or_woreda_name=column[5],
+					po_box=column[6],
+					phone_number_1=column[7],
+					phone_number_2=column[8],
+					email=column[9],
+					website=column[10],
+					female_teachers=column[11],
+					male_teachers=column[12],
+					female_students=column[13],
+					male_students=column[14],
+					female_sn_students=column[15],
+					male_sn_students=column[16],
 					)
 
 			messages.success(request,f'The schools has been uploaded successfully!')
@@ -113,9 +123,16 @@ def school_upload_view(request):
 		'school_nav_link_active': 'active',
 		'title':'School Upload',
 		'school_upload_form':school_upload_form,
-		'hubs':hubs,
+		'projects':projects,
+		'county_regions': county_regions,
 	}
 	return render(request, 'schools/school_upload.html', context)
+
+def ajax_load_sub_county_zone(request):
+	if request.GET.get('county_id'):
+		county_id = request.GET.get('county_id')
+		sub_county_zones = Sub_County_Zone.objects.filter(county_or_region_name=county_id)
+		return render(request, 'schools/sub_county_zone_dropdown_option.html', {'sub_county_zones': sub_county_zones})
 ###################### End Views for managing school ######################
 
 ###################### Views for managing Counties/Regions ######################

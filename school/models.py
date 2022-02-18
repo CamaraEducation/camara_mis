@@ -49,7 +49,7 @@ class School(models.Model):
     project_name = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, default=None, blank=True)
     county_or_region_name = models.ForeignKey(County_Region, on_delete=models.CASCADE, null=True, default=None, blank=True)
     sub_county_or_Zone_name = models.ForeignKey(Sub_County_Zone, on_delete=models.CASCADE, null=True, default=None, blank=True)
-    district_or_woreda_name = models.ForeignKey(District_Woreda, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    district_or_woreda_name = models.CharField(max_length=30, default=None, blank=True, null=True)
 
     def __str__(self):
         return self.school_name

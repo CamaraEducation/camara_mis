@@ -12,10 +12,22 @@
     <div class="card-body">
     	<div class="row">
 			<div class="form-group col-md-3">
-				{{school_update_form.school_code|as_crispy_field}}
+				{{school_update_form.country|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
-				{{school_update_form.country|as_crispy_field}}
+				{{school_update_form.project_name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{school_update_form.county_or_region_name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{school_update_form.sub_county_or_Zone_name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{school_update_form.district_or_woreda_name|as_crispy_field}}
+			</div>
+			<div class="form-group col-md-3">
+				{{school_update_form.school_code|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
 				{{school_update_form.school_name|as_crispy_field}}
@@ -67,4 +79,22 @@
     </div>
   </form>
 </div>
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <script>
+    $("#id_county_or_region_name").change(function () {
+      var url = $("#SchoolAddForm").attr("data-sub-county-zone-url");  // get the url of the `load_cities` view
+      var county_id = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'county_id': county_id       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_sub_county_or_Zone_name").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
 {% endblock content %}

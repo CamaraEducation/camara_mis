@@ -1,0 +1,6 @@
+{% if sub_county_zones %}
+    <option selected="selected" disabled value="">------------Select One------------</option>
+	{% for sub_county_zone in sub_county_zones %}
+	<option value="{{ sub_county_zone.id }}">{{ sub_county_zone.sub_county_or_Zone_name }}</option>
+	{% endfor %}
+{% endif %}

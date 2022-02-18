@@ -15,7 +15,8 @@
 			<thead>
 				<tr>
 					<th>School Name</th>
-					<th>School Hub</th>
+					<th>School County/Region</th>
+					<th>School Sub County/Zone</th>
 					<th>School Ownership</th>
 					<th>School Area</th>
 					<th>School Level</th>
@@ -27,7 +28,8 @@
 				{% for schools in schools_list %}
 				<tr>
 					<td>{{ schools.school_name }}</td>
-					<td>{{ schools.country }}</td>
+					<td>{{ schools.county_or_region_name }}</td>
+					<td>{{ schools.sub_county_or_Zone_name }}</td>
 					<td>{{ schools.school_ownership }}</td>
 					<td>{{ schools.school_area }}</td>
 					<td>{{ schools.school_level }}</td>

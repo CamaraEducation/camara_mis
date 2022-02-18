@@ -6,21 +6,36 @@
 	<div class="card-header">
 	<h3 class="card-title">Uploading Schools</h3>
 	</div>
-	<form method="POST" action="{% url 'school_upload' %}" enctype="multipart/form-data">
+	<form method="POST" action="{% url 'school_upload' %}" id="SchoolUploadForm" data-sub-county-zone-url="{% url 'ajax_load_sub_county_zone' %}" enctype="multipart/form-data" novalidate>
 	{% csrf_token %}
 	<div class="card-body">
 		<div class="row">
-			<div class="col-md-3">
-			<div class="form-group col-md-12">
-				<label for="hub" class="from-control">Please select your Hub</label>
-				<select name="hub" id="id_hub" class="form-control" required>
+			<div class="form-group col-md-3">
+				<label for="project" class="from-control">Please select School Project</label>
+				<select name="project" id="id_project" class="form-control" required>
 					<option selected="selected" disabled value="">------------Select One------------</option>
-					{% for hub in hubs %}
-					<option value="{{hub.id}}">{{hub.hub_name}}</option>
+					{% for project in projects %}
+					<option value="{{project.id}}">{{project.project_name}}</option>
 					{% endfor %}
 				</select>
 			</div>
-			<div class="form-group col-md-12">
+			<div class="form-group col-md-3">
+				<label for="county_region" class="from-control">Please select School County/Region</label>
+				<select name="county_region" id="id_county_region" class="form-control" required>
+					<option selected="selected" disabled value="">------------Select One------------</option>
+					{% for county_region in county_regions %}
+					<option value="{{county_region.id}}">{{county_region.county_or_region_name}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label for="sub_county_zone" class="from-control">Please select School Sub-County/Zone</label>
+				<select name="sub_county_zone" id="id_sub_county_zone" class="form-control" required>
+					
+				</select>
+			</div>
+			<div class="col-md-3"></div>
+			<div class="form-group col-md-4">
 				{{school_upload_form|crispy}}
 			</div>
 		</div>
@@ -32,6 +47,23 @@
 	</div>
 	</form>
 </div>
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <script>
+    $("#id_county_region").change(function () {
+      var url = $("#SchoolUploadForm").attr("data-sub-county-zone-url");  // get the url of the `load_cities` view
+      var county_id = $(this).val();  // get the selected country ID from the HTML input
 
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'county_id': county_id       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_sub_county_zone").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
 
 {% endblock %}
