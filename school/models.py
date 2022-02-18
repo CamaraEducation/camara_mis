@@ -3,6 +3,7 @@ from statistics import mode
 from django.db import models
 from projects.models import Project
 from accounts.models import Hub
+from phonenumber_field.modelfields import PhoneNumberField
 from school.constants import SCHOOL_AREA_CHOICES, SCHOOL_LEVEL_CHOICES, SCHOOL_OWNERSHIP_CHOICES
 # Create your models here.
 
@@ -36,8 +37,8 @@ class School(models.Model):
     school_ownership = models.CharField(max_length=20, choices=SCHOOL_OWNERSHIP_CHOICES, blank=True, default=None, null=True)
     school_area = models.CharField(max_length=20, choices=SCHOOL_AREA_CHOICES, blank=True, default=None, null=True)
     po_box = models.CharField(max_length=20, default=None, blank=True, null=True)
-    phone_number_1= models.CharField(max_length=20, default=None, blank=True, null=True)
-    phone_number_2 = models.CharField(max_length=20, default=None, blank=True, null=True)
+    phone_number_1= PhoneNumberField(default=None, blank=True, null=True)
+    phone_number_2 = PhoneNumberField(default=None, blank=True, null=True)
     email = models.EmailField(max_length=20, default=None, blank=True, null=True)
     website = models.CharField(max_length=20, default=None, blank=True, null=True)
     female_teachers = models.IntegerField(default=0)

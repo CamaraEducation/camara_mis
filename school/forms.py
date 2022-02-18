@@ -35,6 +35,11 @@ class AddSchoolForm(forms.ModelForm):
                     'po_box', 'phone_number_1', 'phone_number_2', 'website', 'female_teachers', 'male_teachers',
                     'female_students', 'male_students', 'female_sn_students', 'male_sn_students', 'county_or_region_name',
                     'sub_county_or_Zone_name', 'district_or_woreda_name', 'project_name'}
+        labels = {
+            'country': 'Please Select Your Hub',
+            'female_sn_students': 'Female Special Need Students',
+            'male_sn_students': 'Male Special Need Students'
+        }
 
     def __init__(self, user, *args, **kwargs):
         super(AddSchoolForm, self).__init__(*args, **kwargs)
