@@ -2,7 +2,7 @@ import csv, io
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from accounts.models import Hub
+from accounts.models import Hub, Position
 from .models import Monitor, Operating_System, Operating_system_Version, Supplier, Computer
 from .forms import (
 	AddSuplierForm,
@@ -163,8 +163,9 @@ def computer_delete_view(request, id=id):
 
 
 def computer_upload_view(request):
+	user = request.user.userprofile.hub
 	computer_upload_form = UploadComputerForm()
-	hubs = Hub.objects.all()
+	hubs = Hub.objects.all().filter(hub_name=user)
 	if request.method == 'POST':
 		try:
 			csv_file = request.FILES['computer_upload']
@@ -291,8 +292,9 @@ def monitor_delete_view(request, id=id):
 	return redirect('monitor_list')
 
 def monitor_upload_view(request):
+	user = request.user.userprofile.hub
 	monitor_upload_form = UploadMonitorForm()
-	hubs = Hub.objects.all()
+	hubs = Hub.objects.all().filter(hub_name=user)
 	if request.method == 'POST':
 		try:
 			csv_file = request.FILES['monitor_upload']

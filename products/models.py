@@ -61,7 +61,7 @@ class Supplier(models.Model):
 class Computer(models.Model):
     hub = models.ForeignKey(Hub,on_delete=models.CASCADE, default=None, null=True)
     c_affritrack_number = models.CharField(max_length=50, unique=True)
-    serial_number = models.CharField(max_length=50, unique=True)
+    serial_number = models.CharField(max_length=50, null=True, default=None, blank=True,)
     brand = models.CharField(max_length=20, choices=BRAND_CHOICES)
     model = models.CharField(max_length=30)
     donor_id = models.ForeignKey(Donor, on_delete=models.CASCADE, null=True, default=None, blank=True,)
@@ -91,7 +91,7 @@ class Computer(models.Model):
 class Monitor(models.Model):
     hub = models.ForeignKey(Hub,on_delete=models.CASCADE, default=1, null=True)
     m_affritrack_number = models.CharField(max_length=50, unique=True)
-    serial_number = models.CharField(max_length=50, unique=True)
+    serial_number = models.CharField(max_length=50, null=True, default=None, blank=True,)
     brand = models.CharField(max_length=20, choices=BRAND_CHOICES)
     container_number = models.CharField(max_length=20)
     device_status = models.CharField(max_length=20, choices=DEVICE_STATUS_CHOICES, null=True, default=REFURBISHED)
