@@ -24,6 +24,10 @@ class AddSubCountyZoneForm(forms.ModelForm):
         model = Sub_County_Zone
         fields = { 'hub_name','county_or_region_name', 'sub_county_or_Zone_name'}
 
+    def __init__(self, user, *args, **kwargs):
+        super(AddSubCountyZoneForm, self).__init__(*args, **kwargs)
+        self.fields['county_or_region_name'].queryset = County_Region.objects.filter(hub_name = user)
+
 
 class AddDistrictWoredaForm(forms.ModelForm):
 

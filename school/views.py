@@ -214,7 +214,7 @@ def sub_county_zone_list_view(request):
 
 def sub_county_zone_add_view(request):
     user = request.user.userprofile.hub
-    sub_county_zone_add_form = AddSubCountyZoneForm(request.POST or None)
+    sub_county_zone_add_form = AddSubCountyZoneForm(user, request.POST or None)
     if sub_county_zone_add_form.is_valid():
         data = sub_county_zone_add_form.save(commit=False)
         data.hub_name = user
@@ -244,7 +244,7 @@ def sub_county_zone_detail_view(request, id=id):
 def sub_county_zone_update_view(request, id=id):
 	user = request.user.userprofile.hub
 	obj = get_object_or_404(Sub_County_Zone, id=id)
-	sub_county_zone_update_form = AddSubCountyZoneForm(request.POST or None, instance=obj)
+	sub_county_zone_update_form = AddSubCountyZoneForm(user, request.POST or None, instance=obj)
 	if sub_county_zone_update_form.is_valid():
 		data = sub_county_zone_update_form.save(commit=False)
 		data.hub_name = user
