@@ -175,8 +175,9 @@ def county_region_detail_view(request, id=id):
 	return render(request, 'county_regions/county_region_detail.html', context)
 
 def county_region_update_view(request, id=id):
+	user = request.user.userprofile.hub
 	obj = get_object_or_404(County_Region, id=id)
-	county_region_update_form = AddCountyRegionForm(request.POST or None, instance=obj)
+	county_region_update_form = AddCountyRegionForm(user, request.POST or None, instance=obj)
 	if county_region_update_form.is_valid():
 		county_region_update_form.save()
 		messages.success(request, "County/Region has been Updated successfully")
