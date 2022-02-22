@@ -13,6 +13,10 @@ class AddCountyRegionForm(forms.ModelForm):
         model = County_Region
         fields = {'hub_name', 'county_or_region_name'}
 
+    def __init__(self, user, *args, **kwargs):
+        super(AddCountyRegionForm, self).__init__(*args, **kwargs)
+        self.fields['hub_name'].queryset = Hub.objects.filter(hub_name = user)
+
 
 class AddSubCountyZoneForm(forms.ModelForm):
 

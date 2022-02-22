@@ -148,7 +148,8 @@ def county_region_list_view(request):
     return render(request, 'county_regions/county_region_list.html', context)
 
 def county_region_add_view(request):
-    county_region_add_form = AddCountyRegionForm(request.POST or None)
+    user = request.user.userprofile.hub
+    county_region_add_form = AddCountyRegionForm(user, request.POST or None)
     if county_region_add_form.is_valid():
         county_region_add_form.save()
         messages.success(request, "County/Region has been added successfully")
