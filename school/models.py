@@ -16,7 +16,7 @@ class County_Region(models.Model):
 
 class Sub_County_Zone (models.Model):
     county_or_region_name = models.ForeignKey(County_Region, on_delete=models.CASCADE)
-    sub_county_or_Zone_name = models.CharField(max_length=30)
+    sub_county_or_Zone_name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.sub_county_or_Zone_name
