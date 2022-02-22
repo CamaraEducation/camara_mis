@@ -22,7 +22,7 @@ class AddSubCountyZoneForm(forms.ModelForm):
 
     class Meta:
         model = Sub_County_Zone
-        fields = {'county_or_region_name', 'sub_county_or_Zone_name'}
+        fields = { 'hub_name','county_or_region_name', 'sub_county_or_Zone_name'}
 
 
 class AddDistrictWoredaForm(forms.ModelForm):

@@ -137,7 +137,8 @@ def ajax_load_sub_county_zone(request):
 
 ###################### Views for managing Counties/Regions ######################
 def county_region_list_view(request):
-    county_region_list = County_Region.objects.all()
+    user = request.user.userprofile.hub
+    county_region_list = County_Region.objects.all().filter(hub_name = user)
     context = {
 		'title': 'County/Region List',
 		'school_open_menu': 'menu-open',
@@ -200,7 +201,8 @@ def county_region_delete_view(request, id=id):
 
 ###################### Views for managing Sub-Counties/Zone ######################
 def sub_county_zone_list_view(request):
-    sub_county_zone_list = Sub_County_Zone.objects.all()
+    user = request.user.userprofile.hub
+    sub_county_zone_list = Sub_County_Zone.objects.all().filter(hub_name = user)
     context = {
 		'title': 'Sub County/Zone List',
 		'school_open_menu': 'menu-open',
@@ -211,9 +213,12 @@ def sub_county_zone_list_view(request):
     return render(request, 'sub_county_zones/sub_county_zone_list.html', context)
 
 def sub_county_zone_add_view(request):
+    user = request.user.userprofile.hub
     sub_county_zone_add_form = AddSubCountyZoneForm(request.POST or None)
     if sub_county_zone_add_form.is_valid():
-        sub_county_zone_add_form.save()
+        data = sub_county_zone_add_form.save(commit=False)
+        data.hub_name = user
+        data.save()
         messages.success(request, "Sub County/Zone has been added successfully")
         return redirect('sub_county_zone_list')
     context = {
@@ -237,10 +242,13 @@ def sub_county_zone_detail_view(request, id=id):
 	return render(request, 'sub_county_zones/sub_county_zone_detail.html', context)
 
 def sub_county_zone_update_view(request, id=id):
+	user = request.user.userprofile.hub
 	obj = get_object_or_404(Sub_County_Zone, id=id)
 	sub_county_zone_update_form = AddSubCountyZoneForm(request.POST or None, instance=obj)
 	if sub_county_zone_update_form.is_valid():
-		sub_county_zone_update_form.save()
+		data = sub_county_zone_update_form.save(commit=False)
+		data.hub_name = user
+		data.save()
 		messages.success(request, "Sub County/Zone has been Updated successfully")
 		return redirect('sub_county_zone_list')
 	context = {

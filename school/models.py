@@ -15,6 +15,7 @@ class County_Region(models.Model):
         return self.county_or_region_name
 
 class Sub_County_Zone (models.Model):
+    hub_name = models.ForeignKey(Hub, on_delete=models.CASCADE, null=True, default=None, blank=True)
     county_or_region_name = models.ForeignKey(County_Region, on_delete=models.CASCADE)
     sub_county_or_Zone_name = models.CharField(max_length=100)
 
