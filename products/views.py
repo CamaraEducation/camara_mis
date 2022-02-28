@@ -105,12 +105,9 @@ def computer_list_view(request):
     return render(request, 'computers/computer_list.html', context)
 
 def computer_add_view(request):
-    computer_add_form = AddComputerForm(request.POST or None)
-    hubs = Hub.objects.all()
+    user = request.user.userprofile.hub
+    computer_add_form = AddComputerForm(user, request.POST or None)
     if computer_add_form.is_valid():
-        get_hub = request.POST.get("hub")
-        hub = get_object_or_404(Hub, id=get_hub)
-        computer_add_form.hub = hub
         computer_add_form.save()
         messages.success(request, "Computer added successfully")
         return redirect('computer_list')
@@ -120,7 +117,6 @@ def computer_add_view(request):
 		'computer_nav_link_active': 'active',
 		'title':'Add A Computer',
 		'computer_add_form':computer_add_form,
-		'hubs':hubs,
 	}
     return render(request, 'computers/computer_add.html', context)
 
@@ -136,8 +132,9 @@ def computer_detail_view(request, id=id):
 	return render(request, 'computers/computer_detail.html', context)
 
 def computer_update_view(request, id=id):
+	user = request.user.userprofile.hub
 	obj = get_object_or_404(Computer, id=id)
-	computer_update_form = UpdateComputerForm(request.POST or None, instance=obj)
+	computer_update_form = UpdateComputerForm(user, request.POST or None, instance=obj)
 	if computer_update_form.is_valid():
 		# print(computer_update_form)
 		computer_update_form.save()
@@ -200,7 +197,7 @@ def computer_upload_view(request):
 		# except:
 		# 	messages.error(request, 'Please Check your file it looks like you have duplicated items in you file or with the database')
 		except Exception as e:
-			print (e)
+			messages.error(request, f'Please Check your file, it looks like you have duplicated items in you file or with the database or you are using wrong import template')
 	context = {
 		'product_open_menu': 'menu-open',
 		'product_open_menu_active': 'active',
@@ -239,12 +236,9 @@ def monitor_list_view(request):
 	return render(request, 'monitors/monitor_list.html', context)
 
 def monitor_add_view(request):
-    monitor_add_form = AddMonitorForm(request.POST or None)
-    hubs = Hub.objects.all()
+    user = request.user.userprofile.hub
+    monitor_add_form = AddMonitorForm(user, request.POST or None)
     if monitor_add_form.is_valid():
-        get_hub = request.POST.get("hub")
-        hub = get_object_or_404(Hub, id=get_hub)
-        monitor_add_form.hub = hub
         monitor_add_form.save()
         messages.success(request, "Monitor added successfully")
         return redirect('monitor_list')
@@ -254,7 +248,6 @@ def monitor_add_view(request):
 		'monitor_nav_link_active': 'active',
 		'title':'Add A Monitor',
 		'monitor_add_form':monitor_add_form,
-		'hubs':hubs,
 	}
     return render(request, 'monitors/monitor_add.html', context)
 
@@ -270,8 +263,9 @@ def monitor_detail_view(request, id=id):
 	return render(request, 'monitors/monitor_detail.html', context)
 
 def monitor_update_view(request, id=id):
+	user = request.user.userprofile.hub
 	obj = get_object_or_404(Monitor, id=id)
-	monitor_update_form = AddMonitorForm(request.POST or None, instance=obj)
+	monitor_update_form = AddMonitorForm(user, request.POST or None, instance=obj)
 	if monitor_update_form.is_valid():
 		monitor_update_form.save()
 		messages.success(request, "Monitor Updated successfully")
@@ -317,13 +311,12 @@ def monitor_upload_view(request):
 					screen_size=column[5],
 					date_received=column[6],
 					)
-
 			messages.success(request,f'The monitors has been uploaded successfully!')
 			return redirect('monitor_list')
 		# except:
 		# 	messages.error(request, 'Please Check your file it looks like you have duplicated items in you file or with the database')
-		except Exception as e:
-			print (e)
+		except:
+			messages.error(request, f'Please Check your file, it looks like you have duplicated items in you file or with the database or you are using wrong import template')
 	context = {
 		'product_open_menu': 'menu-open',
 		'product_open_menu_active': 'active',

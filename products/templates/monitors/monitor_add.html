@@ -11,53 +11,36 @@
 	{% csrf_token %}
 	<div class="card-body">
 		<div class="row">
-
 			<div class="form-group col-md-3">
-				<label for="hub" class="from-control">Please select your Hub</label>
-				<select name="hub" id="id_hub" class="form-control">
-					<option selected="selected" disabled>------------Select One------------</option>
-					{% for hub in hubs %}
-					<option value="{{hub.id}}">{{hub.hub_name}}</option>
-					{% endfor %}
-				</select>
+				{{monitor_add_form.hub|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.m_affritrack_number|as_crispy_field}}
 			</div>
-			<div class="form-group col-md-3"></div>
-			<div class="form-group col-md-3"></div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.serial_number|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.brand|as_crispy_field}}
 			</div>
-			<div class="form-group col-md-3"></div>
-			<div class="form-group col-md-3"></div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.donor_id|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.container_number|as_crispy_field}}
 			</div>
-			<div class="form-group col-md-3"></div>
-			<div class="form-group col-md-3"></div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.device_status|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.supplier|as_crispy_field}}
 			</div>
-			<div class="form-group col-md-3"></div>
-			<div class="form-group col-md-3"></div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.screen_size|as_crispy_field}}
 			</div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.date_received|as_crispy_field}}
 			</div>
-			<div class="form-group col-md-3"></div>
-			<div class="form-group col-md-3"></div>
 			<div class="form-group col-md-3">
 				{{monitor_add_form.working_status|as_crispy_field}}
 			</div>

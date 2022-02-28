@@ -166,10 +166,10 @@ def computer_request_delete_view(request, id=id):
 ###################### Views for managing Computer Request ######################
 
 def product_status_check(request):
+	user = request.user.userprofile.hub
 	if request.GET.get('paffritract_number', None):
 		c_affritrack_number = request.GET.get('paffritract_number')
-		# check_dispatch = Dispatch.objects.filter(c_affritrack_number__iexact=c_affritrack_number).exists()
-		check_status = Computer.objects.filter(c_affritrack_number=c_affritrack_number, working_status = 'Processed')
+		check_status = Computer.objects.filter(c_affritrack_number=c_affritrack_number, working_status = 'Processed', hub=user)
 		if check_status:
 			response = {
 					'is_taken': 5
@@ -182,7 +182,7 @@ def product_status_check(request):
 			return JsonResponse(response)
 	if request.GET.get('maffritract_number', None):
 		m_affritrack_number = request.GET.get('maffritract_number')
-		check_status = Monitor.objects.filter(m_affritrack_number=m_affritrack_number, working_status = 'Processed')
+		check_status = Monitor.objects.filter(m_affritrack_number=m_affritrack_number, working_status = 'Processed', hub=user)
 		if check_status:
 			response = {
 					'is_taken': 5

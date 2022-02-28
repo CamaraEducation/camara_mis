@@ -1,4 +1,6 @@
 from django import forms
+
+from accounts.models import Hub
 from .models import Monitor, Operating_System, Operating_system_Version, Supplier, Computer
 
 class DateInput(forms.DateInput):
@@ -27,8 +29,13 @@ class AddComputerForm(forms.ModelForm):
                     'processor_speed', 'memory_type', 'memory_size', 'storage_type', 
                     'storage_size', 'os_type', 'os_version', 'working_status', 'date_received', 'comment')
         widgets = {
-            'date_received': DateInput()
+            'date_received': DateInput(),
+            'c_affritrack_number': forms.TextInput(attrs={'required':True})
         }
+
+    def __init__(self, user, *args, **kwargs):
+        super(AddComputerForm, self).__init__(*args, **kwargs)
+        self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
 
 class UpdateComputerForm(forms.ModelForm):
     c_affritrack_number = forms.CharField(label = "Computer Affritrack Number")
@@ -40,12 +47,16 @@ class UpdateComputerForm(forms.ModelForm):
                     'processor_speed', 'memory_type', 'memory_size', 'storage_type', 
                     'storage_size', 'os_type', 'os_version', 'working_status', 'comment')
         widgets = {
-            'date_received': DateInput()
+            'date_received': DateInput(),
+            'c_affritrack_number': forms.TextInput(attrs={'required':True})
         }
+    def __init__(self, user, *args, **kwargs):
+        super(UpdateComputerForm, self).__init__(*args, **kwargs)
+        self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
 
 
 class AddMonitorForm(forms.ModelForm):
-    m_affritrack_number = forms.CharField(label = "Monitor Affritrack Number")
+    m_affritrack_number = forms.CharField(label = "Monitor Affritrack Number", required=True)
 
     class Meta:
         model = Monitor
@@ -54,6 +65,10 @@ class AddMonitorForm(forms.ModelForm):
         widgets = {
             'date_received': DateInput()
         }
+
+    def __init__(self, user, *args, **kwargs):
+        super(AddMonitorForm, self).__init__(*args, **kwargs)
+        self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
 
 
 class UploadComputerForm(forms.Form):
