@@ -8,6 +8,11 @@ EPSON = 'Epson'
 MEDITECH = 'MediTech'
 SAMSUNG = 'Samsung'
 X_TIG = 'X_Tig'
+FUJITSU = 'Fujitsu'
+CLONE = 'Clone'
+PC_PERIPHERALS = 'P.C Peripherals'
+STONE_PC = 'Stone PC'
+SYSTEM_MANUFACTURER = 'System manufacturer'
 
 BRAND_CHOICES = [
     (DELL, 'Dell'),
@@ -19,6 +24,11 @@ BRAND_CHOICES = [
     (MEDITECH, 'MediTech'),
     (SAMSUNG, 'Samsung'),
     (X_TIG, 'X_Tig'),
+    (FUJITSU, 'Fujitsu'),
+    (CLONE, 'Clone'),
+    (PC_PERIPHERALS, 'P.C Peripherals'),
+    (STONE_PC, 'Stone PC'),
+    (SYSTEM_MANUFACTURER, 'System manufacturer'),
 ]
 
 # Devides status
@@ -96,7 +106,7 @@ GB160 = '160 GB'
 GB250 = '250 GB'
 GB320 = '320 GB'
 GB500 = '500 GB'
-TB1 = '1TB'
+TB1 = '1 TB'
 GB16 = '16 GB'
 GB32 = '32 GB'
 GB8 = '8 GB'
@@ -108,7 +118,7 @@ STORAGE_SIZE_CHOICES = [
     (GB250, '250 GB'),
     (GB320, '320 GB'),
     (GB500, '500 GB'),
-    (TB1, '1TB'),
+    (TB1, '1 TB'),
     (GB8, '8 GB'),
     (GB16, '16 GB'),
     (GB32, '32 GB'),
