@@ -121,14 +121,8 @@ def computer_request_add_view(request):
 			hub = hub,
 			applicant_id=applicant_id)
 		obj.save()
+		messages.success(request, "Computer Request added successfully")
 		return redirect('dispatch:computer_request_list')
-	# context = {
-	# 	'dispatch_open_menu': 'menu-open',
-	# 	'dispatch_open_menu_active': 'active',
-	# 	'computer_request_nav_link_active': 'active',
-	# 	'title':'Add a computer Request',
-	# }
-	#return render(request, 'computer_requests/school_computer_request_add.html', context)
 
 def computer_request_detail_view(request, id=id):
 	obj = get_object_or_404(Computer_Request, id=id)
@@ -143,19 +137,29 @@ def computer_request_detail_view(request, id=id):
 
 def computer_request_update_view(request, id=id):
 	obj = get_object_or_404(Computer_Request, id=id)
-	applicant_update_form = AddComputerApplicantForm(request.POST or None, instance=obj)
-	if applicant_update_form.is_valid():
-		applicant_update_form.save()
-		messages.success(request, "Computer Applicant Updated successfully")
-		return redirect('applicant_list')
+	computer_app = Computer_Applicant.objects.all()
 	context = {
 		'dispatch_open_menu': 'menu-open',
 		'dispatch_open_menu_active': 'active',
 		'computer_request_nav_link_active': 'active',
 		'title':'Update computer applicant',
-		'applicant_update_form':applicant_update_form,
+		'computer_app':computer_app,
+		'obj': obj,
 	}
 	return render(request, 'computer_requests/computer_request_update.html', context)
+
+def computer_request_update_action(request):
+	if request.method == 'POST':
+		request_id = request.POST.get('request_id')
+		number_of_computers = request.POST.get('number_of_computers')
+		applicant_from = request.POST.get('applicant_id')
+		applicant_id = get_object_or_404(Computer_Applicant, id=applicant_from)
+		data = get_object_or_404(Computer_Request, id=request_id)
+		data.number_of_computers = number_of_computers
+		data.applicant_id = applicant_id
+		data.save()
+		messages.success(request, "Computer Request Updated successfully")
+		return redirect('dispatch:computer_request_list')
 
 def computer_request_delete_view(request, id=id):
 	obj = get_object_or_404(Computer_Request, id=id)

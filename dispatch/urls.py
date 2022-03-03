@@ -18,6 +18,8 @@ urlpatterns = [
     path('computer_request/list', views.computer_request_list_view, name='computer_request_list'),
     path('computer_request/<int:id>/detail', views.computer_request_detail_view, name='computer_request_detail'),
     path('computer_request/<int:id>/update', views.computer_request_update_view, name='computer_request_update'),
+    path('computer_request/update', views.computer_request_update_action, name='computer_request_update_action'),
+    
     path('computer_request/<int:id>/delete', views.computer_request_delete_view, name='computer_request_delete'),
 
     path('computer_request_dispatch_process/<int:id>/dispatch', views.computer_request_dispatch_process_view, name='computer_request_dispatch_process'),

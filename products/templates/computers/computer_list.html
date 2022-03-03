@@ -306,6 +306,7 @@
 									<td>{{ computer.storage_size }}</td>
 									<td>
 										<a href="{% url 'computer_detail' computer.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if request.user.is_superuser %}
 										<a href="{% url 'computer_update' computer.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -331,6 +332,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
@@ -365,6 +367,7 @@
 									<td>{{ computer.storage_size }}</td>
 									<td>
 										<a href="{% url 'computer_detail' computer.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if request.user.is_superuser %}
 										<a href="{% url 'computer_update' computer.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -390,6 +393,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
