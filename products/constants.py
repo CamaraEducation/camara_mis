@@ -13,6 +13,17 @@ CLONE = 'Clone'
 PC_PERIPHERALS = 'P.C Peripherals'
 STONE_PC = 'Stone PC'
 SYSTEM_MANUFACTURER = 'System manufacturer'
+AOC = 'AOC'
+BELINEA = 'Belinea'
+BENQ = 'Benq'
+GNR = 'gnr'
+HANNS_G = 'Hanns-G'
+IIYAMA = 'Iiyama'
+LACIE = 'Lacie'
+LG = 'LG'
+NEC = 'NEC'
+PHILIPS = 'Philips'
+VIEWSONIC = 'ViewSonic'
 
 BRAND_CHOICES = [
     (DELL, 'Dell'),
@@ -29,6 +40,17 @@ BRAND_CHOICES = [
     (PC_PERIPHERALS, 'P.C Peripherals'),
     (STONE_PC, 'Stone PC'),
     (SYSTEM_MANUFACTURER, 'System manufacturer'),
+    (AOC, 'AOC'),
+    (BELINEA, 'Belinea'),
+    (BENQ, 'Benq'),
+    (GNR, 'gnr'),
+    (HANNS_G, 'Hanns-G'),
+    (IIYAMA, 'Iiyama'),
+    (LACIE, 'Lacie'),
+    (LG, 'LG'),
+    (NEC, 'NEC'),
+    (PHILIPS, 'Philips'),
+    (VIEWSONIC, 'ViewSonic'),
 ]
 
 # Devides status
