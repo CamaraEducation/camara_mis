@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from products.models import Computer
+from django.db.models import Count
+from django.db.models.functions import TruncDay
 
 # Create your views here.
 @login_required(login_url='login')
@@ -24,7 +26,14 @@ def home_view(request):
     two_gb = Computer.objects.filter(memory_size='2 GB').filter(hub=user).count()
     four_gb = Computer.objects.filter(memory_size='4 GB').filter(hub=user).count()
     egiht_gb = Computer.objects.filter(memory_size='8 GB').filter(hub=user).count()
+
+    dailydata = Computer.objects.filter(working_status='Processed').filter(hub=user).annotate(date=TruncDay('date_modified'))\
+        .values("date").annotate(updated_count=Count('id')).order_by("date")
+
+
+
     context = {
+        'dailydata':dailydata,
         'data':data,
         'corei3':corei3,
         'corei5':corei5,

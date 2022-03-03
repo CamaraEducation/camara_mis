@@ -58,7 +58,7 @@
         </div>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
+    <!-- <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box" style="background-color: #ffdfdb;">
         <span class="info-box-icon  elevation-1" style="background-color: red;">
             <i class="icon" style="background-color: red;"><img src="{% static 'dist/img/ewaste.png' %}"  height="50" width="50"></i>
@@ -71,7 +71,7 @@
             </span>
         </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <!-- Charts -->
    
@@ -234,6 +234,62 @@
         <!-- /.card -->
     </div>
 
+    <div class="col-md-4">
+        <div class="card card-secondary">
+            <div class="card-header">
+            <h3 class="card-title">Number of Processed computers Daily</h3>
+            </div>
+            <div class="card-body">
+            <div class="chart">
+                <canvas id="myChart3" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+                <script>
+                var ctx = document.getElementById('myChart3').getContext('2d');
+                var myChart3 = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [{% for update_data in dailydata %} '{{update_data.date}}', {% endfor %} ],
+                        datasets: [{
+                            label: '# Daily Processed Computers',
+                            barPercentage: 0.5,
+                            data: [{% for update_data in dailydata %} {{update_data.updated_count}}, {% endfor %}],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                </script>
+            </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
 </div>
 
+{% for update_data in dailydata %}
+    {{update_data.date}} - {{update_data.updated_count}}<br>
+{% endfor %}
 {% endblock content%}
