@@ -197,6 +197,7 @@ def computer_upload_view(request):
 		# except:
 		# 	messages.error(request, 'Please Check your file it looks like you have duplicated items in you file or with the database')
 		except Exception as e:
+			print (e)
 			messages.error(request, f'Please Check your file, it looks like you have duplicated items in you file or with the database or you are using wrong import template')
 	context = {
 		'product_open_menu': 'menu-open',
@@ -315,7 +316,8 @@ def monitor_upload_view(request):
 			return redirect('monitor_list')
 		# except:
 		# 	messages.error(request, 'Please Check your file it looks like you have duplicated items in you file or with the database')
-		except:
+		except Exception as e:
+			print (e)
 			messages.error(request, f'Please Check your file, it looks like you have duplicated items in you file or with the database or you are using wrong import template')
 	context = {
 		'product_open_menu': 'menu-open',
