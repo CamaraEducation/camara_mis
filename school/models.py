@@ -31,7 +31,7 @@ class District_Woreda(models.Model):
         return self.district_or_woreda_name
 
 class School(models.Model):
-    school_code = models.CharField(max_length=20, unique=True, blank=True, default=None, null=True)
+    school_code = models.CharField(max_length=20, blank=True, default=None, null=True)
     country = models.ForeignKey(Hub, on_delete=models.CASCADE)
     school_name = models.CharField(max_length=200)
     school_level = models.CharField(max_length=20, choices=SCHOOL_LEVEL_CHOICES, blank=True, default=None, null=True)

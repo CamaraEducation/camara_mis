@@ -284,32 +284,5 @@ def computer_dispatch_print_view(request, id=id):
 	}
 	return render(request, 'computer_dispatch/computer_dispatch_detail.html', context)
 
-# def computer_dispatch_view(request):
-# 	computer_dispatch_form = DispatchComputerForm(request.POST or None)
-# 	if computer_dispatch_form.is_valid():
-# 		request_id = request.POST.get('request_id')
-# 		number_of_computers = request.POST.get('number_of_computers')
-# 		request_info = get_object_or_404(Computer_Request, id=request_id)
-# 		hub = request_info['hub']
-# 		computer_request_id = request_id
-# 		applicant_name = request_info['applicant_id']
-# 		school_name = request_info['school_name']
-
-# 		for num_of_com in range(1, number_of_computers):
-# 			computer_dispatch_form.hub = hub
-# 			computer_dispatch_form.computer_request_id = computer_request_id
-# 			computer_dispatch_form.applicant_name = applicant_name
-# 			computer_dispatch_form.school_name = school_name
-# 			computer_dispatch_form.c_affritrack_number = request.POST.get('affritract_number_') + num_of_com
-# 			computer_dispatch_form.m_affritrack_number = request.POST.get('maffritract_number_') + num_of_com
-# 			computer_dispatch_form.save()
-		
-# 		messages.success(request, "Computer Dispatched successfully")
-# 		return redirect('computer_request_list')
-
-# 	context = {
-# 		'computer_dispatch_form': computer_dispatch_form
-# 	}
-# 	return render(request, 'dispatchs/school_dispatch_add.html', context)
 
 

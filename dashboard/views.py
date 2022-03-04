@@ -9,19 +9,17 @@ from django.db.models.functions import TruncDay
 def home_view(request):
     user = request.user.userprofile.hub
     data = Computer.objects.all().filter(hub=user)
-
     processed = Computer.objects.filter(working_status='Processed').filter(hub=user).count()
     working = Computer.objects.filter(working_status='working').filter(hub=user).count()
     problematic = Computer.objects.filter(working_status='Problematic').filter(hub=user).count()
     ewaste = Computer.objects.filter(working_status='E-Waste').filter(hub=user).count()
     dispatched = Computer.objects.filter(working_status='Dispatched').filter(hub=user).count()
     not_received = Computer.objects.filter(working_status='Not Received').filter(hub=user).count()
-
-    processor_type = Computer.objects.filter(hub=user).values('processor_type').annotate(total=Count('id')).order_by('processor_type')
-    computer_ram_size = Computer.objects.filter(hub=user).values('memory_size').annotate(total=Count('id')).order_by('memory_size')
+    brands = Computer.objects.filter(hub=user).values('brand').annotate(total=Count('id')).order_by('brand')
+    computer_ram_size = (Computer.objects.values('memory_size',).filter(hub=user).annotate(total=Count('id'),).order_by('-total'))
+    processor_type = (Computer.objects.values('processor_type').filter(hub=user).annotate(total=Count('id')).order_by('processor_type'))
     dailydata = Computer.objects.filter(working_status='Processed').filter(hub=user).annotate(date=TruncDay('date_modified'))\
         .values("date").annotate(updated_count=Count('id')).order_by("date")
-    brands = Computer.objects.filter(hub=user).values('brand').annotate(total=Count('id')).order_by('brand')
     context = {
         'dailydata':dailydata,
         'processor_type':processor_type,
@@ -39,3 +37,5 @@ def home_view(request):
 	    'computer_dashboard_nav_link_active': 'active',
     }
     return render(request, 'dashboards/dashboard.html',context)
+
+
