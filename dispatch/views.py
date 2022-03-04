@@ -245,8 +245,15 @@ def computer_dispatch_view(request):
 				warranty_end = warranty_end,
 				)
 			obj.save()
-			Computer.objects.filter(c_affritrack_number=pc_affritrac).update(working_status='Dispatched')
-			Monitor.objects.filter(m_affritrack_number=mo_affritrac).update(working_status='Dispatched')
+			dispatched_computer = get_object_or_404(Computer, c_affritrack_number=pc_affritrac)
+			dispatched_computer.working_status = 'Dispatched'
+			dispatched_computer.save()
+
+			dispatched_monitor = get_object_or_404(Monitor, m_affritrack_number=mo_affritrac)
+			dispatched_monitor.working_status = 'Dispatched'
+			dispatched_monitor.save()
+			# Computer.objects.filter(c_affritrack_number=pc_affritrac).update(working_status='Dispatched')
+			# Monitor.objects.filter(m_affritrack_number=mo_affritrac).update(working_status='Dispatched')
 			counter += 1
 
 			Computer_Request.objects.filter(id=request_id).update(request_status=1)

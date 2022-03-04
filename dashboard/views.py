@@ -21,13 +21,7 @@ def home_view(request):
     computer_ram_size = Computer.objects.filter(hub=user).values('memory_size').annotate(total=Count('id')).order_by('memory_size')
     dailydata = Computer.objects.filter(working_status='Processed').filter(hub=user).annotate(date=TruncDay('date_modified'))\
         .values("date").annotate(updated_count=Count('id')).order_by("date")
-
-    
-
     brands = Computer.objects.filter(hub=user).values('brand').annotate(total=Count('id')).order_by('brand')
-
-
-
     context = {
         'dailydata':dailydata,
         'processor_type':processor_type,

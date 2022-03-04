@@ -231,6 +231,7 @@
 									<td>{{ monitor.screen_size }}</td>
 									<td>
 										<a href="{% url 'monitor_detail' monitor.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if request.user.is_superuser %}
 										<a href="{% url 'monitor_update' monitor.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{monitor.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -256,6 +257,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
@@ -286,6 +288,7 @@
 									<td>{{ monitor.screen_size }}</td>
 									<td>
 										<a href="{% url 'monitor_detail' monitor.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if request.user.is_superuser %}
 										<a href="{% url 'monitor_update' monitor.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{monitor.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -311,6 +314,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
