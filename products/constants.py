@@ -86,10 +86,12 @@ PROCESSOR_TYPE_CHOICES = [
 # RAM Types
 DRAM = 'DRAM'
 SRAM = 'SRAM'
+XEON = 'XEON'
 
 RAM_TYPE_CHOICES = [
     (DRAM, 'DRAM'),
     (SRAM, 'SRAM'),
+    (XEON, 'XEON'),
 ]
 
 # RAM Sizes
