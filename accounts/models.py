@@ -70,6 +70,7 @@ class UserProfile(models.Model):
     user_contact_email = models.EmailField(blank=True, default=None, null=True)
     user_contact_address = models.CharField(max_length=100,blank=True, default=None, null=True)
     user_contact_relationship = models.CharField(max_length=30, choices=USER_CONTACT_RELATIONSHIP_CHOICES)
+    is_student = models.BooleanField('User status', default=False)
 
     def __str__(self):
         return self.user.username

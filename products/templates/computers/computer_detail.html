@@ -71,7 +71,9 @@
 		    	</div>
 		    </div>
 		    <div class="card-footer">
-		      <a href="{% url 'computer_update' obj.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit Computer</a>&nbsp;
+				{% if not request.user.userprofile.is_student %}
+		      		<a href="{% url 'computer_update' obj.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit Computer</a>&nbsp;
+			  	{% endif %}
               <a href="{% url 'computer_list' %}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Go Back</a>
 		    </div>
 		</div>

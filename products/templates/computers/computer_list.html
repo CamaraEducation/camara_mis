@@ -46,7 +46,6 @@
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Hub</th>
 									<th>Afritrack Number</th>
 									<th>Serial Number</th>
 									<th> Brand</th>
@@ -60,7 +59,6 @@
 							<tbody>
 								{% for computer in working %}
 								<tr>
-									<td>{{ computer.hub }}</td>
 									<td>{{ computer.c_affritrack_number }}</td>
 									<td>{{ computer.serial_number }}</td>
 									<td>{{ computer.brand }}</td>
@@ -71,6 +69,7 @@
 									<td>
 										<a href="{% url 'computer_detail' computer.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
 										<a href="{% url 'computer_update' computer.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+										{% if not request.user.userprofile.is_student %}
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
 										
@@ -95,6 +94,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
@@ -105,7 +105,6 @@
 						<table id="example2" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Hub</th>
 									<th>Afritrack Number</th>
 									<th>Serial Number</th>
 									<th> Brand</th>
@@ -119,7 +118,6 @@
 							<tbody>
 								{% for computer in processed %}
 								<tr>
-									<td>{{ computer.hub }}</td>
 									<td>{{ computer.c_affritrack_number }}</td>
 									<td>{{ computer.serial_number }}</td>
 									<td>{{ computer.brand }}</td>
@@ -129,6 +127,7 @@
 									<td>{{ computer.storage_size }}</td>
 									<td>
 										<a href="{% url 'computer_detail' computer.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if not request.user.userprofile.is_student %}
 										<a href="{% url 'computer_update' computer.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -154,6 +153,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
@@ -164,7 +164,6 @@
 						<table id="example3" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Hub</th>
 									<th>Afritrack Number</th>
 									<th>Serial Number</th>
 									<th> Brand</th>
@@ -178,7 +177,6 @@
 							<tbody>
 								{% for computer in problematic %}
 								<tr>
-									<td>{{ computer.hub }}</td>
 									<td>{{ computer.c_affritrack_number }}</td>
 									<td>{{ computer.serial_number }}</td>
 									<td>{{ computer.brand }}</td>
@@ -188,6 +186,7 @@
 									<td>{{ computer.storage_size }}</td>
 									<td>
 										<a href="{% url 'computer_detail' computer.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if not request.user.userprofile.is_student %}
 										<a href="{% url 'computer_update' computer.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -213,6 +212,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
@@ -223,7 +223,6 @@
 						<table id="example4" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Hub</th>
 									<th>Afritrack Number</th>
 									<th>Serial Number</th>
 									<th> Brand</th>
@@ -237,7 +236,6 @@
 							<tbody>
 								{% for computer in ewaste %}
 								<tr>
-									<td>{{ computer.hub }}</td>
 									<td>{{ computer.c_affritrack_number }}</td>
 									<td>{{ computer.serial_number }}</td>
 									<td>{{ computer.brand }}</td>
@@ -247,6 +245,7 @@
 									<td>{{ computer.storage_size }}</td>
 									<td>
 										<a href="{% url 'computer_detail' computer.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if not request.user.userprofile.is_student %}
 										<a href="{% url 'computer_update' computer.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -272,6 +271,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
@@ -282,7 +282,6 @@
 						<table id="example5" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Hub</th>
 									<th>Afritrack Number</th>
 									<th>Serial Number</th>
 									<th> Brand</th>
@@ -296,7 +295,6 @@
 							<tbody>
 								{% for computer in dispatched %}
 								<tr>
-									<td>{{ computer.hub }}</td>
 									<td>{{ computer.c_affritrack_number	 }}</td>
 									<td>{{ computer.serial_number }}</td>
 									<td>{{ computer.brand }}</td>
@@ -343,7 +341,6 @@
 						<table id="example6" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Hub</th>
 									<th>Afritrack Number</th>
 									<th>Serial Number</th>
 									<th> Brand</th>
@@ -357,7 +354,6 @@
 							<tbody>
 								{% for computer in computers_list %}
 								<tr>
-									<td>{{ computer.hub }}</td>
 									<td>{{ computer.c_affritrack_number	 }}</td>
 									<td>{{ computer.serial_number }}</td>
 									<td>{{ computer.brand }}</td>
@@ -404,7 +400,6 @@
 						<table id="example6" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Hub</th>
 									<th>Afritrack Number</th>
 									<th>Serial Number</th>
 									<th> Brand</th>
@@ -418,7 +413,6 @@
 							<tbody>
 								{% for computer in not_received %}
 								<tr>
-									<td>{{ computer.hub }}</td>
 									<td>{{ computer.c_affritrack_number	 }}</td>
 									<td>{{ computer.serial_number }}</td>
 									<td>{{ computer.brand }}</td>
@@ -428,6 +422,7 @@
 									<td>{{ computer.storage_size }}</td>
 									<td>
 										<a href="{% url 'computer_detail' computer.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+										{% if not request.user.userprofile.is_student %}
 										<a href="{% url 'computer_update' computer.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
 										<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer.id}}">
 											<i class="fa fa-trash"></i> Delete</a>
@@ -453,6 +448,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div>
+										{% endif %}
 									</td>
 								</tr>
 								{% endfor %}
