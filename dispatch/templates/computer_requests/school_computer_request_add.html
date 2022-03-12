@@ -56,7 +56,7 @@
 						{% csrf_token %}
 						<div class="form-group col-md-12">
 						Number of computers this school requesting:
-						<input type="number" name="number_of_computers" class="form-control" required>
+						<input type="number" name="number_of_computers" class="form-control" required min="1">
 					</div>
 						<div class="form-group col-md-12">
 						<select class="form-control" name="applicant_id">

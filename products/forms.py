@@ -47,12 +47,14 @@ class UpdateComputerForm(forms.ModelForm):
                     'processor_speed', 'memory_type', 'memory_size', 'storage_type', 
                     'storage_size', 'os_type', 'os_version', 'working_status', 'comment')
         widgets = {
-            'date_received': DateInput(),
             'c_affritrack_number': forms.TextInput(attrs={'required':True})
         }
     def __init__(self, user, *args, **kwargs):
         super(UpdateComputerForm, self).__init__(*args, **kwargs)
         self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
+        self.fields['hub'].disabled = True
+        self.fields['c_affritrack_number'].disabled = True
+        self.fields['serial_number'].disabled = True
 
 
 class AddMonitorForm(forms.ModelForm):
@@ -69,6 +71,22 @@ class AddMonitorForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(AddMonitorForm, self).__init__(*args, **kwargs)
         self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
+
+class UpdateMonitorForm(forms.ModelForm):
+    m_affritrack_number = forms.CharField(label = "Monitor Affritrack Number", required=True)
+
+    class Meta:
+        model = Monitor
+        fields = ('hub','m_affritrack_number', 'serial_number', 'brand', 'donor_id', 'container_number',
+                    'device_status', 'supplier', 'screen_size', 'working_status', 'comment')
+
+    def __init__(self, user, *args, **kwargs):
+        super(UpdateMonitorForm, self).__init__(*args, **kwargs)
+        self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
+        self.fields['hub'].disabled = True
+        self.fields['m_affritrack_number'].disabled = True
+        self.fields['serial_number'].disabled = True
+        self.fields['container_number'].disabled = True
 
 
 class UploadComputerForm(forms.Form):

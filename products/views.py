@@ -11,6 +11,7 @@ from .forms import (
 	UploadComputerForm,
 	UploadMonitorForm,
 	UpdateComputerForm,
+	UpdateMonitorForm,
 	AddOSForm,
 	AddOSVForm,)
 # Create your views here.
@@ -266,7 +267,7 @@ def monitor_detail_view(request, id=id):
 def monitor_update_view(request, id=id):
 	user = request.user.userprofile.hub
 	obj = get_object_or_404(Monitor, id=id)
-	monitor_update_form = AddMonitorForm(user, request.POST or None, instance=obj)
+	monitor_update_form = UpdateMonitorForm(user, request.POST or None, instance=obj)
 	if monitor_update_form.is_valid():
 		monitor_update_form.save()
 		messages.success(request, "Monitor Updated successfully")
