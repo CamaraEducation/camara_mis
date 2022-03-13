@@ -72,7 +72,8 @@ class AddUserProfileForm(forms.ModelForm):
 		model = UserProfile
 		fields = ('hub', 'department', 'position','user_code','user_personal_email', 'user_hired_date', 'user_employement_type',
 			'user_gender', 'user_phone_number', 'user_education_level', 'user_birth_date', 'user_contact_name',
-			'user_contact_phone_number', 'user_contact_email', 'user_contact_relationship', 'user_contact_address', 'is_student')
+			'user_contact_phone_number', 'user_contact_email', 'user_contact_relationship', 'user_contact_address',
+			'is_student', 'is_t_officer')
 		labels = {
 			'hub': 'Hub Name',
 			'department': 'Department Name',

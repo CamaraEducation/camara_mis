@@ -1,0 +1,51 @@
+{% load static %}
+{% if dispatch_open_menu %}
+        <li class="nav-item {{dispatch_open_menu}}">
+          <a href="#" class="nav-link {{dispatch_open_menu_active}}" style="background-color: #82bc00;">
+            <i class="nav-icon fas fa fa-dolly" ></i>
+            <p> Dispatch</p>
+          </a>
+          <ul class="nav nav-treeview" style="background-color: #6c757d;">
+            {% if computer_request_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'dispatch:computer_request_list' %}" class="nav-link {{computer_request_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-question-circle" style="color: #82bc00;"></i><p> Computer Request</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'dispatch:computer_request_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-question-circle" style="color: #82bc00;"></i><p> Computer Request</p></a>
+              </li>
+            {% endif %}
+
+            {% if computer_dispath_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'dispatch:computer_dispatch_list' %}" class="nav-link {{computer_dispath_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-table" style="color: #82bc00;"></i><p> Dispatch Data</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'dispatch:computer_dispatch_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-table" style="color: #82bc00;"></i><p> Dispatch Data</p></a>
+              </li>
+            {% endif %}
+          </ul>
+        </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa fa-dolly" style="color: #82bc00;"></i>
+          <p> Dispatch</p>
+        </a>
+        <ul class="nav nav-treeview" style="background-color: #6c757d;">
+          <li class="nav-item">
+            <a href="{% url 'dispatch:computer_request_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-question-circle" style="color: #82bc00;"></i><p> Computer Request</p></a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'dispatch:computer_dispatch_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-table" style="color: #82bc00;"></i><p> Dispatch Data</p></a>
+          </li>
+        </ul>
+      </li>
+      {% endif%}

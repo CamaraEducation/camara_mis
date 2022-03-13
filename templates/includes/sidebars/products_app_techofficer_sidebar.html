@@ -1,0 +1,53 @@
+{% load static %}
+{% if product_open_menu %}
+        <li class="nav-item {{product_open_menu}}">
+          <a href="#" class="nav-link  {{product_open_menu_active}} " style="background-color: #82bc00;">
+            <img src="{% static 'dist/img/whiteproduct.png' %}"  height="33" width="33">
+            <p> Products</p>
+          </a>
+          <ul class="nav nav-treeview" style="background-color: #6c757d;">
+           {% if computer_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'computer_list' %}" class="nav-link {{computer_nav_link_active}}">
+                    <i class="nav-icon fa fa-server" style="color: #82bc00;"></i><p> Computer</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'computer_list' %}" class="nav-link">
+                    <i class="nav-icon fa fa-server" style="color: #82bc00;"></i><p> Computer</p></a>
+              </li>
+            {% endif %}
+            {% if monitor_nav_link_active %}
+              <li class="nav-item">
+                <a href="{% url 'monitor_list' %}" class="nav-link {{monitor_nav_link_active}}">
+                    <i class="nav-icon fas fa fa-desktop" style="color: #82bc00;"></i><p> Monitor</p></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'monitor_list' %}" class="nav-link">
+                    <i class="nav-icon fas fa fa-desktop" style="color: #82bc00;"></i><p> Monitor</p></a>
+              </li>
+            {% endif %}
+          </ul>
+        </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="{% static 'dist/img/greenproduct.png' %}"  height="33" width="33">
+          <p> Products</p>
+        </a>
+        <ul class="nav nav-treeview" style="background-color: #6c757d;">
+          <li class="nav-item">
+            <a href="{% url 'computer_list' %}" class="nav-link">
+                <i class="nav-icon fa fa-server" style="color: #82bc00;"></i>
+                <p>Computer</p></a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'monitor_list' %}" class="nav-link">
+                <i class="nav-icon fas fa fa-desktop" style="color: #82bc00;"></i>
+                <p> Monitor</p></a>
+          </li>
+        </ul>
+      </li>
+      {% endif%}

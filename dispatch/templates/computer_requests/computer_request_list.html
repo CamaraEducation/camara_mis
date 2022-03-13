@@ -12,7 +12,6 @@
 		<table id="example1" class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>Hub Name</th>
 					<th>School Name</th>
 					<th>Full Name</th>
 					<th>Number of Computers Requested</th>
@@ -22,38 +21,42 @@
 			<tbody>
 				{% for computer_request in computer_request_list %}
 				<tr>
-					<td>{{ computer_request.hub }}</td>
 					<td>{{ computer_request.school_name }}</td>
 					<td>{{ computer_request.applicant_id }}</td>
 					<td>{{ computer_request.number_of_computers }}</td>
 					<td>
-						<a href="{% url 'dispatch:computer_request_detail' computer_request.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
-        				<a href="{% url 'dispatch:computer_request_update' computer_request.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
-						<a href="{% url 'dispatch:computer_request_dispatch_process' computer_request.id %}" class="btn btn-primary btn-xs "><i class="fa fa-truck"></i> Dispatch</a>&nbsp;
-						<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer_request.id}}">
-							<i class="fa fa-trash"></i> Delete</a>
-						
-						<div class="modal fade" id="modal-danger{{computer_request.id}}">
-							<div class="modal-dialog modal-md">
-							  <div class="modal-content ">
-								<div class="modal-header bg-danger">
-								  <h4 class="modal-title">Deleting <strong>{{ computer_request.full_name }}</strong></h4>
-								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								  </button>
+						{% if request.user.userprofile.is_t_officer %}
+							<a href="{% url 'dispatch:computer_request_detail' computer_request.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+							<a href="{% url 'dispatch:computer_request_dispatch_process' computer_request.id %}" class="btn btn-primary btn-xs "><i class="fa fa-truck"></i> Dispatch</a>&nbsp;
+						{% else %}
+							<a href="{% url 'dispatch:computer_request_detail' computer_request.id %}" class="btn btn-success btn-xs"><i class="fa fa-info-circle"></i> View</a>&nbsp;
+							<a href="{% url 'dispatch:computer_request_update' computer_request.id %}" class="btn btn-warning btn-xs "><i class="fa fa-pencil-alt"></i> Edit</a>&nbsp;
+							<a href="{% url 'dispatch:computer_request_dispatch_process' computer_request.id %}" class="btn btn-primary btn-xs "><i class="fa fa-truck"></i> Dispatch</a>&nbsp;
+							<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-danger{{computer_request.id}}">
+								<i class="fa fa-trash"></i> Delete</a>
+							
+							<div class="modal fade" id="modal-danger{{computer_request.id}}">
+								<div class="modal-dialog modal-md">
+								<div class="modal-content ">
+									<div class="modal-header bg-danger">
+									<h4 class="modal-title">Deleting <strong>{{ computer_request.full_name }}</strong></h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									</div>
+									<div class="modal-body">
+									<p>Are you sure you want to Delete <strong> {{ computer_request.full_name }}</strong>?</p>
+									</div>
+									<div class="modal-footer justify-content-between">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<a href="{% url 'dispatch:computer_request_delete' computer_request.id %}" class="btn btn-danger">Delete</a>
+									</div>
 								</div>
-								<div class="modal-body">
-								  <p>Are you sure you want to Delete <strong> {{ computer_request.full_name }}</strong>?</p>
+								<!-- /.modal-content -->
 								</div>
-								<div class="modal-footer justify-content-between">
-								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								  <a href="{% url 'dispatch:computer_request_delete' computer_request.id %}" class="btn btn-danger">Delete</a>
-								</div>
-							  </div>
-							  <!-- /.modal-content -->
+								<!-- /.modal-dialog -->
 							</div>
-							<!-- /.modal-dialog -->
-						</div>
+						{% endif %}
 					</td>
 				</tr>
 				{% endfor %}

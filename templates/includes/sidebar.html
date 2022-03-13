@@ -14,6 +14,10 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         {% if request.user.userprofile.is_student %}
           {% include 'includes/sidebars/products_app_volunteer_sidebar.html' %}
+        {% elif request.user.userprofile.is_t_officer %}
+          {% include 'includes/sidebars/dashboard.html' %}
+          {% include 'includes/sidebars/products_app_techofficer_sidebar.html' %}
+          {% include 'includes/sidebars/tofficer_dispatch.html' %}
         {% else %}
           {% include 'includes/sidebars/dashboard.html' %}
           {% if request.user.is_superuser %}
