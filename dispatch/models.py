@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import tree
 from accounts.models import Hub, UserProfile
+from phonenumber_field.modelfields import PhoneNumberField
 
 from products.constants import (
     DEVICE_TYPE_CHOICES,
@@ -21,7 +22,7 @@ class Computer_Applicant(models.Model):
     school_name = models.ForeignKey(School, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50)
     email = models.EmailField(blank=True, default=None)
-    phone_number = models.IntegerField()
+    phone_number = PhoneNumberField()
 
     def __str__(self):
         return self.full_name

@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import fields
 from .models import Computer_Applicant, Computer_Request, Dispatch
-
+from accounts.models import Hub
 from school.models import School
 
 class DateInput(forms.DateInput):
@@ -13,6 +13,11 @@ class AddComputerApplicantForm(forms.ModelForm):
     class Meta:
         model = Computer_Applicant
         fields = {'hub', 'school_name', 'full_name', 'email', 'phone_number',}
+
+    def __init__(self, user, *args, **kwargs):
+        super(AddComputerApplicantForm, self).__init__(*args, **kwargs)
+        self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
+        self.fields['school_name'].queryset = School.objects.filter(country = user)
 
 class AddComputerRequestForm(forms.ModelForm):
 

@@ -23,7 +23,8 @@ def applicant_list_view(request):
     return render(request, 'applicants/applicant_list.html', context)
 
 def applicant_add_view(request):
-    applicant_add_form = AddComputerApplicantForm(request.POST or None)
+    user = request.user.userprofile.hub
+    applicant_add_form = AddComputerApplicantForm(user, request.POST or None)
     if applicant_add_form.is_valid():
         applicant_add_form.save()
         messages.success(request, "Computer Applicant added successfully")
