@@ -80,8 +80,9 @@ def applicant_delete_view(request, id=id):
 
 # The function below can add the number of computers a school is requesting
 def school_computer_request_add(request, id=id):
+	user = request.user.userprofile.hub
 	obj = get_object_or_404(School, id=id)
-	computer_app = Computer_Applicant.objects.all()
+	computer_app = Computer_Applicant.objects.all().filter(hub=user)
 	context = {
 		'title':'Add Computer Request',
 		'title': 'Computer Applicant List',
