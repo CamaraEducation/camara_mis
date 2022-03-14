@@ -50,8 +50,9 @@ def applicant_detail_view(request, id=id):
 	return render(request, 'applicants/applicant_detail.html', context)
 
 def applicant_update_view(request, id=id):
+	user = request.user.userprofile.hub
 	obj = get_object_or_404(Computer_Applicant, id=id)
-	applicant_update_form = AddComputerApplicantForm(request.POST or None, instance=obj)
+	applicant_update_form = AddComputerApplicantForm(user, request.POST or None, instance=obj)
 	if applicant_update_form.is_valid():
 		applicant_update_form.save()
 		messages.success(request, "Computer Applicant Updated successfully")
