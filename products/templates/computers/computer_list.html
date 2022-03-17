@@ -6,8 +6,10 @@
 <div class="card card-secondary">
 	<div class="card-header">
 		<h1 class="card-title mt-1">Camara Computers List</h1>
-		<a href="{% url 'computer_add' %}" class="btn btn-success btn-sm float-right ml-2"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Computer</a>
-		<a href="{% url 'computer_upload' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-upload"></i>&nbsp;&nbsp;Upload Computer</a>
+		{% if not request.user.userprofile.is_student %}
+			<a href="{% url 'computer_add' %}" class="btn btn-success btn-sm float-right ml-2"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Computer</a>
+			<a href="{% url 'computer_upload' %}" class="btn btn-success btn-sm float-right"><i class="fa fa-upload"></i>&nbsp;&nbsp;Upload Computer</a>
+		{% endif %}
 	</div>
 	<!-- /.card-header -->
 	

@@ -135,7 +135,7 @@ def computer_detail_view(request, id=id):
 def computer_update_view(request, id=id):
 	user = request.user.userprofile.hub
 	obj = get_object_or_404(Computer, id=id)
-	computer_update_form = UpdateComputerForm(user, request.POST or None, instance=obj)
+	computer_update_form = UpdateComputerForm(user, request, request.POST or None, instance=obj)
 	if computer_update_form.is_valid():
 		# print(computer_update_form)
 		computer_update_form.save()

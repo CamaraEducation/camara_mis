@@ -49,12 +49,13 @@ class UpdateComputerForm(forms.ModelForm):
         widgets = {
             'c_affritrack_number': forms.TextInput(attrs={'required':True})
         }
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, request, *args, **kwargs):
         super(UpdateComputerForm, self).__init__(*args, **kwargs)
         self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
-        self.fields['hub'].disabled = True
-        self.fields['c_affritrack_number'].disabled = True
-        self.fields['serial_number'].disabled = True
+        if not request.user.is_superuser:
+            self.fields['hub'].disabled = True
+            self.fields['c_affritrack_number'].disabled = True
+            self.fields['serial_number'].disabled = True
 
 
 class AddMonitorForm(forms.ModelForm):
