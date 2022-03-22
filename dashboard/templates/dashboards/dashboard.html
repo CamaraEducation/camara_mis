@@ -102,7 +102,7 @@
                 var myChart3 = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: [{% for update_data in dailydata %} '{{update_data.date}}', {% endfor %} ],
+                        labels: [{% for update_data in dailydata %} '{{update_data.date.date}}', {% endfor %} ],
                         datasets: [{
                             label: '# Daily Processed Computers',
                             barPercentage: 0.5,
