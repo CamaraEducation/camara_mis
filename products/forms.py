@@ -52,10 +52,15 @@ class UpdateComputerForm(forms.ModelForm):
     def __init__(self, user, request, *args, **kwargs):
         super(UpdateComputerForm, self).__init__(*args, **kwargs)
         self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
-        if not request.user.is_superuser:
+        if not request.user.is_staff:
             self.fields['hub'].disabled = True
             self.fields['c_affritrack_number'].disabled = True
             self.fields['serial_number'].disabled = True
+            self.fields['container_number'].disabled = True
+        elif request.user.is_superuser:
+            self.fields['hub'].disabled = False
+            self.fields['c_affritrack_number'].disabled = False
+            self.fields['serial_number'].disabled = False
 
 
 class AddMonitorForm(forms.ModelForm):
@@ -81,14 +86,19 @@ class UpdateMonitorForm(forms.ModelForm):
         fields = ('hub','m_affritrack_number', 'serial_number', 'brand', 'donor_id', 'container_number',
                     'device_status', 'supplier', 'screen_size', 'working_status', 'comment')
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, request, *args, **kwargs):
         super(UpdateMonitorForm, self).__init__(*args, **kwargs)
         self.fields['hub'].queryset = Hub.objects.filter(hub_name = user)
-        self.fields['hub'].disabled = True
-        self.fields['m_affritrack_number'].disabled = True
-        self.fields['serial_number'].disabled = True
-        self.fields['container_number'].disabled = True
-
+        if not request.user.is_staff:
+            self.fields['hub'].disabled = True
+            self.fields['m_affritrack_number'].disabled = True
+            self.fields['serial_number'].disabled = True
+            self.fields['container_number'].disabled = True
+        elif request.user.is_superuser:
+            self.fields['hub'].disabled = False
+            self.fields['m_affritrack_number'].disabled = False
+            self.fields['serial_number'].disabled = False
+            self.fields['container_number'].disabled = False
 
 class UploadComputerForm(forms.Form):
 	computer_upload = forms.FileField()
