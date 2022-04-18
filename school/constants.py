@@ -2,6 +2,7 @@
 PRIMARY = 'Primary'
 SECONDARY = 'Secondary'
 TVET = 'TVET'
+INTEGRATED = 'Integrated'
 
 # School Ownership Choices
 GOVERNMENT = 'Government'
@@ -24,6 +25,7 @@ SCHOOL_LEVEL_CHOICES = (
 	(PRIMARY, 'Primary'),
 	(SECONDARY, 'Secondary'),
 	(TVET, 'TVET'),
+	(INTEGRATED, 'Integrated'),
 )
 
 SCHOOL_OWNERSHIP_CHOICES = (
